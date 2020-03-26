@@ -1,0 +1,9 @@
+:root {
+    --main-color: rgb(115,55,74);
+}
+body{
+    background-color: whitesmoke;
+}
+.content {
+    margin-left: 130px;
+}
