@@ -1,31 +1,34 @@
 import React,{Component}  from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './Components/Sidebar'
-import Navbar from './Components/Navbar'
+import Dashboard from './Components/Dashboard'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+/*BOOTSTRAP */
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+/*CUSTOM STYLE */
 import './Styles/sidebar.css';
 import './Styles/style_global.css';
 import './Styles/navbar.css';
+import './Styles/custom.css';
 
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
+
+const theme = createMuiTheme({
+  palette: {
+    primary:{
+        main:'#73374a',
+    },
+  },
+});
 
 class Main extends Component {
     render(){
-        return(
-            <div class="main-content container">
-            
-                <div class="sidenav">
-                    <Sidebar/>  
-                </div>
-                
-                <div class="content">
-                    <Navbar/>
-                </div>
-          
-                
-                
-                     
-            </div>
+        return(<ThemeProvider theme={theme}>     
+                <Dashboard/>
+            </ThemeProvider>
             )
     }
 }

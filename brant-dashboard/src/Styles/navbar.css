@@ -1,16 +1,12 @@
-.navbar-top {
-    position: relative;
-    height: 50px;
-    background-color: gray;
-  
+.navbar {
+    padding: 0 !important;
+    height: 60px;
+}
+.navbar .navbar-brand {
+    margin-left: 45px;
 }
 .navbar-nav {
     position:absolute;
     right: 0;
     display:flex;
-}
-
-.navbar-nav img {
-    width: 20px;
-    height: 20px;
 }
