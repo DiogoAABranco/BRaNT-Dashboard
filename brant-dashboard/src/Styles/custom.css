@@ -103,9 +103,18 @@
     background-color: #d996a3;
   }
   .text-brant-color {
-    color: rgb(216, 156, 167) !important;
+    color: #752938 !important;
   }
   a.text-brant-color:hover, a.text-brant-color:focus {
     color: #752938 !important;
   }
+  .bottom-border-brant{
+    border-bottom: 1px  #752938 solid !important;
+  }
+  .hoverable:hover {
+    color: #fff;
+    background-color: #94525f;
+    border-color: #752938;
+  }
+  
   

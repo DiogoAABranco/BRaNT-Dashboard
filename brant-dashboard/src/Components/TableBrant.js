@@ -8,13 +8,16 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import userStore from '../Stores/UserStore'
+
+
 
 const columns = [
   { id: 'name', label: 'Nome', minWidth: 170 },
 
   {
-    id: 'exemplo',
-    label: 'exemplo',
+    id: 'age',
+    label: 'age',
     minWidth: 170,
     align: 'right',
     format: value => value.toLocaleString(),
@@ -26,6 +29,7 @@ function createData(name, exemplo) {
   return { name, exemplo };
 }
 
+/*
 const rows = [
   createData('Nome_do_paciente', 3287263),
   createData('Nome_do_paciente',  301340),
@@ -41,7 +45,14 @@ const rows = [
   createData('Nome_do_paciente', 17098246),
   createData('Nome_do_paciente', 923768),
   createData('Nome_do_paciente', 8515767),
-];
+];*/
+
+
+let rows = userStore.getAll();
+console.log("[table]");
+console.log(rows);
+
+
 
 const useStyles = makeStyles({
   root: {
@@ -52,10 +63,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TableBrant() {
+export default function TableBrant(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -86,12 +98,12 @@ export default function TableBrant() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map(column => {
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                        {column.format && typeof value === 'age' ? column.format(value) : value}
                       </TableCell>
                     );
                   })}

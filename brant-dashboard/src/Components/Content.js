@@ -7,25 +7,26 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TableBrant from './TableBrant'
 
 function Content (props){
-    return <div className="container mt-4">
+    console.log(props.state);
+    return <div className="container-fluid mt-2">
     
-        <div class="accordion" id="accordionExample">
-            <div class="card">
-                <div class="card-header" id="headingOne">
+        <div className="accordion ml-3 mr-3" id="accordionExample">
+            <div className="card">
+                <div className="card-header" id="headingOne">
                     <h4>
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <p className="text-secondary">Pesquisa de pacientes</p>
                         </button>
                     </h4>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <form>
                         <div className="row">
                             <div className="col-sm-6">
                                 <div className="pl-4 pr-4 pt-2">
                                     <label className="text-brant-color">Nome</label>
-                                    <input type="email" class="form-control" id="inputName" placeholder="Enter name"/>
+                                    <input type="email" className="form-control" id="inputName" placeholder="Enter name"/>
                                 </div>
                                 <div className="pl-4 pr-4 pt-4">
                                     <label className="text-brant-color">Idade</label>
@@ -46,7 +47,7 @@ function Content (props){
                                         </div>
                                     </div>
                                     <div className="col-sm-6 p-4 d-flex align-items-center">
-                                        <button type="button" class="btn btn-brant-color">Pesquisar</button>
+                                        <button type="button" className="btn btn-brant-color">Pesquisar</button>
                                     </div>
                                 </div>
                                 
@@ -57,8 +58,8 @@ function Content (props){
                 </div>
             </div>
         </div> 
-        <div className="container mt-4">
-            <TableBrant/>
+        <div className="container mw-100 mt-2">
+            <TableBrant state={props.state}/>     
         </div>
     </div>
 }

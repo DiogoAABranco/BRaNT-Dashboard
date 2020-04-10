@@ -3,27 +3,36 @@ import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import Content from './Content'
 import Assessment from './Assessment'
+import Patient from './Patient/Patient'
+
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-function Dashboard(){
+function Dashboard(props){
+    console.log(props.state);
     return <div>
-            <Router>
-        <div class="sidenav">
-            
-            <div class="d-flex" id="wrapper">
-                <Sidebar/>
+    
+        <Router>
+            <div className="sidenav">
 
-                <div id="page-content-wrapper">
+                <div className="d-flex" id="wrapper">
 
-                    <Navbar/>
-                    <Route exact path="/" />
-                    <Route path="/Content" component={Content}/>
-                    <Route path="/Assessment" component={Assessment}/>
-                   
-                </div>
-                
-            </div>        
-        </div>
+                    <Sidebar/>
+
+                    <div id="page-content-wrapper">
+                        <Navbar/>
+                        <Route exact path="/" />
+                        <Route path="/Content" component={ Content } />
+                        <Route path="/Avaliacao" component={Assessment }/>  
+                        <Route path="/Paciente" component={ Patient }/>  
+
+        
+
+                    </div>
+
+                </div>    
+
+            </div>
+
         </Router>
 
     </div>

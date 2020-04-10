@@ -14,8 +14,29 @@ import './Styles/custom.css';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 
+import UserStore from './Stores/UserStore'
+
+
+
+class Main extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      users: UserStore.getAll()
+    }
+  }
+    render(){
+      console.log(this.state.users);
+    
+        return(
+          <ThemeProvider theme={theme}>     
+            <Dashboard state={this.state.users}/>
+          </ThemeProvider> 
+      
+            )
+    }
+}
 const theme = createMuiTheme({
   palette: {
     primary:{
@@ -23,14 +44,5 @@ const theme = createMuiTheme({
     },
   },
 });
-
-class Main extends Component {
-    render(){
-        return(<ThemeProvider theme={theme}>     
-                <Dashboard/>
-            </ThemeProvider>
-            )
-    }
-}
 
 ReactDOM.render(<Main/>,document.getElementById("root"));
