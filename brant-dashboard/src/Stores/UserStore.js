@@ -11,6 +11,10 @@ class UserStore extends EventEmitter{
                 id:"11",
                 name:"Luis1 Gonçalves",
                 age:"22",
+                clinicalInfo:[
+                    {description:"Nova descrição de procedimento", date:"05/04/2020", type:"clinicalProcedure"},
+                    {description:"Nova descrição de edicação", date:"09/11/2019", type:"medication"}
+                ]
             },
             {
                 id:"22",

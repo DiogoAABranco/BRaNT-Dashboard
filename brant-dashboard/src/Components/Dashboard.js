@@ -5,7 +5,7 @@ import Content from './Content'
 import Assessment from './Assessment'
 import Patient from './Patient/Patient'
 
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {BrowserRouter as Router, Route } from 'react-router-dom'
 
 function Dashboard(props){
     console.log(props.state);

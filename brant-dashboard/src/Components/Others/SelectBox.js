@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React,{ useState } from 'react'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -7,14 +7,19 @@ import FormControl from '@material-ui/core/FormControl';
 
 
 function SelectBox (props){
-    let selected_val;
 
-    //const [age, setAge] = React.useState('');
+
+
+    const [selected_val, setSelected_val] = useState('');
   
-   // const handleChange = event => {
-    //  setAge(event.target.value);
-   // };
+    const handleChange = event => {
+        setSelected_val(event.target.value);
+        //this.setState({selectedValue:selected_val});
+        console.log(selected_val);
+       
+    };
 
+    
 
 
     return <div className="">
@@ -25,14 +30,10 @@ function SelectBox (props){
             labelId="demo-customized-select-label"
             id="demo-customized-select"
             value={selected_val}
-
-       
-            // onChange={handleChange}
+            onChange={props.handlerSelect}
             >
-       
-                <MenuItem value={0}>Medicação</MenuItem>
-                <MenuItem value={1}>Procedimento clínico</MenuItem>
-                <MenuItem value={2}>Patologia</MenuItem>
+                <MenuItem value={0}>Procedimento clínico / Patologia</MenuItem>
+                <MenuItem value={1}>Medicação</MenuItem>
             </Select>
         </FormControl>
     </div>

@@ -24,10 +24,10 @@ const columns = [
   },
 ];
 
-function createData(name, exemplo) {
+/*function createData(name, exemplo) {
   
   return { name, exemplo };
-}
+}*/
 
 /*
 const rows = [
