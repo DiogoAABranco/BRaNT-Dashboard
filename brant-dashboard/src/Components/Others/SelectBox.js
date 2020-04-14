@@ -14,9 +14,8 @@ function SelectBox (props){
   
     const handleChange = event => {
         setSelected_val(event.target.value);
-        //this.setState({selectedValue:selected_val});
-        console.log(selected_val);
-       
+        this.setState({selectedValue:selected_val});
+      
     };
 
     

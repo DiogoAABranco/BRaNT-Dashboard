@@ -8,30 +8,38 @@ import {
   DatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 
 function ClinicalInfo(props){
 
     const [selectedDate, handleDateChange] = useState(new Date());
-    const selected_val = useState('');
    // let description;
     //const data = props.clinicalInfo;
     const data =props.data;
     const [description,setDescription] = useState('');
 
+    const [selected_val, setSelected_val] = useState('');
+  
+    //handle select input
+    const handlerSelect = event => {
+        setSelected_val(event.target.value);
+        //this.setState({selectedValue:selected_val});
+        //console.log(selected_val);
+      
+    };
 
-
-    function handleAddClinicalInfo(){
-        console.log(description);
-        console.log(selected_val);
+    function handleAddClinicalInfo(e){
+        e.preventDefault();
+        
+        props.handleNewClinicalInfo(description,selected_val,selectedDate);
+        setDescription("");
+        handleDateChange(new Date());
     }
 
-    const handlerSelect = event => {
-        //setSelected_val(event.target.value);
-        //this.setState({selectedValue:selected_val});
-        console.log(this.value);
-       
-    };
 
     return <div>
         <Title sectionTitle="Informação Clínica"/>
@@ -60,17 +68,32 @@ function ClinicalInfo(props){
                 </div>
             
                 <div className="col-sm-6">
+                    <form onSubmit={handleAddClinicalInfo}>
             
                     <SubTitle sectionTitle="Adicionar informação clínica"/>
                 
-                    <textarea className="form-control form-control-sm border-brant-color mt-2" rows="2" placeholder="Inserir descrição"  onChange={event => setDescription(event.target.value)} ></textarea>
+                    <textarea className="form-control form-control-sm border-brant-color mt-2" rows="2" placeholder="Inserir descrição" value={description}  onChange={event => setDescription(event.target.value)} required></textarea>
                 
                     <div className="container-fluid mt-2">
                     <div className="row">
                 
                         <div className="col-sm-6">
-                            
-                            <SelectBox handler = {handlerSelect.bind(this)} />
+
+                            <FormControl className="w-100">
+                                <InputLabel id="demo-controlled-open-select-label">Selecionar Tipo</InputLabel>
+                                <Select
+                                labelId="demo-customized-select-label"
+                                id="demo-customized-select"
+                                value={selected_val}
+                                onChange={handlerSelect}
+                                >
+                                    <MenuItem value={0}>Procedimento clínico / Patologia</MenuItem>
+
+                                    <MenuItem value={1}>Medicação</MenuItem>
+
+                                </Select>
+
+                            </FormControl>
 
                         </div>
                 
@@ -85,8 +108,8 @@ function ClinicalInfo(props){
                         </div>      
                     </div>        
                 
-                    <button className="btn btn-brant-color mt-2" onClick={handleAddClinicalInfo}>Adicionar</button>
-            
+                    <button type="submite" className="btn btn-brant-color mt-2">Adicionar</button>
+                    </form>
                 </div>
             
             </div>

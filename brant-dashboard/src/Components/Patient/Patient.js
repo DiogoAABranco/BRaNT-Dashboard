@@ -22,6 +22,21 @@ class Patient extends Component {
         };
       }
 
+      handleNewClinicalInfo = (description,selectedValue,dateInfo) =>{
+          //console.log("really?");
+          const tempData = this.state.data;
+          if(selectedValue === 0){
+            const lastId = tempData.clinicalInfo.length; 
+            const newEntry = {id:lastId,description:description,selectedValue:selectedValue,dateInfo:dateInfo}
+            tempData.clinicalInfo.push(newEntry);
+          }else {
+            const lastId = tempData.medication.length; 
+            const newEntry = {id:lastId,description:description,selectedValue:selectedValue,dateInfo:dateInfo}
+            tempData.medication.push(newEntry);
+          }
+          this.setState({data:tempData });
+          console.log(this.state.data);
+      }
      
    render(){
    
@@ -38,7 +53,7 @@ class Patient extends Component {
 
             <div className="row">
                 <div className="col-sm-12">
-                    <ClinicalInfo data={this.state.data}/>
+                    <ClinicalInfo handleNewClinicalInfo={this.handleNewClinicalInfo} data={this.state.data}/>
                 </div>
             </div>
 
