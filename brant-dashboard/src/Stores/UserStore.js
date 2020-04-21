@@ -8,48 +8,48 @@ class UserStore extends EventEmitter{
         super();
         this.users = [
             {
-                id:"11",
-                name:"Luis1 Gonçalves",
-                age:"22",
+                id:"0",
+                name:"Primeiro Nome Apelido",
+                age:"29",
                 clinicalInfo:[
                     {description:"Nova descrição de procedimento", date:"05/04/2020", type:"clinicalProcedure"},
                     {description:"Nova descrição de edicação", date:"09/11/2019", type:"medication"}
                 ]
             },
             {
-                id:"22",
-                name:"Luis2 Gonçalves2",
+                id:"1",
+                name:"Primeiro Nome Apelido",
                 age:"25",
             },
             {
-                id:"33",
-                name:"Luis3 Gonçalves",
-                age:"22",
+                id:"2",
+                name:"Primeiro Nome Apelido",
+                age:"23",
             },
             {
-                id:"44",
-                name:"Luis4 Gonçalves2",
+                id:"3",
+                name:"Primeiro Nome Apelido",
                 age:"25",
             },
-            {
+          /*  {
                 id:"55",
-                name:"Luis3 Gonçalves",
+                name:"Primeiro Nome Apelido",
                 age:"22",
-            },
+            }
             {
                 id:"66",
-                name:"Luis4 Gonçalves2",
+                name:"Primeiro Nome Apelido",
                 age:"25",
             },{
                 id:"77",
-                name:"Luis3 Gonçalves",
+                name:"Primeiro Nome Apelido",
                 age:"22",
             },
             {
                 id:"88",
-                name:"Luis4 Gonçalves2",
+                name:"Primeiro Nome Apelido",
                 age:"25",
-            }
+            }*/
         ];     
     }
     createUser(name,age){

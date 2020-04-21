@@ -7,32 +7,31 @@ import FormControl from '@material-ui/core/FormControl';
 
 
 function SelectBox (props){
-
-
-
+/*see example of select on the asessment.js */
+/*properies
+handlerSelect
+selected_val
+values(id,name)
+label*/
     const [selected_val, setSelected_val] = useState('');
   
     const handleChange = event => {
         setSelected_val(event.target.value);
-        this.setState({selectedValue:selected_val});
-      
+        
     };
-
-    
-
 
     return <div className="">
         
         <FormControl className="w-100">
-            <InputLabel id="demo-controlled-open-select-label">Selecionar Tipo</InputLabel>
+            <InputLabel id="demo-controlled-open-select-label">{props.label}</InputLabel>
             <Select
             labelId="demo-customized-select-label"
             id="demo-customized-select"
-            value={selected_val}
+            value={props.selected_val}
             onChange={props.handlerSelect}
             >
-                <MenuItem value={0}>Procedimento clínico / Patologia</MenuItem>
-                <MenuItem value={1}>Medicação</MenuItem>
+                {props.values.map(temp =>(<MenuItem key={temp.id} value={temp.id}>{temp.name}</MenuItem>))}
+                
             </Select>
         </FormControl>
     </div>

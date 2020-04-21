@@ -8,50 +8,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import userStore from '../Stores/UserStore'
 
-
-
-const columns = [
-  { id: 'name', label: 'Nome', minWidth: 170 },
-
-  {
-    id: 'age',
-    label: 'age',
-    minWidth: 170,
-    align: 'right',
-    format: value => value.toLocaleString(),
-  },
-];
-
-/*function createData(name, exemplo) {
-  
-  return { name, exemplo };
-}*/
-
-/*
-const rows = [
-  createData('Nome_do_paciente', 3287263),
-  createData('Nome_do_paciente',  301340),
-  createData('Nome_do_paciente', 9833520),
-  createData('Nome_do_paciente', 9984670),
-  createData('Nome_do_paciente', 7692024),
-  createData('Nome_do_paciente', 357578),
-  createData('Nome_do_paciente',  70273),
-  createData('Nome_do_paciente',  1972550),
-  createData('Nome_do_paciente',  377973),
-  createData('Nome_do_paciente',  640679),
-  createData('Nome_do_paciente',  242495),
-  createData('Nome_do_paciente', 17098246),
-  createData('Nome_do_paciente', 923768),
-  createData('Nome_do_paciente', 8515767),
-];*/
-
-
-let rows = userStore.getAll();
-console.log("[table]");
-console.log(rows);
-
+/*************Properties table******** */
+//pass array in props.documentation-sidebar
+//define columns in:
+//columns1(id,label)
+//columns2(id,lanel)
 
 
 const useStyles = makeStyles({
@@ -66,8 +28,21 @@ const useStyles = makeStyles({
 export default function TableBrant(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+console.log(props.column1.label);
+  const columns = [
+    { id: props.column1.id, label: props.column1.label, minWidth: 170 },
+  
+    {
+      id: props.column2.id,
+      label: props.column2.label,
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toLocaleString(),
+    },
+  ];
+  
+  let rows = props.data;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -103,7 +78,7 @@ export default function TableBrant(props) {
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'age' ? column.format(value) : value}
+                        {column.format && typeof value === props.column2.id ? column.format(value) : value}
                       </TableCell>
                     );
                   })}

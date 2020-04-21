@@ -5,9 +5,15 @@ import Slider from '@material-ui/core/Slider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TableBrant from './TableBrant'
+import userStore from '../Stores/UserStore'
+
+
 
 function Content (props){
-    console.log(props.state);
+    let users = userStore.getAll();
+    const column1={id:"name",label:"Nome"};
+    const column2={id:"age",label:"Idade"};
+    
     return <div className="container-fluid mt-2">
     
         <div className="accordion ml-3 mr-3" id="accordionExample">
@@ -37,13 +43,13 @@ function Content (props){
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="pl-4 pr-4 pt-2">
-                                            <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Treinos em atraso" labelPlacement="end"/>
+                                            <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Sessões em atraso" labelPlacement="end"/>
                                         </div>
                                         <div className="pl-4 pr-4 pt-2">
-                                            <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Treinos em atraso" labelPlacement="end"/>
+                                            <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Sessões concluídas" labelPlacement="end"/>
                                         </div>
                                         <div className="pl-4 pr-4 pt-2">
-                                            <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Treinos em atraso" labelPlacement="end"/>
+                                            <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Avaliação pendente" labelPlacement="end"/>
                                         </div>
                                     </div>
                                     <div className="col-sm-6 p-4 d-flex align-items-center">
@@ -59,7 +65,7 @@ function Content (props){
             </div>
         </div> 
         <div className="container mw-100 mt-2">
-            <TableBrant state={props.state}/>     
+            <TableBrant data={users} column1={column1} column2={column2}/>     
         </div>
     </div>
 }

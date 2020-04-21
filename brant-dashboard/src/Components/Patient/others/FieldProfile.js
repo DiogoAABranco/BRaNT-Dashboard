@@ -6,7 +6,6 @@ import WcIcon from '@material-ui/icons/Wc';
 import PhoneIcon from '@material-ui/icons/Phone';
 
 function FieldProfile(props){
-    console.log(props.fieldName);
     return <div className="row hoverable">
                 <div className="col-sm-6 pt-2 pb-2">
                     <div className="row">

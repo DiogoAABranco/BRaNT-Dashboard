@@ -31,7 +31,7 @@
   }
   .btn-brant-color {
     color: #fff;
-    background-color: #9B374A;
+    background-color: #752938;
     border-color: #9B374A;
   }
   .btn-brant-color:hover {
@@ -116,5 +116,9 @@
     background-color: #94525f;
     border-color: #752938;
   }
-  
+  .list-group-item{
+    background-color: whitesmoke;
+
+  }
+
   
