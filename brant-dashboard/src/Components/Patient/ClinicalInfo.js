@@ -14,6 +14,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 
+
 function ClinicalInfo(props){
 
     const [selectedDate, handleDateChange] = useState(new Date());
@@ -141,7 +142,7 @@ function ClinicalInfo(props){
                     
                         <div className="col pt-3 d-flex justify-content-center">
                         
-                            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptLocale}>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils} utils={DateFnsUtils} locale={ptLocale}>
                                 
                                 <DatePicker value={selectedDate} onChange={handleDateChange} format="dd/MM/yyyy"/>
             

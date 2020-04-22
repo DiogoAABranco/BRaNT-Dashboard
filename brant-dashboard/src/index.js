@@ -16,6 +16,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 import UserStore from './Stores/UserStore'
+import { ptPT } from '@material-ui/core/locale';
 
 
 
@@ -43,6 +44,6 @@ const theme = createMuiTheme({
         main:'#73374a',
     },
   },
-});
+},ptPT);
 
 ReactDOM.render(<Main/>,document.getElementById("root"));

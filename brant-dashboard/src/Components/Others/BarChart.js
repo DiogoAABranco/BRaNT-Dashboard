@@ -2,23 +2,11 @@ import React, { Component } from 'react'
 import { VictoryBar, VictoryChart, VictoryAxis,
     VictoryTheme } from 'victory';
 
-//pass data by props of the state
-    const data = [
-        {domain: "Memória", value: 100},
-        {domain: "Atenção", value: 90},
-        {domain: "Linguagem", value: 32},
-        {domain: "Nomeação", value: 54},
-        {domain: "Visuo-espacial", value: 23},
-        {domain: "Orientação", value: 45},
-        {domain: "Evocação diferida", value: 90},
-        {domain: "Abstração", value: 93}
-      ];
+
       
-class BarChart extends Component {
-  render(){
-      return (
-          
-          <VictoryChart
+function BarChart(props){
+      let data =  props.data;
+      return <VictoryChart
           theme={VictoryTheme.material}
           domainPadding={15}
           horizontal={true}
@@ -46,8 +34,6 @@ class BarChart extends Component {
             y="value"
           />
         </VictoryChart>
-      )
-      }
 }
 export default BarChart
 
