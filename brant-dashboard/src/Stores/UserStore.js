@@ -9,8 +9,8 @@ class UserStore extends EventEmitter{
         this.users = [
             {
                 id:"0",
-                name:"Primeiro Nome Apelido",
-                age:"29",
+                name:"Primeiro0 Nome Apelido",
+                age:29,
                 clinicalInfo:[
                     {description:"Nova descrição de procedimento", date:"05/04/2020", type:"clinicalProcedure"},
                     {description:"Nova descrição de edicação", date:"09/11/2019", type:"medication"}
@@ -18,18 +18,18 @@ class UserStore extends EventEmitter{
             },
             {
                 id:"1",
-                name:"Primeiro Nome Apelido",
-                age:"25",
+                name:"Primeiro1 Nome Apelido",
+                age:25,
             },
             {
                 id:"2",
-                name:"Primeiro Nome Apelido",
-                age:"23",
+                name:"Primeiro2 Nome Apelido",
+                age:40,
             },
             {
                 id:"3",
                 name:"Primeiro Nome Apelido",
-                age:"25",
+                age:21,
             },
           /*  {
                 id:"55",
