@@ -36,7 +36,7 @@ class Assessment extends Component {
                 }
             ],
             novoTesteMoca:[
-                {id:0, domain: "Memória", value: 0},
+                {id:0, domain: "Memória", value: 0,subdomains:[{id:0,subdomain:"sub0", value:0},{id:1,subdomain:"sub1", value:0}]},
                 {id:1, domain: "Atenção", value: 0},
                 {id:2, domain: "Linguagem", value: 0},
                 {id:3, domain: "Nomeação", value: 0},
@@ -53,7 +53,10 @@ class Assessment extends Component {
 
             elementSelectedTable:"",
 
-            open:false
+            open:false,
+
+            tests:[{id:0, data:this.novoTesteMoca, name:"MOCA"},
+                {id:1, data:this.novoTesteMoca, name:"ACE-R"}]
         };
     }
     render(){ 
@@ -103,8 +106,7 @@ class Assessment extends Component {
 
     }
 
-    let tests = [{id:0, data:this.state.novoTesteMoca, name:"MOCA"},
-    {id:1, data:this.state.novoTesteMoca, name:"ACE-R"}]
+    
     return <div>     
         <div className="p-4">
             <div className="w-100">
@@ -149,12 +151,12 @@ class Assessment extends Component {
                     <Title sectionTitle="Inserir nova avaliação"></Title>
                 </div>
                 <div className="col-sm-2 pb-6">
-                    <SelectBox handlerSelect={handlerSelectTest} selected_val={this.state.selectedTest_val} values={tests} label="Selecionar Teste"></SelectBox>
+                    <SelectBox handlerSelect={handlerSelectTest} selected_val={this.state.selectedTest_val} values={this.state.tests} label="Selecionar Teste"></SelectBox>
                 </div>
             </div>
             <div className="">
                 
-                {//rendering the correct test in the interface
+                {//rendering the selected test in the user interface
                 (() => {
                     switch (this.state.selectedTest_val) {
                         case 0: return <Test data={this.state.novoTesteMoca} newEntry={newEntry} ></Test>

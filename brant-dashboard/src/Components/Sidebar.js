@@ -15,6 +15,7 @@ function Sidebar(props){
                                 <Link to='/'><li className="list-group-item list-group-item-action bg-light">Treino</li></Link>
                                 <Link to='/'><li className="list-group-item list-group-item-action bg-light">Resultados</li></Link>
                                 <Link to='/Paciente'><li className="list-group-item list-group-item-action bg-light">Teste Perfil</li></Link>
+                                <Link to='/CriarNovoTeste'><li className="list-group-item list-group-item-action bg-light">Criar Novo teste</li></Link>
                                 
                             </ul>
                         </div>
