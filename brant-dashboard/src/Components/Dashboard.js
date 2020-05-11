@@ -7,6 +7,7 @@ import Patient from './Patient/Patient'
 import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
 import {BrowserRouter as Router, Route } from 'react-router-dom'
+import TrainingSession from './TrainingSession/TrainingSession'
 
 function Dashboard(props){
     console.log(props.state);
@@ -26,6 +27,7 @@ function Dashboard(props){
                         <Route path="/Avaliacao" component={Assessment }/>  
                         <Route path="/Paciente" component={ Patient }/>  
                         <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
+                        <Route path="/SessaoTreino" component={ TrainingSession }/>  
 
         
 

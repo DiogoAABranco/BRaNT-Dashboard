@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { VictoryBar, VictoryChart, VictoryAxis,
-    VictoryTheme } from 'victory';
+    VictoryTheme,VictoryLabel } from 'victory';
 
 
       
@@ -23,15 +23,24 @@ function BarChart(props){
           />
       
           <VictoryBar
+          
+          
+         
+          data={data} 
+          labels={({ datum }) => datum.value}
           style={{
               data: {
               fill: "#802d3d",
             
               },
+              labels: { fill: "white" }
+          
           }}
-            data={data}
+         
             x="domain"
             y="value"
+            labelComponent={<VictoryLabel dy={0} dx={-30}/>}
+          
           />
         </VictoryChart>
 }

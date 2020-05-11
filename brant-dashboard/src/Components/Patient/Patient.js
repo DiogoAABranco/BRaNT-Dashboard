@@ -20,13 +20,13 @@ class Patient extends Component {
             selectedValue: "",
             dateInfo:"",
             patologyList:[
-                {id:"0",patology:"Hipertensão"},
-                {id:"1",patology:"Diabetes"},
-                {id:"2",patology:"AVC"},
-                {id:"3",patology:"Demência"},
-                {id:"4",patology:"Parkinson"},
-                {id:"5",patology:"Alzheimer"},
-                {id:"6",patology:"Outros"}
+                {id:"0",patology:"Patologia 1"},
+                {id:"1",patology:"Patologia 2"},
+                {id:"2",patology:"Patologia 3"},
+                {id:"3",patology:"Patologia 4"},
+                {id:"4",patology:"Patologia 5"},
+                {id:"5",patology:"Patologia 6"},
+                {id:"6",patology:"Patologia 7"}
             ],
             getPatology(id){
                 //console.log(this.patologyList[id].patology);
