@@ -7,9 +7,10 @@ import Slider from '@material-ui/core/Slider';
 import Checkbox from '@material-ui/core/Checkbox';
 import DateFnsUtils from '@date-io/date-fns';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import DialogEditParameters from "./DialogEditParameters"
+import AddIcon from '@material-ui/icons/Add';
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
     KeyboardDatePicker,
   } from '@material-ui/pickers';
 
@@ -17,10 +18,10 @@ class TrainingSession extends Component{
     constructor(props){
         super(props);
         this.state = {
-            activities:[{id:0, activityName:"Atividade 1", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
-            {id:1, activityName:"Atividade 2", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
-            {id:2, activityName:"Atividade 3", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
-            {id:3, activityName:"Atividade 4", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"}],
+            activities:[{id:0, activityName:"Atividade 1", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
+            {id:1, activityName:"Atividade 2", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
+            {id:2, activityName:"Atividade 3", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
+            {id:3, activityName:"Atividade 4", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]}],
             dificulty:0,
             startDate:null,
             endDate:null,
@@ -61,16 +62,18 @@ class TrainingSession extends Component{
 
         return <div><Title sectionTitle="Plano de treino"/>
           
-                    <div className="card m-4">
-                        <div className="card-header">
+                    <div className="card m-2">
+                        <div className="card-header d-flex justify-content-between">
                             <Subtitle sectionTitle="Atividades recomendadas"/>
+                            <button className="btn btn-brant-color"><AddIcon/></button>
                         </div>
                         <div className="card-body">
                             <div className="row">            
                                 {this.state.activities.map(temp =>
                                     <div key={temp.id} className="col-sm-3"><ActivityBoxShape data={temp}/>
                                         <div className="row justify-content-md-center">
-                                            <button onClick={e => this.onClickRemoveActivity(e,temp)} className="btn btn-brant-color"><ClearIcon/></button>
+                                            {temp.parameters !== undefined || temp.parameters.length > 0 ? <div className="mr-2"><DialogEditParameters activityName={temp.activityName} data={temp.parameters} /></div>:null }
+                                            <button onClick={e => this.onClickRemoveActivity(e,temp)} className="btn btn-brant-color ml-2"><ClearIcon/></button>
                                         </div>
                                     </div>)}
                             </div>
@@ -94,7 +97,7 @@ class TrainingSession extends Component{
                             </div>
                         </div>
                     </div>  
-                    <div className="container-fluid card">
+                    <div className="container-fluid card mb-2">
                         <div className="row">
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <div className="col-sm-4">
@@ -128,6 +131,7 @@ class TrainingSession extends Component{
                                     />
                             </div>
                             <div className="col-sm-4">
+                                <div className="row"><Subtitle sectionTitle="Dias das sessões"/></div>
                                 <div className="row">
                                 {daysOfTheWeek.map(temp =>
                                     <div className="col-sm-6" key={temp}>
