@@ -9,11 +9,14 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import TextField from '@material-ui/core/TextField';
+import VerticalLinearStepper from './VerticalLinearStepper'
+import Title from '../Others/Title'
 
-
-const DialogEditParameters =(props)=>{
+//props contains list of activities
+const DialogEditByStep =(props)=>{
 
     const [open, setOpen] = React.useState(false);
+    const [step, setStep] = React.useState(1);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -25,20 +28,31 @@ const DialogEditParameters =(props)=>{
         setOpen(false);
     };
 
+    const handleNext = () =>{
+
+    }
+    const handlePrev = () =>{
+
+    }
+
     return  (<div>
     <button className="btn btn-outline-brant-color" onClick={handleClickOpen}>
-      <EditIcon/>
+      <EditIcon/> Editar Parâmetros
     </button>
     <Dialog
       fullScreen={fullScreen}
       open={open}
+      fullWidth={true}
       onClose={handleClose}
+      maxWidth="sm"
       aria-labelledby="responsive-dialog-title"
     >
-        <DialogTitle id="responsive-dialog-title">{props.activityName+" - "+"Parâmetros"}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title"><Title sectionTitle="Editar parâmetros das atividades"/></DialogTitle>
         <DialogContent>
+
+            <VerticalLinearStepper activities={props.data}/>
            
-            {props.data.map(temp =><div key={temp.key} className="row"><TextField required id="standard-basic" label={temp.key} defaultValue={temp.value} /></div>)}
+        {/* {props.data.map(temp =><div key={temp.id} className="row"><li>{temp.activityName}</li></div>)} */}
            
         </DialogContent>
         <DialogActions>
@@ -52,4 +66,4 @@ const DialogEditParameters =(props)=>{
     </Dialog>
   </div>);
 }
-export default DialogEditParameters
+export default DialogEditByStep
