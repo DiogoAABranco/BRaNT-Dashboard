@@ -15,16 +15,19 @@ return <div>
         <Dialog
             open={props.open}
             onClose={props.handleClose}
+            fullWidth={true}
+            maxWidth="sm"
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">Avaliação do paciente XXXXXXXX</DialogTitle>
+
             <DialogContent>
 
-          
-                    <BarChart data={props.data.cognitiveDomain}/>
-                
+                <BarChart data={props.data.cognitiveDomain}/>
+
             </DialogContent>
+
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary" autoFocus>Ok</Button>
             </DialogActions>

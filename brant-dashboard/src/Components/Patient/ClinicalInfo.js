@@ -12,6 +12,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import MaterialTable from 'material-table'
+
 
 
 
@@ -38,13 +40,22 @@ function ClinicalInfo(props){
 
     //handle select input
     const handlerSelectPatology = event => {
+        
         setSelectedPatology_val(event.target.value);    
     };
 
     function handleAddClinicalInfo(e){
         e.preventDefault();
 
-        props.handleNewClinicalInfo(description,selected_val,selectedDate,selectedPatology_val);
+        let patology = props.state.getPatology(selectedPatology_val);
+        let type = "";
+
+        if(selected_val == 0)
+            type = "clinicalProcedure";
+        if(selected_val == 1)
+            type = "medication";
+
+        props.handleNewClinicalInfo(description,type,selectedDate,patology);
 
         setDescription("");
 
@@ -60,22 +71,24 @@ function ClinicalInfo(props){
             <div className="row">
             
                 <div className="col-sm-6">
-
-                    <SubTitle sectionTitle="Procedimento clínico / Patologia"/>
-                    <div className="row pb-4">
-                        
-                        <ul className="list-group list-group-flush w-100 pl-5 pr-5">
-                            {data.clinicalInfo.map(temp => (<li className="list-group-item bottom-border-brant" key={temp.id}>{props.state.getPatology(temp.patology)}: {temp.description}</li>))}
-                        </ul>
-                                    
-                    </div>
-                    <SubTitle sectionTitle="Medicação/Terapia"/>
-                    <div className="row">
-                        
-                        <ul className="list-group list-group-flush w-100 pl-5 pr-5">
-                            {data.medication.map(temp => (<li className="list-group-item bottom-border-brant" key={temp.id}>{props.state.getPatology(temp.patology)}: {temp.description}</li>))}
-                        </ul>
-                    </div>
+                        <MaterialTable
+                        options={{
+                            search: false,
+                            draggable: false,
+                            headerStyle: {
+                                backgroundColor: '#73374a',
+                                color:"white"
+                        },
+                        actionsColumnIndex:-1
+                        }}
+                        columns={[
+                                { title: 'Patologia', field: 'patology' },
+                                { title: 'Tipo', field: 'type' },
+                                { title: 'Descrição', field: 'description'}
+                        ]}
+                        data={data.clinicalInfo}
+                        title="Patologia/Procedimento clínico"      
+                        />
                 </div>
             
                 <div className="col-sm-6">

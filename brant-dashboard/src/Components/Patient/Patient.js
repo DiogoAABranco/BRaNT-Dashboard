@@ -10,11 +10,10 @@ class Patient extends Component {
         this.state = {
             data: {  
                 clinicalInfo:[
-                    {id:"0", description:"Nova descrição de procedimento1", date:"05/04/2020", type:"clinicalProcedure", patology:"1"},
-                    {id:"1", description:"Nova descrição de procedimento2", date:"09/11/2019", type:"clinicalProcedure",patology:"2"}],
-                medication:[
-                    {id:"0", description:"Nova descrição de medicação", date:"09/11/2019", type:"medication",patology:"4"},
-                    {id:"1", description:"Nova descrição de medicaçã2", date:"12/11/2019", type:"medication",patology:"5"}]
+                    {id:"0", description:"Nova descrição de procedimento1", date:"05/04/2020", type:"clinicalProcedure", patology:"Patologia 1"},
+                    {id:"1", description:"Nova descrição de procedimento2", date:"09/11/2019", type:"clinicalProcedure",patology:"Patologia 2"},
+                    {id:"2", description:"Nova descrição de medicação", date:"09/11/2019", type:"medication",patology:"Patologia 4"},
+                    {id:"3", description:"Nova descrição de medicaçã2", date:"12/11/2019", type:"medication",patology:"Patologia 5"}]         
             },
             description:"",
             selectedValue: "",
@@ -30,28 +29,24 @@ class Patient extends Component {
             ],
             getPatology(id){
                 //console.log(this.patologyList[id].patology);
-                return <b>{this.patologyList[id].patology}</b>
+                return this.patologyList[id].patology;
                 
             }
         };
         
       }
 
-      handleNewClinicalInfo = (description,selectedValue,dateInfo,patology) =>{
-         
-          const tempData = this.state.data;
-          if(selectedValue === 0){
-            const lastId = tempData.clinicalInfo.length; 
-            const newEntry = {id:lastId,description:description,selectedValue:selectedValue,dateInfo:dateInfo,patology:patology}
-            tempData.clinicalInfo.push(newEntry);
-          }else {
-            const lastId = tempData.medication.length; 
-            const newEntry = {id:lastId,description:description,selectedValue:selectedValue,dateInfo:dateInfo,patology:patology}
-            tempData.medication.push(newEntry);
-          }
-          this.setState({data:tempData });
-          console.log(this.state.data);
-      }
+    handleNewClinicalInfo = (description,selectedValue,dateInfo,patology) =>{
+        
+        const tempData = this.state.data;
+    
+        const lastId = tempData.clinicalInfo.length; 
+        const newEntry = {id:lastId,description:description,type:selectedValue,dateInfo:dateInfo,patology:patology}
+        tempData.clinicalInfo.push(newEntry);
+        
+        this.setState({data:tempData });
+        console.log(this.state.data);
+    }
      
    render(){
     return <div className="container-fluid mt-2">

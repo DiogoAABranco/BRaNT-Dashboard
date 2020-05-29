@@ -8,6 +8,7 @@ import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
 import {BrowserRouter as Router, Route } from 'react-router-dom'
 import TrainingSession from './TrainingSession/TrainingSession'
+import Program from './Program/Program'
 
 function Dashboard(props){
     console.log(props.state);
@@ -20,14 +21,18 @@ function Dashboard(props){
 
                     <Sidebar/>
 
-                    <div id="page-content-wrapper">
+                    <div id="page-content-wrapper" className="">
                         <Navbar/>
-                        <Route exact path="/" />
-                        <Route path="/Content" component={ Content } />
-                        <Route path="/Avaliacao" component={Assessment }/>  
-                        <Route path="/Paciente" component={ Patient }/>  
-                        <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
-                        <Route path="/SessaoTreino" component={ TrainingSession }/>  
+                        <div className="pt-2">
+                            <Route exact path="/" />
+                            <Route path="/Content" component={ Content } />
+                            <Route path="/Avaliacao" component={Assessment }/>  
+                            <Route path="/Paciente" component={ Patient }/>  
+                            <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
+                            <Route path="/SessaoTreino" component={ TrainingSession }/>  
+                            <Route path="/TestProgram" component={ Program }/>  
+                        </div>
+                        
 
         
 

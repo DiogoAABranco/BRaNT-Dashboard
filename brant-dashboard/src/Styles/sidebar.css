@@ -6,6 +6,7 @@
   -moz-transition: margin .25s ease-out;
   -o-transition: margin .25s ease-out;
   transition: margin .25s ease-out;
+  
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -40,14 +41,16 @@
   }
 }
 .list-group li{
-  color: var(--main-color);
+  color: white;
  
 }
 .list-group a{
   
   text-decoration: none;
 }
-
+.bg-light{
+  background-color: var(--main-color)!important;
+}
 a li.bg-light:focus, a li.bg-light:hover, button.bg-light:focus, button.bg-light:hover {
   background-color: rgb(195, 169, 186) !important;
   color: var(--main-color); 

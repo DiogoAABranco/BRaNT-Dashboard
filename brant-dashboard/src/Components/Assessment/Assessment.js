@@ -106,7 +106,6 @@ class Assessment extends Component {
 
     }
 
-    
     return <div>     
         <div className="p-4">
             <div className="w-100">

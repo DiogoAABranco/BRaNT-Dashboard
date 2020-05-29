@@ -1,6 +1,8 @@
 import React,{Component}  from 'react';
 import ReactDOM from 'react-dom';
 import Dashboard from './Components/Dashboard'
+//development server for teste - miragejs
+import {makeServer} from './server';
 
 /*BOOTSTRAP */
 import 'bootstrap/dist/css/bootstrap.css';
@@ -27,8 +29,13 @@ class Main extends Component {
       users: UserStore.getAll()
     }
   }
+ 
+  
     render(){
-      console.log(this.state.users);
+      if (process.env.NODE_ENV === "development") {
+        makeServer()
+      }
+      //console.log(this.state.users);
     
         return(
           <ThemeProvider theme={theme}>     
@@ -38,6 +45,7 @@ class Main extends Component {
             )
     }
 }
+
 const theme = createMuiTheme({
   palette: {
     primary:{
@@ -45,5 +53,7 @@ const theme = createMuiTheme({
     },
   },
 },ptPT);
+
+
 
 ReactDOM.render(<Main/>,document.getElementById("root"));
