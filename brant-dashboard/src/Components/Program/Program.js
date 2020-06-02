@@ -6,16 +6,18 @@ export class Program extends Component {
         super(props)
     
         this.state = {
-            activities:[]
+            //recomended activities for the user
+            programs:[]
         }
     }
     handleApiCall () {
-        fetch("/api/activities")
+        //recommended activities for the user
+        fetch("/api/programs")
             .then(res => res.json())
             .then(json => {
-                this.setState({activities:json.activities});
-                console.log(this.state.activities);
+                this.setState({programs:json.programs});
             })
+            console.log("test: " + this.state.programs);
     }
 
     componentDidMount() {

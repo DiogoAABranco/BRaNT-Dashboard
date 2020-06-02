@@ -6,6 +6,7 @@ export function makeServer({ environment = "development" } = {}) {
 
     models: {
       activity: Model,
+      program: Model,
     },
 
     seeds(server) {
@@ -26,13 +27,40 @@ export function makeServer({ environment = "development" } = {}) {
                 {key:"parametro 1",value:1},
                 {key:"parametro 2",value:2},
                 {key:"parametro 3",value:3}]
-            })},
+            })
+        server.create("activity", 
+            {id:2, 
+            activityName:"Atividade 3", 
+            description:"Descrição...",
+            parameters:[
+                {key:"parametro 1",value:1},
+                {key:"parametro 2",value:2},
+                {key:"parametro 3",value:3}]
+            })
+        server.create("activity", 
+            {id:3, 
+            activityName:"Atividade 4", 
+            description:"Descrição...",
+            parameters:[
+                {key:"parametro 1",value:1},
+                {key:"parametro 2",value:2},
+                {key:"parametro 3",value:3}]
+            })
+        },
 
     routes() {
       this.namespace = "api"
 
       this.get("/activities", schema => {
         return schema.activities.all()
+      });
+      this.get("/programs", schema => {
+        return schema.programs.all()
+      });
+      this.post("/program", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody)
+      
+        return schema.programs.create(attrs)
       })
     },
   })
