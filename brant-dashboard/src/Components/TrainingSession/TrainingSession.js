@@ -42,6 +42,7 @@ class TrainingSession extends Component{
         if( this.state.nSessions == 0)
             return alert("Definir número de sessões");
         let trainingPlan = {
+            patientName:this.state.patientName,
             activities:this.state.activities,
             startDate:this.state.startDate,
             nSessions:this.state.nSessions,
