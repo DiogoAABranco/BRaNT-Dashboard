@@ -57,6 +57,10 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/programs", schema => {
         return schema.programs.all()
       });
+      this.get("/program/:patientName", (schema, request) => {
+        let patientName = request.params.patientName;
+        return schema.programs.findBy({patientName:patientName});
+      });
       this.post("/program", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
       

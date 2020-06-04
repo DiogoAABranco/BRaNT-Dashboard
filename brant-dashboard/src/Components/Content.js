@@ -19,7 +19,6 @@ class Content extends Component{
             
         }
     }
-
     //event handler for search box
     searchSpace = (event)=>{
         let keyword = event.target.value;

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Title from '../Others/Title'
 import ActivitiesView from './ActivitiesView'
 import DetailsPlanView from './DetailsPlanView'
+import SimpleDialog from '../Others/SimpleDialog'
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -26,7 +28,9 @@ class TrainingSession extends Component{
                 {id:3, value:"Quarta-feira",isChecked:false},
                 {id:4, value:"Quinta-feira",isChecked:false},
                 {id:5, value:"Sexta-feira",isChecked:false},
-                {id:6, value:"Sábado",isChecked:false}]
+                {id:6, value:"Sábado",isChecked:false}],
+            programComplete:false,
+            errorCreatingProgram:false
         }
         //necessary bind to get context of "this.setState"
         this.onClickRemoveActivity = this.onClickRemoveActivity.bind(this);
@@ -47,6 +51,7 @@ class TrainingSession extends Component{
             startDate:this.state.startDate,
             nSessions:this.state.nSessions,
             daysOfTheWeek:this.state.daysOfTheWeek,
+            isComplete:false,
             plannedSessions: this.createSessionsObject()
         };
         fetch('/api/program', {
@@ -59,10 +64,14 @@ class TrainingSession extends Component{
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                this.setState({programComplete:true})
+                
             })
             .catch((error) => {
                 console.error('Error:', error);
+                this.setState({errorCreatingProgram:true})
             });
+            //this.props.history.push('/programs');
         // console.log(trainingPlan);
 
     }
@@ -144,7 +153,9 @@ class TrainingSession extends Component{
     render(){
 
         return <div>
-
+                {this.state.programComplete?
+                <SimpleDialog title="Informação" information={"Programa de treino criado para o paciente: "+this.state.patientName} link='/programs'/>:
+                <div>
                 <Title sectionTitle={"Plano de treino - " + this.state.patientName }/>
                 <ActivitiesView 
                     state={this.state} 
@@ -159,9 +170,14 @@ class TrainingSession extends Component{
 
                 <div className="row justify-content-md-center m-0">
                     <button className="btn btn-brant-color" onClick={this.handleSubmit}>Submeter treino</button>
-                </div> 
+                </div>
+                </div>}
+                {this.state.errorCreatingProgram?
+                <SimpleDialog title="Informação" information={"Não foi possível criar o programa de treino para: "+this.state.patientName}/>:
+                null}
+                
 
             </div>
     }
 }
-export default TrainingSession
+export default withRouter(TrainingSession)

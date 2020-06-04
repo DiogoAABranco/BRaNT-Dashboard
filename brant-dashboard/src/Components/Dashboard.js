@@ -8,7 +8,9 @@ import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
 import {BrowserRouter as Router, Route } from 'react-router-dom'
 import TrainingSession from './TrainingSession/TrainingSession'
-import Program from './Program/Program'
+import Programs from './Program/Programs'
+import ViewDetailedProgram from './Program/ViewDetailedProgram'
+
 
 function Dashboard(props){
     console.log(props.state);
@@ -30,7 +32,9 @@ function Dashboard(props){
                             <Route path="/Paciente" component={ Patient }/>  
                             <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
                             <Route path="/SessaoTreino" component={ TrainingSession }/>  
-                            <Route path="/TestProgram" component={ Program }/>  
+                            <Route path="/programs" component={ Programs }/>  
+                            <Route path="/view-detailed-program" component={ ViewDetailedProgram }/> 
+                           
                         </div>
                         
 

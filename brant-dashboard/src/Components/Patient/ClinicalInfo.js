@@ -73,7 +73,7 @@ function ClinicalInfo(props){
                 <div className="col-sm-6">
                         <MaterialTable
                         options={{
-                            search: false,
+                            search: true,
                             draggable: false,
                             headerStyle: {
                                 backgroundColor: '#73374a',
@@ -87,7 +87,8 @@ function ClinicalInfo(props){
                                 { title: 'Descrição', field: 'description'}
                         ]}
                         data={data.clinicalInfo}
-                        title="Patologia/Procedimento clínico"      
+                        title="Informação"
+                          
                         />
                 </div>
             
