@@ -1,37 +1,41 @@
 import React from 'react'
-import MaterialTable from 'material-table'
-import {Link} from 'react-router-dom'
 
+
+function convertDate(inDate){
+  let date =  new Date(inDate);
+
+  return date.getDate() + '/' +date.getMonth() + '/' +date.getFullYear();
+}
 
 export default function TablePrograms(props) {
     
-    return (<MaterialTable 
-                   options={{
-                       search: true,
-                       draggable: false,
-                       headerStyle: {
-                           backgroundColor: '#752938',
-                           color:"white"
-                       },
-                       actionsColumnIndex: -1
-                     }}
-                   columns={[
-                       { title: 'Paciente', field: 'patientName' },
-                   { title: 'Data de início', field: 'startDate' },
-                       { title: 'Número de sessões', field: 'nSessions'}
-                   ]}
-                  actions={[
-                    {
-                      tooltip: 'Editar',
-                      icon: 'edit',
-                      //event on click row-> edit program -> passar o id especifico do treino
-                      onClick: (evt, data) => {}
-                    }
-                  ]}
-                   data={props.data}
-                   
-                   title="Programas de treino ativos" 
-               />
+    let columns=["#","Paciente","Data de início","Número de sessões","Ver"];
+    const programs = props.data;
+    
+    return (
+      
+      <table className="table">
+      <thead>
+        <tr>
+          {columns.map((element,index) => <th key={index} scope="col">{element}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {programs.length != 0?
+        programs.map((item,index) => 
+          
+          <tr key={index}> 
+            <th scope="row">{index+1}</th>
+            <td>{item.patientName}</td>
+            <td>{convertDate(item.startDate)}</td>
+            <td>{item.nSessions}</td>
+            <td><button className="btn btn-outline-brant-color">ver</button></td>
+            
+          </tr>
+         ):<tr><th scope="row">Sem items para mostrar</th></tr>
+        }
+      </tbody>
+    </table>
      
     )
 }

@@ -33,7 +33,7 @@ class Main extends Component {
   
     render(){
       if (process.env.NODE_ENV === "development") {
-        makeServer()
+        //makeServer()
       }
       //console.log(this.state.users);
     

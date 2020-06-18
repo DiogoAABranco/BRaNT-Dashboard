@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TablePrograms from './TablePrograms'
+import Title from '../Others/Title'
 /*----------------------------------------------------------------
 it receives all program currently active from all the patients
 and health professional can manage and edit the active programs
@@ -35,6 +36,7 @@ export class Programs extends Component {
         return (
             <div>
                 <div className="row p-0 m-0">
+                    <Title sectionTitle="Programas de treino ativos"/>
                     <div className="col-sm-12 p-2">
                         <TablePrograms data={this.state.programs}/>
                     </div>

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,16 +7,26 @@ import userStore from '../Stores/UserStore'
 
 
 
-class Content extends Component{
+class PatientsList extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            users: userStore.getAll(),
+            users: [],
             searchName:"",
             valueRangeSlider:[0, 100]
             
         }
     }
+    componentDidMount() {
+        fetch('http://localhost:8000/api/patients')
+        .then(res => res.json())
+        .then((data) => {
+            
+            this.setState({ users: data })
+            console.log('patientsAPI',this.state.users);
+        })
+        .catch(console.log)
+      }
     //event handler for search box
     searchSpace = (event)=>{
         let keyword = event.target.value;
@@ -51,7 +59,8 @@ class Content extends Component{
 
 
         const column1={id:"name",label:"Nome"};
-        const column2={id:"age",label:"Idade"};
+        //const column2={id:"age",label:"Idade"};
+        const column2={id:"address",label:"Morada"};
         
         return <div className="container-fluid mt-2">
         
@@ -112,9 +121,10 @@ class Content extends Component{
                 </div>
             </div> 
             <div className="container mw-100 mt-2">
-                <TableBrant data={users} column1={column1} column2={column2}/>     
+                {/* <TableBrant data={users} column1={column1} column2={column2}/>      */}
+                <TableBrant data={this.state.users} column1={column1} column2={column2}/>    
             </div>
         </div>
     }
 }
-export default Content
+export default PatientsList
