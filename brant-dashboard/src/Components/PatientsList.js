@@ -17,8 +17,10 @@ class PatientsList extends Component{
             
         }
     }
+    abortController = new AbortController();
+
     componentDidMount() {
-        fetch('http://localhost:8000/api/patients')
+        fetch('http://localhost:8000/api/patients',{signal: this.abortController.signal })
         .then(res => res.json())
         .then((data) => {
             
@@ -26,7 +28,11 @@ class PatientsList extends Component{
             console.log('patientsAPI',this.state.users);
         })
         .catch(console.log)
-      }
+    }
+    componentWillUnmount(){
+        this.abortController.abort();
+    }
+
     //event handler for search box
     searchSpace = (event)=>{
         let keyword = event.target.value;

@@ -30,7 +30,7 @@ function Dashboard(props){
                     <div id="page-content-wrapper" className="">
                         <Navbar/>
                         <div className="pt-2">
-                            <Route exact path="/" /><a href='/create-patient'>criar paciente</a>
+                            <Route exact path="/" />
                             <Route path="/Content" component={ PatientsList } />
                             <Route path="/Avaliacao" component={Assessment }/>  
                             <Route path="/Paciente" component={ Patient }/>  
