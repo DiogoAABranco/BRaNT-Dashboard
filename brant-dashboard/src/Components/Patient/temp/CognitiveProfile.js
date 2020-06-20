@@ -1,6 +1,6 @@
 import React from 'react'
-import Title from '../Others/Title'
-import BarChart from '../Others/BarChart'
+import Title from '../../Others/Title'
+import BarChart from '../../Others/BarChart'
 
 //pass data by props of the state
 const data = [

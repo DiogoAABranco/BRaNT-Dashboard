@@ -18,6 +18,7 @@ function Sidebar(props){
                     <Link to='/Paciente'><li className="list-group-item list-group-item-action bg-light">T:Perfil</li></Link>
                     <Link to='/programs'><li className="list-group-item list-group-item-action bg-light">Programas de Treino</li></Link>
                     <Link to='/view-detailed-program'><li className="list-group-item list-group-item-action bg-light">T:Programa detalhado</li></Link>
+                    <Link to='/patient-information'><li className="list-group-item list-group-item-action bg-light">T:Info Paciente tabs</li></Link>
                     
             
                 </ul>

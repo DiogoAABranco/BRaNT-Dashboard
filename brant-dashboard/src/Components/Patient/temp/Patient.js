@@ -1,5 +1,5 @@
 import React,{Component, useState} from 'react'
-import SocioDemoInfo from './SocioDemoInfo'
+import SocioDemoInfo from '../SocioDemoInfo'
 import CognitiveProfile from './CognitiveProfile'
 import ClinicalInfo from './ClinicalInfo'
 
@@ -52,7 +52,7 @@ class Patient extends Component {
     return <div className="container-fluid mt-2">
             <div className="row">
                 <div className="col-sm-6">
-                    <SocioDemoInfo/>
+                    {/* <SocioDemoInfo/> */}
                 </div>
                 <div className="col-sm-6">
                     <CognitiveProfile/>

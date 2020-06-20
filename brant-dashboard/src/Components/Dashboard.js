@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import PatientsList from './PatientsList'
 import Assessment from './Assessment/Assessment'
-import Patient from './Patient/Patient'
+import Patient from './Patient/temp/Patient'
 import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
 import {BrowserRouter as Router, Route } from 'react-router-dom'
@@ -12,6 +12,7 @@ import Programs from './Program/Programs'
 import ViewDetailedProgram from './Program/ViewDetailedProgram'
 import ViewDetailedSession from './Program/ViewDetailedSession'
 import NewPatientForm from './Patient/NewPatientForm'
+import PatientInformation from './Patient/PatientInformation'
 
 
 
@@ -40,6 +41,7 @@ function Dashboard(props){
                             <Route path="/view-detailed-program" component={ ViewDetailedProgram }/> 
                             <Route path="/view-detailed-session" component={ ViewDetailedSession }/>
                             <Route path="/create-patient" component={ NewPatientForm }/> 
+                            <Route path="/patient-information" component={ PatientInformation }/> 
                            
                         </div>
                         
