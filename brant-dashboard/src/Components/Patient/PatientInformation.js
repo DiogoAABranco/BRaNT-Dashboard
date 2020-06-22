@@ -11,6 +11,12 @@ export default function PatientInformation(props) {
     const [patient, setPatient] = useState(null);
     const [clinicalTypes, setClinicalTypes] = useState();
 
+    const [description, setDescription] = useState("");
+    const [clinical_info_type_id, setClinical_info_type_id] = useState(0);
+
+    const [success, setSuccess] = useState(false);
+    const [warning, setWarning] = useState(false);
+
     const apiCallFields = () => {
         const abortController = new AbortController();
         const signal = abortController.signal;
@@ -60,12 +66,50 @@ export default function PatientInformation(props) {
 
     },[]);
 
-    
-  console.log(patient);
-  console.log(clinicalTypes);
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+
+        let data={description,clinical_info_type_id};
+        console.log(JSON.stringify(data));
+
+        fetch('http://localhost:8000/api/clinical-info/1', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            
+            if(res.status==201){
+                setSuccess(true);
+                setWarning(false);
+                apiCallPatient();
+                
+            }else{
+                setSuccess(false);
+                setWarning(true);
+             
+            }
+            return res;
+        })
+        .then(res => res.json())
+        .then((data) => {
+            console.log('API success: ',data);
+        })
+        .catch(err => {
+            setSuccess(false);
+            setWarning(true);
+            return err;
+        });
+        setDescription("");
+        setClinical_info_type_id(0);
+     
+    }
   
     return (
         <div className="container w-100">
+            {success?<div className="alert alert-success" role="alert">Informação adicionada!</div>:null }
+            {warning?<div className="alert alert-danger" role="alert">Não foi possível adicionar informação</div>:null }
         <div className="row">
             <div className="col-md-12">
                 <nav>
@@ -85,7 +129,7 @@ export default function PatientInformation(props) {
                         
                         <h1>
                         {patient !== null && clinicalTypes !== null?
-                        (console.log(clinicalTypes),<ClinicalInfo clinicalTypes={clinicalTypes} clinicalInfo={patient.clinical_info}/>):null}
+                        <ClinicalInfo clinicalTypes={clinicalTypes} clinicalInfo={patient.clinical_info} handleSubmit={handleSubmit} description={description} setDescription={setDescription} clinical_info_type_id={clinical_info_type_id} setClinical_info_type_id={setClinical_info_type_id}/>:null}
                            
                         </h1>
                     </div>
@@ -96,6 +140,7 @@ export default function PatientInformation(props) {
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
     );
