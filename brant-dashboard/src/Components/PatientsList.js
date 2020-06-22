@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import Slider from '@material-ui/core/Slider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import TableBrant from './TableBrant'
-import userStore from '../Stores/UserStore'
+import Subtitle from './Others/Subtitle';
+import MaterialTable from 'material-table'
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -13,8 +15,9 @@ class PatientsList extends Component{
         this.state = {
             users: [],
             searchName:"",
-            valueRangeSlider:[0, 100]
-            
+            valueRangeSlider:[0, 100],
+            usersTable:[],
+  
         }
     }
     abortController = new AbortController();
@@ -26,6 +29,7 @@ class PatientsList extends Component{
             
             this.setState({ users: data })
             console.log('patientsAPI',this.state.users);
+            this.prepareTable();
         })
         .catch(console.log)
     }
@@ -51,9 +55,28 @@ class PatientsList extends Component{
         console.log(newValue);
       };
   
+    getAge = (birthDate) =>{
+        var birthdate = new Date(birthDate);
+        var cur = new Date();
+        var diff = cur-birthdate;
+        var age = Math.floor(diff/31536000000);
+        return age;
+    }
+    prepareTable = () =>{
+        let temp=[];
+        this.state.users.forEach(user =>{
+            let id = user.id;
+            let age = this.getAge(user.sociodemographic_data.date_of_birth);
+            let name = user.name;
+            let address = user.address;
+            let data = {id, name, address, age}
+            temp.push(data);
+        });
+        this.setState({usersTable:temp});
+    }
     render(){
         //apply fliter to users array
-        let usersFilterByName = this.state.users.filter((temp) =>
+        let usersFilterByName = this.state.usersTable.filter((temp) =>
             {
                 if(this.state.searchName == null)
                     return temp;
@@ -64,24 +87,18 @@ class PatientsList extends Component{
         let users = usersFilterByName.filter(user => (user.age >=this.state.valueRangeSlider[0]) && (user.age <= this.state.valueRangeSlider[1]));
 
 
-        const column1={id:"name",label:"Nome"};
-        //const column2={id:"age",label:"Idade"};
-        const column2={id:"address",label:"Morada"};
+       
         
         return <div className="container-fluid mt-2">
         
             <div className="accordion ml-3 mr-3" id="accordionExample">
                 <div className="card">
-                    <div className="card-header" id="headingOne">
-                        <h4>
-                            <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <p className="text-secondary">Pesquisa de pacientes</p>
-                            </button>
-                        </h4>
+                    <div className="card-header d-flex justify-content-between" id="headingOne">
+                        <Subtitle sectionTitle="Lista de utentes"/>
+                        <Link to="/create-patient"><button className="btn btn-brant-color">Novo Paciente</button></Link>
                     </div>
-    
+
                     <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <form>
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="pl-4 pr-4 pt-2">
@@ -116,20 +133,36 @@ class PatientsList extends Component{
                                                 <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Avaliação pendente" labelPlacement="end"/>
                                             </div>
                                         </div>
-                                       
                                     </div>
-                                    
                                 </div>
                             </div>
                             
-                        </form>
+                        <div>
+                        <MaterialTable
+                            options={{
+                                search: true,
+                                paging: true,
+                                showTitle:false,
+                                header:true,
+                                headerStyle:{
+                                    "fontWeight": 900,
+                                        "fontSize": 16,
+                                    color:"rgb(78, 36, 50)"
+                                }
+                            }}
+                            columns={[
+                                { title: 'ID', field: 'id'},
+                                { title: 'Nome', field: 'name'},
+                                { title: 'Morada', field: 'address'},
+                                { title: 'Idade', field: 'age'}
+                        ]}
+                        data={users}
+                            onRowClick={((evt, selectedRow) => this.props.history.push(`patient-information/${selectedRow.id}`))}
+                        />
+                        </div>
                     </div>
                 </div>
             </div> 
-            <div className="container mw-100 mt-2">
-                {/* <TableBrant data={users} column1={column1} column2={column2}/>      */}
-                <TableBrant data={this.state.users} column1={column1} column2={column2}/>    
-            </div>
         </div>
     }
 }

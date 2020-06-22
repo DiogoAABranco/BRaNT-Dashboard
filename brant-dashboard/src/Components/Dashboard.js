@@ -32,7 +32,7 @@ function Dashboard(props){
                         <Navbar/>
                         <div className="pt-2">
                             <Route exact path="/" />
-                            <Route path="/Content" component={ PatientsList } />
+                            <Route path="/patients" component={ PatientsList } />
                             <Route path="/Avaliacao" component={Assessment }/>  
                             <Route path="/Paciente" component={ Patient }/>  
                             <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
@@ -41,7 +41,7 @@ function Dashboard(props){
                             <Route path="/view-detailed-program" component={ ViewDetailedProgram }/> 
                             <Route path="/view-detailed-session" component={ ViewDetailedSession }/>
                             <Route path="/create-patient" component={ NewPatientForm }/> 
-                            <Route path="/patient-information" component={ PatientInformation }/> 
+                            <Route path="/patient-information/:id" component={ PatientInformation }/> 
                            
                         </div>
                         

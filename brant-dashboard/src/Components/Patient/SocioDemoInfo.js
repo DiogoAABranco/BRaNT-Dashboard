@@ -47,6 +47,7 @@ function SocioDemoInfo({patient, education_level}){
             { name: 'Nome', data: patient.name },
             { name: 'Email', data: patient.email },
             { name: 'Morada', data: patient.address },
+            { name: 'Profissão', data: patient.sociodemographic_data.job },
             { name: 'Data Nascimento', data: patient.sociodemographic_data.date_of_birth },
             { name: 'Sexo', data: setGender(patient.sociodemographic_data.gender)},
             { name: 'Escolaridade', data: setEducationLevel (patient.sociodemographic_data.education_level_id) },
