@@ -9,28 +9,26 @@ export default class ViewDetailedProgram extends Component {
         super(props)
     
         this.state = {
-            program:{
-                patientName:"",
-                activities:[],
-                daysOfTheWeek:[],
-                nSessions:0,
-                startDate:new Date(),
-                plannedSessions:[]
-            },
+           patientID:this.props.match.params.id,
+            program:[]
             
         }
         this.onClickRemoveSession = this.onClickRemoveSession.bind(this);
     }
+    abortController = new AbortController();
+
     componentDidMount(){
+    
         this.handleApiCall ();
     }
+
     handleApiCall () {
         //api call for a specific patient
         //only change "Paciente X" for pacient name or id or program id
-        fetch("/api/program/Paciente X")
+        fetch(`http://localhost:8000/api/training-program/${this.state.patientID}`,{signal: this.abortController.signal })
             .then(res => res.json())
-            .then(json => {
-                this.setState({program:json.program});
+            .then(data => {
+                this.setState({program:data});
                 console.log("json",this.state.program);
         
             })
@@ -38,6 +36,7 @@ export default class ViewDetailedProgram extends Component {
                 console.error('Error:', error);
                 
             });      
+            return () => this.abortController.abort(); 
     }
  
 
@@ -48,15 +47,19 @@ export default class ViewDetailedProgram extends Component {
         this.setState({program:copyProgram});
     }
     render() {
+        if(this.state.program.length !== 0)
         return (
             <div className="container-fluid">
                 
-                <Title sectionTitle={"Programa de treino de: " + this.state.program.patientName} />
+                <Title sectionTitle={"Programa de treino: " + this.state.program.patient.name} />
                 <CardsRow data={this.state.program}/>
-                <ListSessions data={this.state.program.plannedSessions} onClickRemoveSession={this.onClickRemoveSession}/>
-
-                
+                <ListSessions sessions={this.state.program.sessions} onClickRemoveSession={this.onClickRemoveSession} goTo={(id) => {this.props.history.push(`view-detailed-program/${id}`)}}/>
+ 
             </div>
+        )
+        else 
+        return(
+            <div></div>
         )
     }
 }

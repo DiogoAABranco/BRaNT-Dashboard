@@ -37,7 +37,7 @@ const DialogEditParameters =(props)=>{
         <DialogTitle id="responsive-dialog-title">{props.activityName+" - "+"Parâmetros"}</DialogTitle>
         <DialogContent>
            
-            {props.data.map(temp =><div key={temp.key} className="row"><TextField required id="standard-basic" label={temp.key} defaultValue={temp.value} /></div>)}
+            {props.data.map(temp =><div key={temp.id} className="row"><TextField required id="standard-basic" label={temp.name} defaultValue={5} /></div>)}
            
         </DialogContent>
         <DialogActions>

@@ -36,9 +36,9 @@ function Dashboard(props){
                             <Route path="/Avaliacao" component={Assessment }/>  
                             <Route path="/Paciente" component={ Patient }/>  
                             <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
-                            <Route path="/SessaoTreino" component={ TrainingSession }/>  
+                            <Route path="/new-program" component={ TrainingSession }/>  
                             <Route path="/programs" component={ Programs }/>  
-                            <Route path="/view-detailed-program" component={ ViewDetailedProgram }/> 
+                            <Route path="/view-detailed-program/:id" component={ ViewDetailedProgram }/> 
                             <Route path="/view-detailed-session" component={ ViewDetailedSession }/>
                             <Route path="/create-patient" component={ NewPatientForm }/> 
                             <Route path="/patient-information/:id" component={ PatientInformation }/> 

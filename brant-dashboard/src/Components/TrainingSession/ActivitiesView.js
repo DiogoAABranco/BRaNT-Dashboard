@@ -15,7 +15,7 @@ const ActivitiesView =(props)=>{
                     <Subtitle sectionTitle="Atividades recomendadas"/>
                     <div className="row p-0 m-0">
                         <button className="btn btn-brant-color mr-2"><AddIcon/></button>
-                        <DialogEditByStep data={props.state.activities}/>
+                        {/* <DialogEditByStep data={props.state.activities}/> */}
                     </div>
                 </div>
                 <div className="card-body">
@@ -23,7 +23,7 @@ const ActivitiesView =(props)=>{
                         {props.state.activities.map(temp =>
                             <div key={temp.id} className="col-sm-2"><ActivityBoxShape data={temp}/>
                                 <div className="row justify-content-md-center">
-                                    {temp.parameters !== undefined || temp.parameters.length > 0 ? <div className="mr-2"><DialogEditParameters activityName={temp.activityName} data={temp.parameters} /></div>:null }
+                                    {temp.game_variable_type !== undefined ? <div className="mr-2"><DialogEditParameters activityName={temp.name} data={temp.game_variable_type} /></div>:null }
                                     <button onClick={e => props.onClickRemoveActivity(e,temp)} className="btn btn-brant-color ml-2"><ClearIcon/></button>
                                 </div>
                             </div>)}

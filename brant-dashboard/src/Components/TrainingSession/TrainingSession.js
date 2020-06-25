@@ -11,13 +11,15 @@ class TrainingSession extends Component{
     constructor(props){
         super(props);
         this.state = {
-            patientName:"Paciente X",
-            activities:[{id:0, activityName:"Atividade 1", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
-                {id:1, activityName:"Atividade 2", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
-                {id:2, activityName:"Atividade 3", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
-                {id:3, activityName:"Atividade 4", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]},
-                {id:4, activityName:"Atividade 5", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]},
-                {id:5, activityName:"Atividade 6", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]}],
+            patientID:this.props.location.patientID,
+            patientName:this.props.location.name,
+            games:[{id:0, activityName:"Atividade 1", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
+            {id:1, activityName:"Atividade 2", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
+            {id:2, activityName:"Atividade 3", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[{key:"parametro 1",value:1},{key:"parametro 2",value:2},{key:"parametro 3",value:3}]},
+            {id:3, activityName:"Atividade 4", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]},
+            {id:4, activityName:"Atividade 5", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]},
+            {id:5, activityName:"Atividade 6", description:"Descrição:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",parameters:[]}],
+            activities:[],
             dificulty:0,
             startDate:new Date(),
             nSessions:0,
@@ -37,6 +39,27 @@ class TrainingSession extends Component{
         this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
         this.handleChangenSessions = this.handleChangenSessions.bind(this);
         this.handleChangeCheckBox = this.handleChangeCheckBox.bind(this);
+    }
+
+    abortController = new AbortController();
+      
+    handleApiCall () {
+        //recommended activities for the user
+        fetch(`http://localhost:8000/api/patients/${this.state.patientID}/recommended-games`,{signal: this.abortController.signal })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                this.setState({activities:data});
+            });
+            return () => this.abortController.abort(); 
+    }
+
+    componentDidMount() {
+        this.handleApiCall();
+    }
+
+    componentWillUnmount(){
+        this.abortController.abort();
     }
 
     handleSubmit = () => {
@@ -151,7 +174,7 @@ class TrainingSession extends Component{
     }
 
     render(){
-
+        if(this.state.activities.length !== 0)
         return <div>
                 {this.state.programComplete?
                 <SimpleDialog title="Informação" information={"Programa de treino criado para o paciente: "+this.state.patientName} link='/programs'/>:
@@ -178,6 +201,8 @@ class TrainingSession extends Component{
                 
 
             </div>
+        else
+        return <div></div>
     }
 }
 export default withRouter(TrainingSession)

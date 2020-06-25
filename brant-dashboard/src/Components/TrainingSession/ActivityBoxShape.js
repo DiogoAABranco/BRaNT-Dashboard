@@ -14,7 +14,7 @@ const ActivityBoxShape =(props)=>{
                 <SportsEsportsIcon/>
             </div>
             <div className="row justify-content-md-center">
-                <Subtitle sectionTitle={props.data.activityName}/>
+                <Subtitle sectionTitle={props.data.name}/>
             </div> 
            
          

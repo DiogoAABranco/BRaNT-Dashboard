@@ -15,23 +15,23 @@ export default function CardsRow(props) {
     }
     const calculateProgress = () =>{
         let value = 0;
-        let nSessions = props.data.nSessions;
-        let sessions = props.data.plannedSessions;
+        let nSessions = props.data.n_sessions;
+        let sessions = props.data.sessions;
         sessions.forEach(session => {
             if(session.isDone) 
                 value++;
         });
 
-        return value;
+        return value/nSessions*100;
     }
 
     return (
         <div className="row m-o p-0">
             <div className="col-sm-4 p-4">
-                <CardProgram title="Total de Sessões" value={props.data.nSessions}/>
+                <CardProgram title="Total de Sessões" value={props.data.n_sessions}/>
             </div>
             <div className="col-sm-4 p-4">
-                <CardProgram title="Data inicial" value={transformDate(props.data.startDate)}/>
+                <CardProgram title="Data inicial" value={props.data.start_date}/>
             </div>
             <div className="col-sm-4 p-4">
                 <ProgressSessions value={calculateProgress()}/>

@@ -5,6 +5,8 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Subtitle from '../Others/Subtitle'
+import {Link} from 'react-router-dom'
+
 
 
 
@@ -22,6 +24,9 @@ export default function PatientInformation(props) {
 
     const [success, setSuccess] = useState(false);
     const [warning, setWarning] = useState(false);
+
+    const [goToNewProgram, setGoToNewProgram] = useState(false);
+   
 
     const apiCallFields = () => {
         const abortController = new AbortController();
@@ -44,6 +49,7 @@ export default function PatientInformation(props) {
         .then(res => res.json())
         .then((data) => {
             setPatient(data);
+            setGoToNewProgram({pathname: "/new-program", patientID, name: data.name});
             
         })
         .catch(err =>{console.log(err)});
@@ -69,6 +75,8 @@ export default function PatientInformation(props) {
         apiCallClinicalInfoTypes();
         apiCallFields();
         apiCallPatient();
+        
+        
         
 
     },[]);
@@ -112,6 +120,7 @@ export default function PatientInformation(props) {
         setClinical_info_type_id(0);
      
     }
+    
   
     return (
         <div className=" w-100">
@@ -153,6 +162,8 @@ export default function PatientInformation(props) {
                         </div>
                     </div>
                 </div>
+                {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Novo Programa</button></Link>:null}
+                
                 
             </div>
     </div>

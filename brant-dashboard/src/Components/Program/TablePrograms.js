@@ -1,41 +1,50 @@
 import React from 'react'
+import MaterialTable from 'material-table'
 
 
-function convertDate(inDate){
-  let date =  new Date(inDate);
-
-  return date.getDate() + '/' +date.getMonth() + '/' +date.getFullYear();
-}
 
 export default function TablePrograms(props) {
     
-    let columns=["#","Paciente","Data de início","Número de sessões","Ver"];
     const programs = props.data;
     
     return (
-      
-      <table className="table">
-      <thead>
-        <tr>
-          {columns.map((element,index) => <th key={index} scope="col">{element}</th>)}
-        </tr>
-      </thead>
-      <tbody>
-        {programs.length != 0?
-        programs.map((item,index) => 
-          
-          <tr key={index}> 
-            <th scope="row">{index+1}</th>
-            <td>{item.patientName}</td>
-            <td>{convertDate(item.startDate)}</td>
-            <td>{item.nSessions}</td>
-            <td><button className="btn btn-outline-brant-color">ver</button></td>
-            
-          </tr>
-         ):<tr><th scope="row">Sem items para mostrar</th></tr>
+      <MaterialTable
+        options={{
+            search: true,
+            paging: true,
+            showTitle:false,
+            header:true,
+            headerStyle:{
+                "fontWeight": 900,
+                    "fontSize": 16,
+                color:"rgb(78, 36, 50)"
+            }
+        }}
+        columns={[
+            { title: 'ID', field: 'id'},
+            { title: 'Nome', field: 'patient.name'},
+            { title: 'Data de início', field: 'start_date'},
+            { title: 'Número de sessões', field: 'n_sessions'}
+      ]}
+      data={programs}
+        onRowClick={((evt, selectedRow) => props.goTo(selectedRow.id))}
+
+      localization={{
+        toolbar: {
+          searchTooltip: 'Procurar',
+          searchPlaceholder: 'Procurar'
+        },
+        pagination: {
+          labelRowsSelect: 'linhas',
+          labelDisplayedRows: '{count} de {from}-{to}',
+          firstTooltip: 'Primeira página',
+          previousTooltip: 'Página anterior',
+          nextTooltip: 'Próxima página',
+          lastTooltip: 'Última página'
         }
-      </tbody>
-    </table>
+        
+      }}
+      />
      
     )
 }

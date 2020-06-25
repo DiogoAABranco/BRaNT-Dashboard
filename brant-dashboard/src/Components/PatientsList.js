@@ -140,7 +140,7 @@ class PatientsList extends Component{
                         <div>
                         <MaterialTable
                             options={{
-                                search: true,
+                                search: false,
                                 paging: true,
                                 showTitle:false,
                                 header:true,
@@ -158,6 +158,16 @@ class PatientsList extends Component{
                         ]}
                         data={users}
                             onRowClick={((evt, selectedRow) => this.props.history.push(`patient-information/${selectedRow.id}`))}
+                        localization={{
+                            pagination: {
+                                labelRowsSelect: 'linhas',
+                                labelDisplayedRows: '{count} de {from}-{to}',
+                                firstTooltip: 'Primeira página',
+                                previousTooltip: 'Página anterior',
+                                nextTooltip: 'Próxima página',
+                                lastTooltip: 'Última página'
+                                }
+                        }}
                         />
                         </div>
                     </div>

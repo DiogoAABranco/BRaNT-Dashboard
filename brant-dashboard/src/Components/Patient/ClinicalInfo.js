@@ -70,6 +70,20 @@ function ClinicalInfo({clinicalTypes,clinicalInfo,handleSubmit, description, set
                 // { title: 'Data', field: 'date'}
         ]}
         data={clinicalInfo}
+        localization={{
+            toolbar: {
+              searchTooltip: 'Procurar',
+              searchPlaceholder: 'Procurar'
+            },
+            pagination: {
+                labelRowsSelect: 'linhas',
+                labelDisplayedRows: '{count} de {from}-{to}',
+                firstTooltip: 'Primeira página',
+                previousTooltip: 'Página anterior',
+                nextTooltip: 'Próxima página',
+                lastTooltip: 'Última página'
+              }
+        }}
         />
     </div>
 }
