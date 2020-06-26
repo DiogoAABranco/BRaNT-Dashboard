@@ -36,7 +36,7 @@ function Dashboard(props){
                             <Route path="/Avaliacao" component={Assessment }/>  
                             <Route path="/Paciente" component={ Patient }/>  
                             <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
-                            <Route path="/new-program" component={ TrainingSession }/>  
+                            <Route path="/new-program/:id/:name" component={ TrainingSession }/>  
                             <Route path="/programs" component={ Programs }/>  
                             <Route path="/view-detailed-program/:id" component={ ViewDetailedProgram }/> 
                             <Route path="/view-detailed-session" component={ ViewDetailedSession }/>

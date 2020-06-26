@@ -49,7 +49,7 @@ export default function PatientInformation(props) {
         .then(res => res.json())
         .then((data) => {
             setPatient(data);
-            setGoToNewProgram({pathname: "/new-program", patientID, name: data.name});
+            setGoToNewProgram({pathname: `/new-program/${patientID}/${data.name}`});
             
         })
         .catch(err =>{console.log(err)});
