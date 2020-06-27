@@ -5,6 +5,7 @@ import DetailsPlanView from "./DetailsPlanView";
 import SimpleDialog from "../Others/SimpleDialog";
 import { withRouter } from "react-router-dom";
 
+
 class TrainingSession extends Component {
   constructor(props) {
     super(props);
@@ -64,32 +65,36 @@ class TrainingSession extends Component {
 
     if (this.state.nSessions == 0) return alert("Definir número de sessões");
 
-    let trainingPlan = {
-      patientName: this.state.patientName,
-      activities: this.state.activities,
-      startDate: this.state.startDate,
-      nSessions: this.state.nSessions,
-      daysOfTheWeek: this.state.daysOfTheWeek,
-      isComplete: false,
-      plannedSessions: this.createSessionsObject(),
+    let data = {
+      patient_id: this.state.patientID,
+      user_id: 1,
+      games: this.state.activities,
+      start_date: this.state.startDate.toISOString().toString().split('T')[0],
+      n_sessions: this.state.nSessions,
+      days_of_the_week: this.state.daysOfTheWeek,
+  
     };
-    console.log(trainingPlan);
-    // fetch("/api/program", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(trainingPlan),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //     this.setState({ programComplete: true });
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     this.setState({ errorCreatingProgram: true });
-    //   });
+    console.log(data);
+
+    fetch('http://localhost:8000/api/training-program', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            return res;
+        })
+        .then(res => res.json())
+        .then((data) => {
+            console.log('API success: ',data);
+            this.props.history.push('/programs');
+        })
+        .catch(err => {
+          console.log(err);
+            return err;
+        });
+
     // //this.props.history.push('/programs');
     // // console.log(trainingPlan);
   };
@@ -120,52 +125,6 @@ class TrainingSession extends Component {
     });
     this.setState({ daysSelectBox: days });
     this.setState({ daysOfTheWeek: daysOfTheWeek });
-  };
-
-  //return days of the sessions
-  setDaysOfSessions = () => {
-    //day selected to start the plan
-    let currentDate = this.state.startDate;
-
-    //days of the week sunday-0 monday-1 tuesday-2
-    let days = this.state.daysOfTheWeek;
-
-    //number of sessions for this program
-    let nSessions = this.state.nSessions;
-
-    let sessionsDates = [];
-    let i = 1;
-
-    while (sessionsDates.length < nSessions) {
-      let tempDate = new Date();
-      tempDate.setDate(currentDate.getDate() + i);
-
-      for (var j = 0; j < days.length; j++) {
-        if (tempDate.getDay() == days[j]) {
-          sessionsDates.push(tempDate);
-          
-        }
-      }
-      i++;
-    }
-    return sessionsDates;
- 
-  };
-
-  createSessionsObject = () => {
-    let sessions = [];
-    let dates = this.setDaysOfSessions();
-
-    dates.map((date, index) => {
-      let session = {
-        id: index,
-        activities: this.state.activities,
-        date: date,
-        isDone: false,
-      };
-      sessions.push(session);
-    });
-    return sessions;
   };
 
   render() {

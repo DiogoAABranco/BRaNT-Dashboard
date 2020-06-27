@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Title from '../Others/Title'
 import CardsRow from './CardsRow';
 import ListSessions from './ListSessions'
+import {Link} from 'react-router-dom'
+import ActivitiesNextSession from '../Session/ActivitiesNextSession'
+
 
 
 export default class ViewDetailedProgram extends Component {
@@ -47,13 +50,24 @@ export default class ViewDetailedProgram extends Component {
         this.setState({program:copyProgram});
     }
     render() {
+       
         if(this.state.program.length !== 0)
         return (
             <div className="container-fluid">
                 
                 <Title sectionTitle={"Programa de treino: " + this.state.program.patient.name} />
                 <CardsRow data={this.state.program}/>
-                <ListSessions sessions={this.state.program.sessions} onClickRemoveSession={this.onClickRemoveSession} goTo={(id) => {this.props.history.push(`view-detailed-program/${id}`)}}/>
+                <ActivitiesNextSession session={this.state.program.sessions[0]} />
+
+                <div className="row p-0 ml-2">
+                    <Link to="/view-detailed-session"><button className="btn btn-brant-color mt-2">Modificar atividades</button></Link>
+                </div>
+
+                <div className="row p-2 ">
+                    <div className="col-md-12 mt-5">
+                        <ListSessions history={this.props.history} sessions={this.state.program.sessions} onClickRemoveSession={this.onClickRemoveSession} goTo={(id) => {this.props.history.push(`view-detailed-program/${id}`)}}/>
+                    </div>
+                </div>
  
             </div>
         )

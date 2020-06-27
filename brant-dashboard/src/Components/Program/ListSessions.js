@@ -1,29 +1,70 @@
-import React from 'react';
+import React,{useState} from 'react';
 import MaterialTable from 'material-table'
 import DialogEditByStep from './DialogEditByStep'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from 'react-router-dom'
 
 
-
-function convertState(inState){
-  if (inState == true) return "Completa";
-  else return "Por fazer";
-}
-function handleDeleteSession(e){
-  console.log(e);
-}
-function idSession(sessions,id){
-  let first = sessions[0].id;
-  let finalId = id - first + 1
-  return "Sessão " + finalId;
-}
 export default function ListSessions(props) {
+
+  const [sessions,setSession] = useState(props.sessions);
+
+
+  function convertState(inState){
+
+    if (inState == true) return <div className="alert alert-success m-0"></div>;
+    else return <div className="alert alert-danger m-0"></div>;
+
+  }
+
+
+  function handleDeleteSession(e){
+    console.log(e);
+  }
+
+
+  function idSession(sessions,id){
+
+    let first = sessions[0].id;
+    let finalId = id - first + 1
+    return "Sessão " + finalId;
+
+  }
+
+  
+  function deleteSession(rowData){
+
+    let answer = window.confirm("Deseja eliminar a sessão de: "+rowData.date+"?")
+      if (answer) {
+        //true
+          fetch(`http://localhost:8000/api/session/${rowData.id}`, {
+              method: 'DELETE',
+          }).then(res => {
+              return res;
+          })
+          .then(res => res.json())
+          .then((data) => {
+              console.log('API success: ',data);
+              const newSessions = sessions.filter((item) => item.id !== rowData.id);
+              setSession(newSessions);
+              if(newSessions.length === 0){
+                props.history.push('/programs');
+              }
+          })
+          .catch(err => {
+            console.log(err);
+              return err;
+          });
+      }
+      else {
+          //some code
+      }
+  }
     return (
       <MaterialTable
         title="Sessões"
           options={{
-              search: true,
+              search: false,
               paging: true,
               showTitle:true,
               header:true,
@@ -39,8 +80,8 @@ export default function ListSessions(props) {
               { title: 'Estado', field: 'isDone', render: rowData =>{if(rowData.isDone !== null)return convertState(rowData.isDone)}},
               { title: 'Resultados', field: ''},
         ]}
-        data={props.sessions}
-          onRowClick={((evt, selectedRow) => props.goTo(selectedRow.id))}
+        data={sessions}
+        
 
         localization={{
           toolbar: {
@@ -63,8 +104,8 @@ export default function ListSessions(props) {
           rowData => ({
             icon: 'delete',
             tooltip: 'Eliminar sessão',
-            onClick: (event, rowData) => alert("You want to delete " + rowData.name),
-            //disabled: /rowData.birthYear < 2000
+            onClick: (event, rowData) => {deleteSession(rowData)},
+              //disabled: /rowData.birthYear < 2000
           })
         ]}
         options={{

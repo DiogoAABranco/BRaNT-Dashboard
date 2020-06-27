@@ -9,26 +9,26 @@ export default function TablePrograms(props) {
     
     return (
       <MaterialTable
-        options={{
-            search: true,
-            paging: true,
-            showTitle:false,
-            header:true,
-            headerStyle:{
-                "fontWeight": 900,
-                    "fontSize": 16,
-                color:"rgb(78, 36, 50)"
-            }
-        }}
         columns={[
             { title: 'ID', field: 'id'},
             { title: 'Nome', field: 'patient.name'},
-            { title: 'Data de início', field: 'start_date'},
+            { title: 'Data de início', field: 'start_date', defaultSort: 'desc'},
             { title: 'Número de sessões', field: 'n_sessions'}
       ]}
       data={programs}
         onRowClick={((evt, selectedRow) => props.goTo(selectedRow.id))}
-
+      options={{
+          search: true,
+          sorting:true,
+          paging: true,
+          showTitle:true,
+          header:true,
+          headerStyle:{
+              "fontWeight": 900,
+              "fontSize": 16,
+              color:"rgb(78, 36, 50)"
+          }
+      }}
       localization={{
         toolbar: {
           searchTooltip: 'Procurar',
@@ -44,6 +44,7 @@ export default function TablePrograms(props) {
         }
         
       }}
+      
       />
      
     )
