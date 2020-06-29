@@ -111,35 +111,7 @@ export default function ListSessions(props) {
         options={{
           actionsColumnIndex: -1
         }}
-      />
-
-      
-    //   <table className="table">
-    //   <thead>
-    //     <tr>
-    //       {columns.map((element,index) => <th key={index} scope="col">{element}</th>)}
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {props.data.length != 0?
-    //     props.data.map((item,index) => 
-          
-    //       <tr key={index}> 
-    //         <th scope="row">{item.id + 1}</th>
-    //         <td>{convertDate(item.date)}</td>
-    //         <td>{convertState(item.isDone)}</td>
-    //         <td><DialogEditByStep session={item.id +1} data={item.activities}/></td>
-    //         <td><button className="btn btn-outline-brant-color" onClick={e => props.onClickRemoveSession(e,item)}><DeleteIcon/></button></td>
-    //         <td>ver</td>
-            
-    //       </tr>
-    //      ):<tr><th scope="row">Sem items para mostrar</th></tr>
-    //     }
-    //   </tbody>
-    // </table>
-         
-         
-         
+      /> 
     );
   }
 

@@ -4,6 +4,7 @@ import CardsRow from './CardsRow';
 import ListSessions from './ListSessions'
 import {Link} from 'react-router-dom'
 import ActivitiesNextSession from '../Session/ActivitiesNextSession'
+import DialogEditByStep from './DialogEditByStep';
 
 
 
@@ -27,12 +28,11 @@ export default class ViewDetailedProgram extends Component {
 
     handleApiCall () {
         //api call for a specific patient
-        //only change "Paciente X" for pacient name or id or program id
         fetch(`http://localhost:8000/api/training-program/${this.state.patientID}`,{signal: this.abortController.signal })
             .then(res => res.json())
             .then(data => {
                 this.setState({program:data});
-                console.log("json",this.state.program);
+                console.log("json",data);
         
             })
             .catch((error) => {
@@ -42,7 +42,6 @@ export default class ViewDetailedProgram extends Component {
             return () => this.abortController.abort(); 
     }
  
-
     onClickRemoveSession (e,session){
         let copyProgram = this.state.program;
         let newPlannedSessions = this.state.program.plannedSessions.filter(item => item !== session);
@@ -60,7 +59,7 @@ export default class ViewDetailedProgram extends Component {
                 <ActivitiesNextSession session={this.state.program.sessions[0]} />
 
                 <div className="row p-0 ml-2">
-                    <Link to="/view-detailed-session"><button className="btn btn-brant-color mt-2">Modificar atividades</button></Link>
+                    <DialogEditByStep gameVariables={this.state.program.game_variables}/>
                 </div>
 
                 <div className="row p-2 ">

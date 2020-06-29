@@ -12,11 +12,12 @@ import TextField from '@material-ui/core/TextField';
 import VerticalLinearStepper from '../TrainingSession/VerticalLinearStepper'
 import Title from '../Others/Title'
 
-//props contains list of activities
 const DialogEditByStep =(props)=>{
 
     const [open, setOpen] = React.useState(false);
     const [step, setStep] = React.useState(1);
+    const [gameVariables, setGameVariables] = React.useState(props.gameVariables);
+    
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -24,7 +25,30 @@ const DialogEditByStep =(props)=>{
         setOpen(true);
     };
 
-    const handleClose = () => {
+    
+    const handleSave = () => {
+        setOpen(false);
+
+        let data = {gameVariables};
+
+        fetch('http://localhost:8000/api/game-variables', {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then((data) => {
+            console.log('API success: ',data);
+        })
+        .catch(err => {
+            //erro msg
+            return err;
+        });
+    };
+
+    const handleClose= () => {
         setOpen(false);
     };
 
@@ -36,9 +60,9 @@ const DialogEditByStep =(props)=>{
     }
 
     return  (<div>
-    <button className="btn btn-outline-brant-color" onClick={handleClickOpen}>
-      <EditIcon/>
-    </button>
+
+    <button className="btn btn-brant-color mt-2" onClick={handleClickOpen}><EditIcon/>Parâmetros das atividades</button>
+ 
     <Dialog
       fullScreen={fullScreen}
       open={open}
@@ -47,10 +71,10 @@ const DialogEditByStep =(props)=>{
       maxWidth="sm"
       aria-labelledby="responsive-dialog-title"
     >
-        <DialogTitle id="responsive-dialog-title"><Title sectionTitle={"Editar parâmetros da sessão " + props.session}/></DialogTitle>
+        <DialogTitle id="responsive-dialog-title"><Title sectionTitle="Editar parâmetros das atividades"/></DialogTitle>
         <DialogContent>
 
-            <VerticalLinearStepper activities={props.data}/>
+            <VerticalLinearStepper gameVariables={gameVariables}/>
            
         {/* {props.data.map(temp =><div key={temp.id} className="row"><li>{temp.activityName}</li></div>)} */}
            
@@ -59,7 +83,7 @@ const DialogEditByStep =(props)=>{
             <Button autoFocus onClick={handleClose} color="primary">
                 Cancelar
             </Button>
-            <Button onClick={handleClose} color="primary" autoFocus>
+            <Button onClick={handleSave} color="primary" autoFocus>
                 Guardar
             </Button>
         </DialogActions>

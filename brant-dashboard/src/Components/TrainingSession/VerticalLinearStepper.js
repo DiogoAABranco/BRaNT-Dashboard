@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [gameVariables, setGameVariables] = React.useState(props.gameVariables);
   
 
   const handleNext = () => {
@@ -44,36 +45,52 @@ export default function VerticalLinearStepper(props) {
     setActiveStep(0);
   };
 
+  const updateField = (index2) => e => {
+    console.log(index2);
+    let tempData = [...gameVariables];
+        tempData[index2].value = e.target.value;
+        setGameVariables(tempData);
+  };
+
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">
-        {props.activities.map((temp) => (
-          <Step key={temp.id}>
-            <StepLabel>{temp.activityName}</StepLabel>
-            <StepContent>
-                {temp.parameters.map(tempX =><div key={tempX.key} className="row"><TextField required id="standard-basic" label={tempX.key} defaultValue={tempX.value} /></div>)}
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Voltar
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === props.activities.length - 1 ? 'Terminar' : 'Próximo'}
-                  </Button>
-                </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
+        {gameVariables.map((temp,index) =>
+          {if(index === 0 || temp.game_id !== gameVariables[index - 1].game_id){
+            return (<Step key={temp.id}>
+                <StepLabel>{temp.game.name}</StepLabel>
+                <StepContent>
+                        {gameVariables.map((element,index2) => <div key={element.id} className="row">
+                          {element.game_id === temp.game_id ?
+                            (<TextField required id="standard-basic" label={element.name} value={element.value} onChange={updateField(index2)}/>)
+                            :null 
+                          }
+                          </div>
+                          )}
+                  <div className={classes.actionsContainer}>
+                    <div>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        className={classes.button}
+                      >
+                        Voltar
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button} 
+                      >
+                        {activeStep === props.gameVariables.length - 1 ? 'Terminar' : 'Próximo'}
+                      </Button>
+                    </div>
+                  </div>
+                </StepContent>
+              </Step>)}
+            }
+          
+        )}
       </Stepper>
       
     </div>

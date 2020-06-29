@@ -10,7 +10,7 @@ import {BrowserRouter as Router, Route } from 'react-router-dom'
 import TrainingSession from './TrainingSession/TrainingSession'
 import Programs from './Program/Programs'
 import ViewDetailedProgram from './Program/ViewDetailedProgram'
-import ViewDetailedSession from './Program/ViewDetailedSession'
+import ChangeGameVariables from './Program/ChangeGameVariables'
 import NewPatientForm from './Patient/NewPatientForm'
 import PatientInformation from './Patient/PatientInformation'
 
@@ -39,7 +39,7 @@ function Dashboard(props){
                             <Route path="/new-program/:id/:name" component={ TrainingSession }/>  
                             <Route path="/programs" component={ Programs }/>  
                             <Route path="/view-detailed-program/:id" component={ ViewDetailedProgram }/> 
-                            <Route path="/view-detailed-session" component={ ViewDetailedSession }/>
+                            <Route path="/game-variables" component={ ChangeGameVariables }/>
                             <Route path="/create-patient" component={ NewPatientForm }/> 
                             <Route path="/patient-information/:id" component={ PatientInformation }/> 
                            
