@@ -58,8 +58,12 @@ export default class ViewDetailedProgram extends Component {
                 <CardsRow data={this.state.program}/>
                 <ActivitiesNextSession session={this.state.program.sessions[0]} />
 
-                <div className="row p-0 ml-2">
+                <div className="row p-0 ml-2 d-flex justify-content-between">
                     <DialogEditByStep gameVariables={this.state.program.game_variables}/>
+                    <div className="pt-2 pr-4">
+                        <button className="btn btn-brant-color" onClick={ () => {this.props.history.push(`/results/training-program/${this.state.program.id}`)}}>Resultados</button>
+
+                    </div>
                 </div>
 
                 <div className="row p-2 ">

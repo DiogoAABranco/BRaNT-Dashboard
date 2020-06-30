@@ -13,6 +13,7 @@ import ViewDetailedProgram from './Program/ViewDetailedProgram'
 import ChangeGameVariables from './Program/ChangeGameVariables'
 import NewPatientForm from './Patient/NewPatientForm'
 import PatientInformation from './Patient/PatientInformation'
+import Results from './Results/Results'
 
 
 
@@ -42,6 +43,7 @@ function Dashboard(props){
                             <Route path="/game-variables" component={ ChangeGameVariables }/>
                             <Route path="/create-patient" component={ NewPatientForm }/> 
                             <Route path="/patient-information/:id" component={ PatientInformation }/> 
+                            <Route path="/results/training-program/:id" component={ Results }/> 
                            
                         </div>
                         

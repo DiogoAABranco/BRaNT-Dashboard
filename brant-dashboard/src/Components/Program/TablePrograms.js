@@ -21,7 +21,7 @@ export default function TablePrograms(props) {
           search: true,
           sorting:true,
           paging: true,
-          showTitle:true,
+          showTitle:false,
           header:true,
           headerStyle:{
               "fontWeight": 900,
