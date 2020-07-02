@@ -5,6 +5,7 @@ import ListSessions from './ListSessions'
 import {Link} from 'react-router-dom'
 import ActivitiesNextSession from '../Session/ActivitiesNextSession'
 import DialogEditByStep from './DialogEditByStep';
+import SimpleSnackbar from '../Others/SimpleSnackBar'
 
 
 
@@ -18,6 +19,7 @@ export default class ViewDetailedProgram extends Component {
             
         }
         this.onClickRemoveSession = this.onClickRemoveSession.bind(this);
+        this.handleSimulateResults = this.handleSimulateResults.bind(this);
     }
     abortController = new AbortController();
 
@@ -48,6 +50,25 @@ export default class ViewDetailedProgram extends Component {
         copyProgram.plannedSessions = newPlannedSessions;
         this.setState({program:copyProgram});
     }
+
+    handleSimulateResults(){
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        fetch(`http://localhost:8000/api/simulate-program/${this.state.program.id}`,{ signal: signal })
+        .then(res => res.json())
+        .then((data) => {
+
+            console.log(data);
+            this.handleApiCall();
+            
+        })
+        .catch(console.log);
+        
+        return () => abortController.abort(); 
+        
+    }
+
     render() {
        
         if(this.state.program.length !== 0)
@@ -60,6 +81,10 @@ export default class ViewDetailedProgram extends Component {
 
                 <div className="row p-0 ml-2 d-flex justify-content-between">
                     <DialogEditByStep gameVariables={this.state.program.game_variables}/>
+                    <div className="pt-2 pr-4">
+                        <button className="btn btn-brant-color" onClick={ this.handleSimulateResults}>Simular Resultados</button>
+
+                    </div>
                     <div className="pt-2 pr-4">
                         <button className="btn btn-brant-color" onClick={ () => {this.props.history.push(`/results/training-program/${this.state.program.id}`)}}>Resultados</button>
 
