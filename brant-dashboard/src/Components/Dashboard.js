@@ -13,6 +13,7 @@ import ViewDetailedProgram from './Program/ViewDetailedProgram'
 import NewPatientForm from './Patient/NewPatientForm'
 import PatientInformation from './Patient/PatientInformation'
 import Results from './Results/Results'
+import GameView from './Games/GameView'
 
 
 
@@ -42,6 +43,7 @@ function Dashboard(props){
                             <Route path="/create-patient" component={ NewPatientForm }/> 
                             <Route path="/patient-information/:id" component={ PatientInformation }/> 
                             <Route path="/results/training-program/:id" component={ Results }/> 
+                            <Route path="/games" component={ GameView }/> 
                            
                         </div>
                         
