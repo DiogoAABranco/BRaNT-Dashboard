@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import baseUrl from '../../Config/config'
 import TablePrograms from './TablePrograms'
 import Title from '../Others/Title'
 import { Link } from 'react-router-dom';
@@ -24,7 +25,7 @@ export class Programs extends Component {
       
     handleApiCall () {
         //recommended activities for the user
-        fetch("http://localhost:8000/api/training-program",{signal: this.abortController.signal })
+        fetch(`${baseUrl}training-program`,{signal: this.abortController.signal })
             .then(res => res.json())
             .then(data => {
             

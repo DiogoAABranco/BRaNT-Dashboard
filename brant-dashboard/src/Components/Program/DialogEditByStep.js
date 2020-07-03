@@ -1,4 +1,5 @@
 import React from 'react';
+import baseUrl from '../../Config/config'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -31,7 +32,7 @@ const DialogEditByStep =(props)=>{
 
         let data = {gameVariables};
 
-        fetch('http://localhost:8000/api/game-variables', {
+        fetch(`${baseUrl}game-variables`, {
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {

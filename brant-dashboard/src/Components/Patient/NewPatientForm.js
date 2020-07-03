@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -41,7 +42,7 @@ export default function NewPatientForm() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch('http://localhost:8000/api/form/patient-fields',{ signal: signal })
+        fetch(`${baseUrl}form/patient-fields`,{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             
@@ -64,7 +65,7 @@ export default function NewPatientForm() {
         const data = {name, email, address, date_of_birth, job, gender, education_level_id, family_members};
         console.log(JSON.stringify(data));
         
-        fetch('http://localhost:8000/api/patients', {
+        fetch(`${baseUrl}patients`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

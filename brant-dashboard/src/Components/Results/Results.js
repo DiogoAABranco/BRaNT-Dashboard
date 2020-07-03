@@ -1,5 +1,7 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import { useParams} from "react-router";
+import baseUrl from '../../Config/config'
+
 import Title from '../Others/Title';
 import FilterResults from './FilterResults'
 import SessionsChart from './SessionsChart';
@@ -8,7 +10,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import Checkbox from '@material-ui/core/Checkbox';
 
 export default function Results(props) {
 
@@ -45,7 +46,7 @@ export default function Results(props) {
 
         const signal = abortController.signal;
 
-        fetch(`http://localhost:8000/api/scores/training-program/${trainingProgramID}`,{ signal: signal })
+        fetch( `${baseUrl}scores/training-program/${trainingProgramID}`,{ signal: signal })
 
         .then(res => res.json())
 
@@ -167,29 +168,9 @@ export default function Results(props) {
         }
 
     return data;
-        // let dataSession = [];
-        // //ver por sessão
-   
-        // trainingProgram.sessions.forEach((element,index) => {
-        //     element.scores.forEach(score => {
-
-        //         if(score.game_id == null && score.score_type_id == 3){
-        //             let temp = {x:index, y:parseInt(score.value), z:element.date }
-        //             dataSession.push(temp);
-        //         }
-        //         //get session scores type
-        //         if(score.game_id == null && index == 0 ){
-        //             let temp = sessionScoreType;
-        //             temp.push(score.score_type_id);
-        //             setSessionScoreType(sessionScoreType,);
-        //         }
-        //     });
-        // });
-        // //console.log(dataSession);
-        // return dataSession;
-
+     
     }
-
+    
     if(patient != null){
 
         return (

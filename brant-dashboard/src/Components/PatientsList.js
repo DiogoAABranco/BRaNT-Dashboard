@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import baseUrl from '../Config/config'
 import Slider from '@material-ui/core/Slider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -23,7 +24,7 @@ class PatientsList extends Component{
     abortController = new AbortController();
 
     componentDidMount() {
-        fetch('http://localhost:8000/api/patients',{signal: this.abortController.signal })
+        fetch(`${baseUrl}patients`,{signal: this.abortController.signal })
         .then(res => res.json())
         .then((data) => {
             

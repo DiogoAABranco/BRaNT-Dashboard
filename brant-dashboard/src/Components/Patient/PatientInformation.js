@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import baseUrl from '../../Config/config'
 import SocioDemoInfo from './SocioDemoInfo'
 import ClinicalInfo from "./ClinicalInfo";
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -32,7 +33,7 @@ export default function PatientInformation(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch('http://localhost:8000/api/form/patient-fields',{ signal: signal })
+        fetch(`${baseUrl}form/patient-fields`,{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             setFieldsEducationLevel(data.educationLevels);
@@ -45,7 +46,7 @@ export default function PatientInformation(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
         
-        fetch(`http://localhost:8000/api/patients/${patientID}`,{ signal: signal })
+        fetch(`${baseUrl}patients/${patientID}`,{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             setPatient(data);
@@ -60,7 +61,7 @@ export default function PatientInformation(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch('http://localhost:8000/api/form/clinical-info-types',{ signal: signal })
+        fetch(`${baseUrl}form/clinical-info-types`,{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             setClinicalTypes(data.types);
@@ -87,7 +88,7 @@ export default function PatientInformation(props) {
         let data={description,clinical_info_type_id};
         console.log(JSON.stringify(data));
 
-        fetch(`http://localhost:8000/api/clinical-info/${patientID}`, {
+        fetch(`${baseUrl}clinical-info/${patientID}`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

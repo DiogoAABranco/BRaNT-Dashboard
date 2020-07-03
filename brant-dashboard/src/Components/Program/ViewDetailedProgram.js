@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import CardsRow from './CardsRow';
 import ListSessions from './ListSessions'
@@ -30,7 +31,7 @@ export default class ViewDetailedProgram extends Component {
 
     handleApiCall () {
         //api call for a specific patient
-        fetch(`http://localhost:8000/api/training-program/${this.state.patientID}`,{signal: this.abortController.signal })
+        fetch(`${baseUrl}training-program/${this.state.patientID}`,{signal: this.abortController.signal })
             .then(res => res.json())
             .then(data => {
                 this.setState({program:data});
@@ -55,7 +56,7 @@ export default class ViewDetailedProgram extends Component {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`http://localhost:8000/api/simulate-program/${this.state.program.id}`,{ signal: signal })
+        fetch(`${baseUrl}simulate-program/${this.state.program.id}`,{ signal: signal })
         .then(res => res.json())
         .then((data) => {
 

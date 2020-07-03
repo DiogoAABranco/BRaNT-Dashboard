@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import baseUrl from '../../Config/config'
 import Title from "../Others/Title";
 import ActivitiesView from "./ActivitiesView";
 import DetailsPlanView from "./DetailsPlanView";
@@ -41,7 +42,7 @@ class TrainingSession extends Component {
   handleApiCall() {
     //recommended activities for the user
     fetch(
-      `http://localhost:8000/api/patients/${this.state.patientID}/recommended-games`,
+      `${baseUrl}patients/${this.state.patientID}/recommended-games`,
       { signal: this.abortController.signal }
     )
       .then((res) => res.json())
@@ -76,7 +77,7 @@ class TrainingSession extends Component {
     };
     console.log(data);
 
-    fetch('http://localhost:8000/api/training-program', {
+    fetch(`${baseUrl}training-program`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

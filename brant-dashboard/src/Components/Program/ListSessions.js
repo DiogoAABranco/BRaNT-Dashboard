@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import baseUrl from '../../Config/config'
 import MaterialTable from 'material-table'
 import DialogEditByStep from './DialogEditByStep'
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -37,7 +38,7 @@ export default function ListSessions(props) {
     let answer = window.confirm("Deseja eliminar a sessão de: "+rowData.date+"?")
       if (answer) {
         //true
-          fetch(`http://localhost:8000/api/session/${rowData.id}`, {
+          fetch(`${baseUrl}session/${rowData.id}`, {
               method: 'DELETE',
           }).then(res => {
               return res;
