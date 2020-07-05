@@ -14,6 +14,7 @@ import NewPatientForm from './Patient/NewPatientForm'
 import PatientInformation from './Patient/PatientInformation'
 import Results from './Results/Results'
 import GameView from './Games/GameView'
+import AssessmentToolList from './Assessment/AssessmentToolList'
 
 
 
@@ -44,6 +45,8 @@ function Dashboard(props){
                             <Route path="/patient-information/:id" component={ PatientInformation }/> 
                             <Route path="/results/training-program/:id" component={ Results }/> 
                             <Route path="/games" component={ GameView }/> 
+                            <Route path="/new-assessment" component={ NewAssessmentTool }/> 
+                            <Route path="/assessment-tools" component={ AssessmentToolList }/> 
                            
                         </div>
                         
