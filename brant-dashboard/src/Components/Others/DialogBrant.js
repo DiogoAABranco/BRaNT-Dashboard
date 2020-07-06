@@ -9,6 +9,32 @@ import BarChart from './BarChart';
 
 function DialogBrant(props){
    
+    const dataConvertToChart = () => {
+
+        let data = [];
+
+        props.assessment.results.forEach(( element,index ) => {
+
+            let domainName = "";
+
+            props.assessment.assessment_tool.modules.forEach(module => {
+
+                module.submodules.forEach(submodule =>{
+                    
+                    if(submodule.id === element.submodule_id){
+                        domainName = submodule.name;
+                    }
+                })
+            });
+
+            let temp = { domain:domainName,value: parseInt(element.value) }
+            data.push(temp);
+        });
+
+        console.log(data);
+
+        return data;
+    }
 
 return <div>
     
@@ -20,11 +46,11 @@ return <div>
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">Avaliação do paciente XXXXXXXX</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Data: " +props.date}</DialogTitle>
 
             <DialogContent>
 
-                <BarChart data={props.data.cognitiveDomain}/>
+                <BarChart data={dataConvertToChart()}/>
 
             </DialogContent>
 

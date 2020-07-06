@@ -27,6 +27,7 @@ export default function PatientInformation(props) {
     const [warning, setWarning] = useState(false);
 
     const [goToNewProgram, setGoToNewProgram] = useState(false);
+    const [goToAssessments, setGoToAssessments] = useState(false);
    
 
     const apiCallFields = () => {
@@ -51,6 +52,7 @@ export default function PatientInformation(props) {
         .then((data) => {
             setPatient(data);
             setGoToNewProgram({pathname: `/new-program/${patientID}/${data.name}`});
+            setGoToAssessments({pathname: `/patient-assessments/${patientID}/${data.name}`});
             
         })
         .catch(err =>{console.log(err)});
@@ -163,7 +165,26 @@ export default function PatientInformation(props) {
                         </div>
                     </div>
                 </div>
-                {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Novo Programa</button></Link>:null}
+                <div className="container-fluid py-4">
+
+                    <div className="row">
+
+                        <div className="col-md-3">
+
+                            {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Novo Programa</button></Link>:null}
+
+                        </div>
+
+                        <div className="col-md-3">
+
+                            {goToAssessments !== false?<Link to={goToAssessments}><button className="btn btn-brant-color">Avaliações</button></Link>:null}
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                
                 
                 
             </div>
