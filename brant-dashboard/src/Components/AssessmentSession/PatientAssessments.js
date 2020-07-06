@@ -3,6 +3,7 @@ import Title from '../Others/Title'
 import MaterialTable from 'material-table'
 import baseUrl from '../../Config/config'
 import DialogBrant from '../Others/DialogBrant'
+import {Link} from 'react-router-dom'
 
 
 
@@ -12,6 +13,9 @@ export default function PatientAssessments(props) {
     const [assessments,setAssessments] = useState(null);
     const [open, setOpen] = useState(false);
     const [assessmentSelected, setAssessmentSelected] = useState(null);
+
+    const [goToNewAssessmentSession, setGoToNewAssessmentSession] = useState(false);
+
 
     useEffect(() => {
 
@@ -23,7 +27,8 @@ export default function PatientAssessments(props) {
         .then((data) => {
             
             setAssessments(data);
-            setAssessmentSelected(data[0])
+            setAssessmentSelected(data[0]);
+            setGoToNewAssessmentSession({pathname: `/patient-new-assessment/${patient.id}/${patient.name}`});
   
         })
         .catch(console.log);
@@ -46,6 +51,7 @@ export default function PatientAssessments(props) {
         return (
             <div className="p-2">
                 <Title sectionTitle={"Avaliações: " + patient.name}/>
+                {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Nova avaliação</button></Link>:null}
 
                 <div>
                 <MaterialTable
