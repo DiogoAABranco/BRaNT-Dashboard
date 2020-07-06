@@ -16,6 +16,8 @@ export default function NewAssessmentSession(props) {
     const [tools, setTools] = useState(null);
     
     const [selectedTool, setSelectedTool] = useState("");
+
+    const [teste,setTeste] = useState(true);
     
 
     useEffect(() => {
@@ -47,7 +49,7 @@ export default function NewAssessmentSession(props) {
 
             mod.submodules.forEach((submod, index) => {
 
-                submod['value'] = 0;
+                submod['value'] = "";
            
             });
             
@@ -55,16 +57,12 @@ export default function NewAssessmentSession(props) {
 
         setSelectedTool(tool);
         
-        
-
-
     };
 
     const handleChangeSubmodules = (e,id) =>{
 
         //setSelectedTool({...selectedTool, [selectedTool.modules[indexmod].submodules[indexsubmod]]: e.target.value } );
         
-
         let tool = selectedTool;
 
         tool.modules.forEach((mod,index) => {
@@ -72,7 +70,9 @@ export default function NewAssessmentSession(props) {
             mod.submodules.forEach((submod,index2) => {
 
                 if(submod.id == id){
+
                     submod.value = e.target.value;
+
                     console.log(submod.name,submod.value);
                     
                 }
@@ -80,7 +80,8 @@ export default function NewAssessmentSession(props) {
             });
            
         });
-
+        
+        setTeste(!teste);
         setSelectedTool(tool);
 
         console.log(tool);
@@ -122,7 +123,7 @@ export default function NewAssessmentSession(props) {
                 
                 {selectedTool != "" ?
 
-                    <div className="d-flex justify-content-center py-4">
+                    <div className="row d-flex justify-content-center py-4">
 
                         <div className="container-fluid">
 
@@ -153,8 +154,23 @@ export default function NewAssessmentSession(props) {
                             </div>
 
                         </div>
+                        <div className="container-fluid p-0">
+
+                            <div className="row p-0 d-flex justify-content-center">
+
+
+                            <button className="btn btn-brant-color">Submeter</button>
+         
+
+                            </div>
+
+                            
+
+                        </div>
+
 
                     </div> 
+                
                 
                 :null}
 
