@@ -12,9 +12,8 @@ function Sidebar(props){
                     <Link to='/'><li className="list-group-item list-group-item-action bg-light">Início</li></Link>
                     <Link to='/create-patient'><li className="list-group-item list-group-item-action bg-light">Novo Paciente</li></Link>
                     <Link to='/patients'><li className="list-group-item list-group-item-action bg-light">Utentes</li></Link>
-                    <Link to='/Avaliacao'><li className="list-group-item list-group-item-action bg-light">Avaliação</li></Link>
-                    <Link to='/SessaoTreino'><li className="list-group-item list-group-item-action bg-light">Treino</li></Link>
-                    <Link to='/'><li className="list-group-item list-group-item-action bg-light">Resultados</li></Link>
+                   
+                    
                     {/* <Link to='/Paciente'><li className="list-group-item list-group-item-action bg-light">T:Perfil</li></Link> */}
                     <Link to='/programs'><li className="list-group-item list-group-item-action bg-light">Programas de Treino</li></Link>
                     <Link to='/games'><li className="list-group-item list-group-item-action bg-light">Atividades</li></Link>

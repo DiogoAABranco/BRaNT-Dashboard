@@ -27,7 +27,7 @@ export default function PatientAssessments(props) {
         .then((data) => {
             
             setAssessments(data);
-            setAssessmentSelected(data[0]);
+           // setAssessmentSelected(data[0]);
             setGoToNewAssessmentSession({pathname: `/patient-new-assessment/${patient.id}/${patient.name}`});
   
         })
@@ -46,13 +46,18 @@ export default function PatientAssessments(props) {
         setOpen(false);
     };
 
-    if(assessments != null && assessmentSelected !=null){
+    if(assessments != null ){
 
         return (
             <div className="p-2">
-                <Title sectionTitle={"Avaliações: " + patient.name}/>
-                {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Nova avaliação</button></Link>:null}
 
+                <div className="d-flex justify-content-between pb-4">
+                    
+                    <Title sectionTitle={"Avaliações: " + patient.name}/>
+                    {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Nova avaliação</button></Link>:null}
+
+                </div>
+                
                 <div>
                 <MaterialTable
             columns={[
@@ -62,7 +67,7 @@ export default function PatientAssessments(props) {
                 { title: 'Ferramenta de avaliação', field: 'assessment_tool.name'}
         ]}
         data={assessments}
-            onRowClick={((evt, selectedRow) => {setOpen(true);console.log(selectedRow)})}
+            onRowClick={((evt, selectedRow) => {setOpen(true); setAssessmentSelected(selectedRow);})}
         options={{
             search: false,
             sorting:true,
@@ -92,8 +97,9 @@ export default function PatientAssessments(props) {
         }}
         
         />
+       
                 </div>
-                <DialogBrant open={open} handleClose={handleClose} date={assessmentSelected.date} assessment={assessmentSelected} />
+                 {assessmentSelected != null ? <DialogBrant open={open} handleClose={handleClose} date={assessmentSelected.date} assessment={assessmentSelected} />:null}
             </div>
 
             
