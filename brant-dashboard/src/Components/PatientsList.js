@@ -158,7 +158,7 @@ class PatientsList extends Component{
                                 { title: 'Idade', field: 'age'}
                         ]}
                         data={users}
-                            onRowClick={((evt, selectedRow) => this.props.history.push(`patient-information/${selectedRow.id}`))}
+                            onRowClick={((evt, selectedRow) => this.props.history.push(`patients/patient-information/${selectedRow.id}`))}
                         localization={{
                             pagination: {
                                 labelRowsSelect: 'linhas',

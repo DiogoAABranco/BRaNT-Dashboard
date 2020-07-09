@@ -4,6 +4,10 @@ import MaterialTable from 'material-table'
 import baseUrl from '../../Config/config'
 import DialogBrant from '../Others/DialogBrant'
 import {Link} from 'react-router-dom'
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { NavLink } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import AssessmentImages from './AssessmentImages';
 
 
 
@@ -28,8 +32,8 @@ export default function PatientAssessments(props) {
             
             setAssessments(data);
            // setAssessmentSelected(data[0]);
-            setGoToNewAssessmentSession({pathname: `/patient-new-assessment/${patient.id}/${patient.name}`});
-  
+            setGoToNewAssessmentSession({pathname: `/patients/patient-new-assessment/${patient.id}/${patient.name}`});
+  console.log(data);
         })
         .catch(console.log);
         
@@ -50,6 +54,15 @@ export default function PatientAssessments(props) {
 
         return (
             <div className="p-2">
+                <div className="pb-2">
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <NavLink className="text-brant-color" to="/patients">
+                            Utentes
+                        </NavLink>
+                        <Typography color="textPrimary">Lista de avaliações</Typography>
+                    </Breadcrumbs>
+                </div>
+                
 
                 <div className="d-flex justify-content-between pb-4">
                     
@@ -64,10 +77,12 @@ export default function PatientAssessments(props) {
                 { title: 'ID', field: 'id'},
                 { title: 'Data', field: 'date'},
                 { title: 'Profisional de saúde', field: 'user.name'},
-                { title: 'Ferramenta de avaliação', field: 'assessment_tool.name'}
+                { title: 'Ferramenta de avaliação', field: 'assessment_tool.name'},
+                { title: 'Anexos', field: 'files', render: rowData => <AssessmentImages images={rowData.images}/>},
+                //{ title: 'Resultados', field: 'files', render: rowData =>  {setOpen(true); setAssessmentSelected(rowData);}}
         ]}
         data={assessments}
-            onRowClick={((evt, selectedRow) => {setOpen(true); setAssessmentSelected(selectedRow);})}
+            //onRowClick={((evt, selectedRow) => {setOpen(true); setAssessmentSelected(selectedRow);})}
         options={{
             search: false,
             sorting:true,

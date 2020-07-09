@@ -35,22 +35,19 @@ function Dashboard(props){
                     <div id="page-content-wrapper" className="">
                         <Navbar/>
                         <div className="pt-2">
-                            <Route exact path="/" />
-                            <Route path="/patients" component={ PatientsList } />
-                            <Route path="/Avaliacao" component={Assessment }/>  
-                            <Route path="/Paciente" component={ Patient }/>  
-                            <Route path="/CriarNovoTeste" component={ NewAssessmentTool }/>  
-                            <Route path="/new-program/:id/:name" component={ TrainingSession }/>  
-                            <Route path="/programs" component={ Programs }/>  
-                            <Route path="/view-detailed-program/:id" component={ ViewDetailedProgram }/> 
-                            <Route path="/create-patient" component={ NewPatientForm }/> 
-                            <Route path="/patient-information/:id" component={ PatientInformation }/> 
-                            <Route path="/results/training-program/:id" component={ Results }/> 
-                            <Route path="/games" component={ GameView }/> 
-                            <Route path="/new-assessment" component={ NewAssessmentTool }/> 
-                            <Route path="/assessment-tools" component={ AssessmentToolList }/> 
-                            <Route path="/patient-assessments/:id/:name" component={ PatientAssessments }/>  
-                            <Route path="/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
+                            <Route exact path="/home" />
+                            <Route exact path="/create-patient" component={ NewPatientForm }/>  
+                            <Route exact path="/patients" component={ PatientsList } />      
+                            <Route exact path="/patients/patient-information/:id" component={ PatientInformation }/>                 
+                            <Route exact path="/patients/new-program/:id/:name" component={ TrainingSession }/>  
+                            <Route exact path="/programs" component={ Programs }/>  
+                            <Route exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>              
+                            <Route exact path="/programs/results/training-program/:id" component={ Results }/> 
+                            <Route exact path="/games" component={ GameView }/> 
+                            <Route exact path="/new-assessment" component={ NewAssessmentTool }/> 
+                            <Route exact path="/assessment-tools" component={ AssessmentToolList }/> 
+                            <Route exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
+                            <Route exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
                         </div>
                         
 

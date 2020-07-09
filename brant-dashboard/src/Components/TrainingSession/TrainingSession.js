@@ -5,7 +5,9 @@ import ActivitiesView from "./ActivitiesView";
 import DetailsPlanView from "./DetailsPlanView";
 import SimpleDialog from "../Others/SimpleDialog";
 import { withRouter } from "react-router-dom";
-
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { NavLink } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 class TrainingSession extends Component {
   constructor(props) {
@@ -143,9 +145,18 @@ class TrainingSession extends Component {
             />
           ) : (
             <div>
-              <Title
+              <Breadcrumbs aria-label="breadcrumb">
+                <NavLink className="text-brant-color" to="/patients">
+                    Utentes
+                </NavLink>
+                <Typography color="textPrimary">Novo plano de treino</Typography>
+            </Breadcrumbs>
+            <div className="pt-2">
+            <Title 
                 sectionTitle={"Plano de treino - " + this.state.patientName}
               />
+            </div>
+              
               <ActivitiesView
                 state={this.state}
                 onClickRemoveActivity={this.onClickRemoveActivity}

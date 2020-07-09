@@ -88,11 +88,18 @@
     color: #40161e;
     cursor:pointer;
   }
-  .list-group-item-brant-color.list-group-item-action.active {
+ 
+  .list-group-item.list-group-item-brant-color.list-group-item-action.active {
     color: #fff!important;
     background-color: #40161e;
     border-color: #40161e;
   }
+  .active li{
+    color: #40161e !important;
+    background-color: rgb(195, 169, 186) !important;;
+  }
+
+  
   .table-brant-color, .table-brant-color > th, .table-brant-color > td {
     background-color: #e0a9b3;
   }

@@ -1,26 +1,33 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ItemSidebar from './ItemSidebar'
-import {Link} from 'react-router-dom'
+import {Link,NavLink} from 'react-router-dom'
 
 
 function Sidebar(props){
     
         return (
             <div className="bg-light border-right" id="sidebar-wrapper">
+
                 <div className="sidebar-heading"><img src="../Images/BRaNT_LOGO.PNG" alt="" className="logo" className="navbar-brand"/></div>
+
                 <ul className="list-group list-group-flush">
-                    <Link to='/'><li className="list-group-item list-group-item-action bg-light">Início</li></Link>
-                    <Link to='/create-patient'><li className="list-group-item list-group-item-action bg-light">Novo Paciente</li></Link>
-                    <Link to='/patients'><li className="list-group-item list-group-item-action bg-light">Utentes</li></Link>
-                   
-                    
-                    {/* <Link to='/Paciente'><li className="list-group-item list-group-item-action bg-light">T:Perfil</li></Link> */}
-                    <Link to='/programs'><li className="list-group-item list-group-item-action bg-light">Programas de Treino</li></Link>
-                    <Link to='/games'><li className="list-group-item list-group-item-action bg-light">Atividades</li></Link>
-                    <Link to='/new-assessment'><li className="list-group-item list-group-item-action bg-light">NovaFerramenta</li></Link>
-                    <Link to='/assessment-tools'><li className="list-group-item list-group-item-action bg-light">Ferramentas de avaliação</li></Link>
-                    {/* <Link to='/view-detailed-program'><li className="list-group-item list-group-item-action bg-light">T:Programa detalhado</li></Link> */}
+
+                    <NavLink activeClassName="active" to='/home'><li className="list-group-item list-group-item-action bg-light">Início</li></NavLink>
+
+                    <NavLink activeClassName="active"  to='/create-patient'><li className="list-group-item list-group-item-action bg-light">Novo Paciente</li></NavLink>
+
+                    <NavLink activeClassName="active" to='/patients'><li className="list-group-item list-group-item-action bg-light">Utentes</li></NavLink>   
+
+                    <NavLink activeClassName="active" to='/programs'><li className="list-group-item list-group-item-action bg-light">Programas de Treino</li></NavLink>
+
+                    <NavLink activeClassName="active" to='/games'><li className="list-group-item list-group-item-action bg-light">Atividades</li></NavLink>
+
+                    <NavLink activeClassName="active" to='/new-assessment'><li className="list-group-item list-group-item-action bg-light">NovaFerramenta</li></NavLink>
+
+                    <NavLink activeClassName="active" to='/assessment-tools'><li className="list-group-item list-group-item-action bg-light">Ferramentas de avaliação</li></NavLink>
+                  
                 </ul>
+
             </div>
         )
     

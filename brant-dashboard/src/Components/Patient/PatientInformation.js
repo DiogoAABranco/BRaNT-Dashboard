@@ -6,7 +6,9 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Subtitle from '../Others/Subtitle'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import BarChart from '../Others/BarChart';
+import Title from '../Others/Title';
 
 
 
@@ -28,6 +30,7 @@ export default function PatientInformation(props) {
 
     const [goToNewProgram, setGoToNewProgram] = useState(false);
     const [goToAssessments, setGoToAssessments] = useState(false);
+    const [goToNewAssessmentSession, setGoToNewAssessmentSession] = useState(false);
    
 
     const apiCallFields = () => {
@@ -51,8 +54,9 @@ export default function PatientInformation(props) {
         .then(res => res.json())
         .then((data) => {
             setPatient(data);
-            setGoToNewProgram({pathname: `/new-program/${patientID}/${data.name}`});
-            setGoToAssessments({pathname: `/patient-assessments/${patientID}/${data.name}`});
+            setGoToNewProgram({pathname: `/patients/new-program/${patientID}/${data.name}`});
+            setGoToAssessments({pathname: `/patients/patient-assessments/${patientID}/${data.name}`});
+            setGoToNewAssessmentSession({pathname: `/patients/patient-new-assessment/${patientID}/${data.name}`});
             
         })
         .catch(err =>{console.log(err)});
@@ -135,6 +139,32 @@ export default function PatientInformation(props) {
                 </NavLink>
                 <Typography color="textPrimary">Informação do paciente</Typography>
             </Breadcrumbs>
+            <div className="d-flex flex-row-reverse">
+
+                    <div className="row p-0 m-0">
+
+                        <div className="col-md-3">
+
+                            {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Criar Novo Programa</button></Link>:null}
+
+                        </div>
+
+                        <div className="col-md-3">
+
+                            {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Criar Nova avaliação</button></Link>:null}
+
+                        </div>
+
+                        <div className="col-md-3">
+
+                            {goToAssessments !== false?<Link to={goToAssessments}><button className="btn btn-brant-color">Lista de Avaliações</button></Link>:null}
+
+                        </div>
+                        
+
+                    </div>
+                    
+                </div>
             <div className="row p-4 m-0">
                 <div className="col-md-12">
                     <nav>
@@ -160,30 +190,25 @@ export default function PatientInformation(props) {
                         </div>
                         <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <h1>
-                                perfil cognitivo
+                                
+                                {patient !== null?
+                                <div>
+                                    <div className="col-md-12 d-flex justify-content-center">
+                                        <Title sectionTitle="Perfil cognitivo"/>
+                                        <div className="container">
+                                            <BarChart data={patient.cognitiveProfile}/>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                :null}
+                                
                             </h1>
                         </div>
                     </div>
                 </div>
-                <div className="container-fluid py-4">
-
-                    <div className="row">
-
-                        <div className="col-md-3">
-
-                            {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Novo Programa</button></Link>:null}
-
-                        </div>
-
-                        <div className="col-md-3">
-
-                            {goToAssessments !== false?<Link to={goToAssessments}><button className="btn btn-brant-color">Avaliações</button></Link>:null}
-
-                        </div>
-
-                    </div>
-                    
-                </div>
+                
                 
                 
                 

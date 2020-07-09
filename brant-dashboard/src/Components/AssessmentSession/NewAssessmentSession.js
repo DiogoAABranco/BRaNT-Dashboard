@@ -7,6 +7,9 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Title from '../Others/Title';
 import Subtitle from '../Others/Subtitle';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { NavLink } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 
 export default function NewAssessmentSession(props) {
@@ -163,6 +166,15 @@ export default function NewAssessmentSession(props) {
     if(tools != null){
         return (
             <div>
+                <div className="pb-2">
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <NavLink className="text-brant-color" to="/patients">
+                            Utentes
+                        </NavLink>
+                        <Typography color="textPrimary">Nova avaliação</Typography>
+                    </Breadcrumbs>
+                </div>
+
                 <Title sectionTitle={"Nova avaliação: " + patient.name}/>
 
                     <div className="d-flex justify-content-center py-4">
