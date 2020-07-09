@@ -15,6 +15,7 @@ import "./Styles/custom.css";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
+import {BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { ptPT } from "@material-ui/core/locale";
 
@@ -32,7 +33,10 @@ class Main extends Component {
     return (
 
         <ThemeProvider theme={ theme }>
-            <Dashboard/>
+          <Router>
+             <Dashboard/>
+          </Router>
+           
       
         </ThemeProvider>    
 

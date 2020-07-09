@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import PatientsList from './PatientsList'
-import Assessment from './Assessment/Assessment'
-import Patient from './Patient/temp/Patient'
 import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
-import {BrowserRouter as Router, Route } from 'react-router-dom'
+import {BrowserRouter as Router, Route,Switch } from 'react-router-dom'
 import TrainingSession from './TrainingSession/TrainingSession'
 import Programs from './Program/Programs'
 import ViewDetailedProgram from './Program/ViewDetailedProgram'
@@ -17,22 +15,28 @@ import GameView from './Games/GameView'
 import AssessmentToolList from './Assessment/AssessmentToolList'
 import PatientAssessments from './AssessmentSession/PatientAssessments'
 import NewAssessmentSession from './AssessmentSession/NewAssessmentSession'
+import Login from './Auth/Login'
+import Register from './Auth/Register'
 
 
 
 
 function Dashboard(props){
- 
-    return <div>
+   
+        return <Switch>
     
-        <Router>
+
+            
+            <Route exact path="/auth/login" component={ Login }/>
+            <Route exact path="/auth/register" component={ Register }/>
+<Fragment>
             <div className="sidenav">
 
                 <div className="d-flex" id="wrapper">
 
                     <Sidebar/>
 
-                    <div id="page-content-wrapper" className="">
+                    <div id="page-content-wrapper">
                         <Navbar/>
                         <div className="pt-2">
                             <Route exact path="/home" />
@@ -58,10 +62,9 @@ function Dashboard(props){
                 </div>    
 
             </div>
-
-        </Router>
-
-    </div>
+            </Fragment>
+            </Switch>
+    
 }
 export default Dashboard
 
