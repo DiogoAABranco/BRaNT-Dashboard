@@ -114,6 +114,7 @@ class TrainingSession extends Component {
     fetch(`${baseUrl}games`,{headers:tokenHeader()},{signal: this.abortController.signal })
     .then(res => res.json())
     .then(data => {
+ 
         this.setState({games:data});
         console.log("json",data);
 
@@ -123,6 +124,65 @@ class TrainingSession extends Component {
         
     });      
     return () => this.abortController.abort(); 
+  }
+
+  //add new games to the program
+  addNewActivities = (activities) => {
+    // console.log(this.state.activities);
+    // console.log(this.state.games);
+    // console.log(activities);
+
+    let  activitiesToAdd = [];
+
+    activities.forEach(element => {
+      activitiesToAdd.push(parseInt(element));
+    });
+
+    this.state.activities.forEach(activity => {
+      //filter the activities that didnt exist yet..
+        let act = activitiesToAdd.filter(val => val !== activity.id);
+        console.log(act);
+        activitiesToAdd = act;    
+   });
+
+   console.log("activitiestoadd: " + activitiesToAdd);
+
+   let activitiesObjToAdd = [];
+
+   this.state.games.forEach(game =>{
+
+      activitiesToAdd.forEach(element => {
+
+          if( game.id == element ){
+            activitiesObjToAdd.push(game);
+          }
+      });
+   });
+
+   console.log(activitiesObjToAdd);
+
+    activitiesObjToAdd.forEach(activity => {
+
+      activity.game_variable_type.forEach(game_var =>{
+        game_var["value"] = 0;
+      });
+    });
+
+    console.log(activitiesObjToAdd);
+
+
+    let activitiesTemp = this.state.activities;
+
+    activitiesObjToAdd.forEach(element => {
+      activitiesTemp.push(element);
+    });
+
+    this.setState({activities:activitiesTemp});
+    
+
+
+
+
   }
 
   //remove activity from the recommended list
@@ -174,9 +234,10 @@ class TrainingSession extends Component {
             </div>
               
               <ActivitiesView
-              games={this.state.games}
+                games={this.state.games}
                 state={this.state}
                 onClickRemoveActivity={this.onClickRemoveActivity}
+                addNewActivities={this.addNewActivities}
               />
 
               <DetailsPlanView

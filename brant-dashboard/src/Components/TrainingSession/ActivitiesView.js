@@ -19,9 +19,8 @@ const ActivitiesView =(props)=>{
 
           <div className="row p-0 m-0">
 
-            <DialogAddActivity games={props.games}/>
+            <DialogAddActivity games={props.games} addNewActivities={props.addNewActivities}/>
 
-            {/* <DialogEditByStep data={props.state.activities}/> */}
           </div>
 
         </div>

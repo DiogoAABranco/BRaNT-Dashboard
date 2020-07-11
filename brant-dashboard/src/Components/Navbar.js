@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {logout} from '../Config/configToken'
+import {logout, getUser} from '../Config/configToken'
 
 
 class Navbar extends Component {
@@ -21,6 +21,9 @@ class Navbar extends Component {
         
     }
     render(){
+        if( getUser()!==null){
+
+        
         return (
          
             <nav className="navbar navbar-expand-lg navbar-light bottom-shadow">
@@ -30,6 +33,7 @@ class Navbar extends Component {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto mt-2 mt-lg-0 mr-2">
+                        <li className="nav-item nav-link">{"Seja bem-vindo, "+ getUser().name}</li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             
@@ -45,7 +49,8 @@ class Navbar extends Component {
             </nav>
             
     
-        )
+        )}
+        else return <div></div>
     }
 }
 

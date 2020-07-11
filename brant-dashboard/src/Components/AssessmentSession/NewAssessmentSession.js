@@ -61,7 +61,7 @@ export default function NewAssessmentSession(props) {
 
             mod.submodules.forEach((submod, index) => {
 
-                submod['value'] = "";
+                submod['value'] = 0;
            
             });
             
@@ -159,6 +159,9 @@ export default function NewAssessmentSession(props) {
         .then(res => res.json())
         .then((data) => {
             console.log('API success: ',data);
+            if(data.msg === 'success'){
+                props.history.push(`/patients/patient-assessments/${patient.id}/${patient.name}`);
+            }
         })
         .catch(err => {
             console.log(err);

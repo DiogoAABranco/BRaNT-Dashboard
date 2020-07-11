@@ -12,22 +12,42 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
-export default function DialogAddActivity({games}) {
+export default function DialogAddActivity({ games, addNewActivities }) {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
+  const [activitiesID, setActivitiesID] = React.useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  
-
   const handleClose = () => {
     setOpen(false);
   };
 
+  const handleCloseAgree = () => {
+
+    setOpen(false);
+
+    let activities = [];
+
+    Object.keys(selected).forEach(function(key,index) {
+        console.log(key);
+        if(selected[key] === true){
+            activities.push(key);
+        }
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object 
+    });
+    addNewActivities(activities);
+    
+  };
+  
+
   const handleChange = (event) => {
     setSelected({ ...selected, [event.target.name]: event.target.checked });
+  
+    
   };
 
   return (
@@ -41,7 +61,7 @@ export default function DialogAddActivity({games}) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Actividades</DialogTitle>
         <DialogContent>
           
           <div className="container">
@@ -63,7 +83,7 @@ export default function DialogAddActivity({games}) {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleCloseAgree} color="primary" autoFocus>
             Adicionar Actividades
           </Button>
         </DialogActions>
