@@ -10,6 +10,9 @@ import Subtitle from '../Others/Subtitle';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { tokenHeader,getToken } from '../../Config/configToken'
+
+
 
 
 export default function NewAssessmentSession(props) {
@@ -35,7 +38,7 @@ export default function NewAssessmentSession(props) {
 
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}assessment-tools`,{ signal: signal })
+        fetch(`${baseUrl}assessment-tools`,{headers:tokenHeader()},{ signal: signal })
 
         .then(res => res.json())
 
@@ -136,7 +139,11 @@ export default function NewAssessmentSession(props) {
         
         fetch(`${baseUrl}assessments`, {
             method: 'POST',
+            headers:new Headers({
+                'Authorization': 'Bearer ' + getToken(),
+            }),
             body: fileData,
+            
     
         }).then(res => {
             

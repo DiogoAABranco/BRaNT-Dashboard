@@ -10,6 +10,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import { tokenHeader } from '../../Config/configToken'
 
 export default function Results(props) {
 
@@ -46,7 +47,7 @@ export default function Results(props) {
 
         const signal = abortController.signal;
 
-        fetch( `${baseUrl}scores/training-program/${trainingProgramID}`,{ signal: signal })
+        fetch( `${baseUrl}scores/training-program/${trainingProgramID}`,{headers:tokenHeader()},{ signal: signal })
 
         .then(res => res.json())
 

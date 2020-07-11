@@ -8,6 +8,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import AssessmentImages from './AssessmentImages';
+import { tokenHeader } from '../../Config/configToken'
 
 
 
@@ -26,7 +27,7 @@ export default function PatientAssessments(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}patients/${patient.id}/assessments`,{ signal: signal })
+        fetch(`${baseUrl}patients/${patient.id}/assessments`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             
@@ -78,11 +79,11 @@ export default function PatientAssessments(props) {
                 { title: 'Data', field: 'date'},
                 { title: 'Profisional de saúde', field: 'user.name'},
                 { title: 'Ferramenta de avaliação', field: 'assessment_tool.name'},
-                { title: 'Anexos', field: 'files', render: rowData => <AssessmentImages images={rowData.images}/>},
-                //{ title: 'Resultados', field: 'files', render: rowData =>  {setOpen(true); setAssessmentSelected(rowData);}}
+                //{ title: 'Anexos', field: 'files'}, //render: rowData => <AssessmentImages images={rowData.images}/>},
+                //{ title: 'Resultados', field: 'files', render: rowData =>  {setOpen(false); setAssessmentSelected(rowData);}}
         ]}
         data={assessments}
-            //onRowClick={((evt, selectedRow) => {setOpen(true); setAssessmentSelected(selectedRow);})}
+            onRowClick={((evt, selectedRow) => {setOpen(true); setAssessmentSelected(selectedRow);})}
         options={{
             search: false,
             sorting:true,

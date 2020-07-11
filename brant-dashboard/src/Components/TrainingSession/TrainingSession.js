@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { tokenHeader } from '../../Config/configToken'
 
 class TrainingSession extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class TrainingSession extends Component {
   handleApiCall() {
     //recommended activities for the user
     fetch(
-      `${baseUrl}patients/${this.state.patientID}/recommended-games`,
+      `${baseUrl}patients/${this.state.patientID}/recommended-games`,{headers:tokenHeader()},
       { signal: this.abortController.signal }
     )
       .then((res) => res.json())
@@ -82,9 +83,7 @@ class TrainingSession extends Component {
     fetch(`${baseUrl}training-program`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers:tokenHeader(),
         }).then(res => {
             return res;
         })

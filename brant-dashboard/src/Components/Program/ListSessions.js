@@ -4,6 +4,7 @@ import MaterialTable from 'material-table'
 import DialogEditByStep from './DialogEditByStep'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from 'react-router-dom'
+import { tokenHeader } from '../../Config/configToken'
 
 
 export default function ListSessions(props) {
@@ -40,6 +41,7 @@ export default function ListSessions(props) {
         //true
           fetch(`${baseUrl}session/${rowData.id}`, {
               method: 'DELETE',
+              headers:tokenHeader(),
           }).then(res => {
               return res;
           })

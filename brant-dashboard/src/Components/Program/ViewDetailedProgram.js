@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import ActivitiesNextSession from '../Session/ActivitiesNextSession'
 import DialogEditByStep from './DialogEditByStep';
 import SimpleSnackbar from '../Others/SimpleSnackBar'
+import { tokenHeader } from '../../Config/configToken'
 
 
 
@@ -31,7 +32,7 @@ export default class ViewDetailedProgram extends Component {
 
     handleApiCall () {
         //api call for a specific patient
-        fetch(`${baseUrl}training-program/${this.state.patientID}`,{signal: this.abortController.signal })
+        fetch(`${baseUrl}training-program/${this.state.patientID}`,{headers:tokenHeader()},{signal: this.abortController.signal })
             .then(res => res.json())
             .then(data => {
                 this.setState({program:data});
@@ -56,7 +57,7 @@ export default class ViewDetailedProgram extends Component {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}simulate-program/${this.state.program.id}`,{ signal: signal })
+        fetch(`${baseUrl}simulate-program/${this.state.program.id}`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
 

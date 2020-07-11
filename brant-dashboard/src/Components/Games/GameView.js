@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react'
 import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import Chip from '@material-ui/core/Chip';
+import { tokenHeader } from '../../Config/configToken'
 
 export default function GameView() {
 
@@ -13,7 +14,7 @@ export default function GameView() {
 
         const signal = abortController.signal;
 
-        fetch( `${baseUrl}games`,{ signal: signal })
+        fetch( `${baseUrl}games`,{headers:tokenHeader()},{ signal: signal })
 
         .then(res => res.json())
 

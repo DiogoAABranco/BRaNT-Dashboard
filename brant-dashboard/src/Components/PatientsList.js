@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Subtitle from './Others/Subtitle';
 import MaterialTable from 'material-table'
 import { Link } from 'react-router-dom';
-
+import { tokenHeader } from '../Config/configToken'
 
 
 
@@ -24,7 +24,8 @@ class PatientsList extends Component{
     abortController = new AbortController();
 
     componentDidMount() {
-        fetch(`${baseUrl}patients`,{signal: this.abortController.signal })
+        
+        fetch(`${baseUrl}patients`,{headers:tokenHeader()},{signal: this.abortController.signal })
         .then(res => res.json())
         .then((data) => {
             
@@ -53,7 +54,7 @@ class PatientsList extends Component{
       }
     handleChangeSlider = (event, newValue) => {
         this.setState({valueRangeSlider:newValue});
-        console.log(newValue);
+        
       };
   
     getAge = (birthDate) =>{
@@ -86,9 +87,6 @@ class PatientsList extends Component{
             } );
         
         let users = usersFilterByName.filter(user => (user.age >=this.state.valueRangeSlider[0]) && (user.age <= this.state.valueRangeSlider[1]));
-
-
-       
         
         return <div className="container-fluid mt-2">
         

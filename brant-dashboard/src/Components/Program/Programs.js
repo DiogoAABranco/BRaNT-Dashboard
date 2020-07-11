@@ -3,6 +3,7 @@ import baseUrl from '../../Config/config'
 import TablePrograms from './TablePrograms'
 import Title from '../Others/Title'
 import { Link } from 'react-router-dom';
+import { tokenHeader } from '../../Config/configToken'
 
 /*----------------------------------------------------------------
 it receives all program currently active from all the patients
@@ -25,7 +26,7 @@ export class Programs extends Component {
       
     handleApiCall () {
         //recommended activities for the user
-        fetch(`${baseUrl}training-program`,{signal: this.abortController.signal })
+        fetch(`${baseUrl}training-program`,{headers:tokenHeader()},{signal: this.abortController.signal })
             .then(res => res.json())
             .then(data => {
             

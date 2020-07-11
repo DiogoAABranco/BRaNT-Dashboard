@@ -14,9 +14,11 @@ import {
 } from '@material-ui/pickers';
 
 import Chip from '@material-ui/core/Chip';
+import { tokenHeader } from '../../Config/configToken'
 
 
-export default function NewPatientForm() {
+
+export default function NewPatientForm(props) {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -42,7 +44,7 @@ export default function NewPatientForm() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}form/patient-fields`,{ signal: signal })
+        fetch(`${baseUrl}form/patient-fields`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             
@@ -68,9 +70,7 @@ export default function NewPatientForm() {
         fetch(`${baseUrl}patients`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers:tokenHeader(),
         }).then(res => {
             
             if(res.status==201){
@@ -86,6 +86,9 @@ export default function NewPatientForm() {
         })
         .then(res => res.json())
         .then((data) => {
+            if(data.message === 'patient record created'){
+                props.history.push('/patients'); 
+            }
             console.log('API success: ',data);
         })
         .catch(err => {

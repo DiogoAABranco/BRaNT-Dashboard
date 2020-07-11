@@ -12,6 +12,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import TextField from '@material-ui/core/TextField';
 import VerticalLinearStepper from '../TrainingSession/VerticalLinearStepper'
 import Title from '../Others/Title'
+import { tokenHeader } from '../../Config/configToken'
+
 
 const DialogEditByStep =(props)=>{
 
@@ -35,9 +37,7 @@ const DialogEditByStep =(props)=>{
         fetch(`${baseUrl}game-variables`, {
             method: 'PUT',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers:tokenHeader(),
         })
         .then(res => res.json())
         .then((data) => {

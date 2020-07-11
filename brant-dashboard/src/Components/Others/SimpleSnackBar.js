@@ -4,12 +4,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function SimpleSnackbar(props) {
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
+export default function SimpleSnackbar({ open,setOpen, data}) {
+  
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -21,7 +17,7 @@ export default function SimpleSnackbar(props) {
 
   return (
     <div>
-      <Button onClick={handleClick}>Open simple snackbar</Button>
+  
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
@@ -30,7 +26,10 @@ export default function SimpleSnackbar(props) {
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        message={props.message}
+        
+        message={data}
+        anchorOrigin={{ vertical:'top', horizontal:'center'} }
+        key={'top' + 'center'}
         action={
           <React.Fragment>
             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>

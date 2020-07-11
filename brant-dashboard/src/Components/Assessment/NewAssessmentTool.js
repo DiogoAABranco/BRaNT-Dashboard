@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react'
 import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import Subtitle from '../Others/Subtitle'
+import { tokenHeader } from '../../Config/configToken'
+
 
 
 function NewAssessmentTool(props){
@@ -109,9 +111,7 @@ function NewAssessmentTool(props){
         fetch(`${baseUrl}assessment-tools`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers:tokenHeader(),
         }).then(res => {
             
             if(res.status==201){

@@ -1,17 +1,31 @@
 import baseUrl from '../../Config/config'
+import {setToken} from '../../Config/configToken'
+import { tokenHeader } from '../../Config/configToken'
 
 
-export const login = user => {
+
+export const login = user => { 
+
+    let formData = new FormData();
+    formData.append('email', user.email);
+    formData.append('password', user.password);
     
     return  fetch(`${baseUrl}login`,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
+       body: formData,
+       method: "post",
+       headers:tokenHeader(),
         })
-            .then(res => {
-                localStorage.setItem('usertoken',res.data.token);
-            })
-            .catch(console.log); 
+        .then(res => res.json())
+        .then(res =>{
+            console.log(res);
+            if(res.success){
+                setToken(res.success.token);
+                return true;
+            }
+            else{
+                return false;
+            }
+                       
+        })
+        .catch(console.log);  
 }

@@ -9,6 +9,8 @@ import Subtitle from '../Others/Subtitle'
 import {Link} from 'react-router-dom';
 import BarChart from '../Others/BarChart';
 import Title from '../Others/Title';
+import { tokenHeader } from '../../Config/configToken'
+
 
 
 
@@ -37,7 +39,7 @@ export default function PatientInformation(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}form/patient-fields`,{ signal: signal })
+        fetch(`${baseUrl}form/patient-fields`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             setFieldsEducationLevel(data.educationLevels);
@@ -50,7 +52,7 @@ export default function PatientInformation(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
         
-        fetch(`${baseUrl}patients/${patientID}`,{ signal: signal })
+        fetch(`${baseUrl}patients/${patientID}`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             setPatient(data);
@@ -67,7 +69,7 @@ export default function PatientInformation(props) {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}form/clinical-info-types`,{ signal: signal })
+        fetch(`${baseUrl}form/clinical-info-types`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             setClinicalTypes(data.types);
@@ -97,9 +99,7 @@ export default function PatientInformation(props) {
         fetch(`${baseUrl}clinical-info/${patientID}`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers:tokenHeader(),
         }).then(res => {
             
             if(res.status==201){

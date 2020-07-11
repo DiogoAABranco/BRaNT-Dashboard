@@ -6,15 +6,17 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { login } from './auth'
+import SimpleSnackbar from '../Others/SimpleSnackBar'
 
 
 export default function Login(props) {
 
-    const [user,setUser] = useState({emai:undefined,password:undefined});
+    const [user,setUser] = useState({email:"",password:""});
+    const [error,setError] = useState(false);
 
     const onChange = (e) => {
         
-        setUser({[e.target.name]:e.target.value});
+        setUser({...user, [e.target.name]:e.target.value});
     }
 
     onsubmit = (e) =>{
@@ -26,14 +28,20 @@ export default function Login(props) {
         }
 
         login(user1).then(res=>{
+            console.log(res);
             if(res){
-                this.props.history.push('/');
+                props.history.push('/'); 
+            }
+            else{
+                console.log("Credenciais incorretas");
+                setError(true);
             }
         })
     }
 
     return (
         <div className="container vh-100 ">
+            <SimpleSnackbar open={error} setOpen={setError} data="Credenciais de login incorretas"/>
             <div className="row pt-4 mt-2s">
                 <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     

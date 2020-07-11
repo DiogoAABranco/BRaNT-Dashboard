@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import { set } from 'date-fns';
+import {tokenHeader} from '../../Config/configToken'
 
 export default function AssessmentToolList() {
 
@@ -14,7 +15,7 @@ export default function AssessmentToolList() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        fetch(`${baseUrl}assessment-tools`,{ signal: signal })
+        fetch(`${baseUrl}assessment-tools`,{headers:tokenHeader()},{ signal: signal })
         .then(res => res.json())
         .then((data) => {
             
