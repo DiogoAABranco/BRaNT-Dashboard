@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 import PatientsList from './PatientsList'
 import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
-import {BrowserRouter as Router, Route,Switch } from 'react-router-dom'
+import {BrowserRouter as Router, Route,Switch, Redirect } from 'react-router-dom'
 import TrainingSession from './TrainingSession/TrainingSession'
 import Programs from './Program/Programs'
 import ViewDetailedProgram from './Program/ViewDetailedProgram'
@@ -17,8 +17,20 @@ import PatientAssessments from './AssessmentSession/PatientAssessments'
 import NewAssessmentSession from './AssessmentSession/NewAssessmentSession'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
+import { checkAuth } from '../Config/configToken'
 
 
+const PrivateRoute = ({component: Component, ...rest}) =>{
+    const isAuthenticated = checkAuth();
+    return <Route
+        {...rest}
+        render={(props) => isAuthenticated === true
+            ? <Component {...props} />
+            : <Redirect to={'/auth/login'} />}
+    />
+
+}
+    
 
 
 function Dashboard(props){
@@ -29,41 +41,38 @@ function Dashboard(props){
             
             <Route exact path="/auth/login" component={ Login }/>
             <Route exact path="/auth/register" component={ Register }/>
-<Fragment>
-            <div className="sidenav">
+            <Fragment>
+                <div className="sidenav">
 
-                <div className="d-flex" id="wrapper">
+                    <div className="d-flex" id="wrapper">
 
-                    <Sidebar/>
+                        <Sidebar/>
 
-                    <div id="page-content-wrapper">
-                        <Navbar/>
-                        <div className="pt-2">
-                            <Route exact path="/home" />
-                            <Route exact path="/create-patient" component={ NewPatientForm }/>  
-                            <Route exact path="/patients" component={ PatientsList } />      
-                            <Route exact path="/patients/patient-information/:id" component={ PatientInformation }/>                 
-                            <Route exact path="/patients/new-program/:id/:name" component={ TrainingSession }/>  
-                            <Route exact path="/programs" component={ Programs }/>  
-                            <Route exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>              
-                            <Route exact path="/programs/results/training-program/:id" component={ Results }/> 
-                            <Route exact path="/games" component={ GameView }/> 
-                            <Route exact path="/new-assessment" component={ NewAssessmentTool }/> 
-                            <Route exact path="/assessment-tools" component={ AssessmentToolList }/> 
-                            <Route exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
-                            <Route exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
+                        <div id="page-content-wrapper">
+                            <PrivateRoute path="/" component={ Navbar }/> 
+                            <div className="pt-2">
+                                <PrivateRoute exact path="/home" />
+                                <PrivateRoute exact path="/create-patient" component={ NewPatientForm }/>  
+                                <PrivateRoute exact path="/patients" component={ PatientsList } />      
+                                <PrivateRoute exact path="/patients/patient-information/:id" component={ PatientInformation }/>                 
+                                <PrivateRoute exact path="/patients/new-program/:id/:name" component={ TrainingSession }/>  
+                                <PrivateRoute exact path="/programs" component={ Programs }/>  
+                                <PrivateRoute exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>              
+                                <PrivateRoute exact path="/programs/results/training-program/:id" component={ Results }/> 
+                                <PrivateRoute exact path="/games" component={ GameView }/> 
+                                <PrivateRoute exact path="/new-assessment" component={ NewAssessmentTool }/> 
+                                <PrivateRoute exact path="/assessment-tools" component={ AssessmentToolList }/> 
+                                <PrivateRoute exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
+                                <PrivateRoute exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
+                            </div>
+
                         </div>
-                        
 
-        
+                    </div>    
 
-                    </div>
-
-                </div>    
-
-            </div>
+                </div>
             </Fragment>
-            </Switch>
+        </Switch>
     
 }
 export default Dashboard

@@ -99,6 +99,6 @@ export default function AssessmentToolList() {
         )
     }
     else
-        return <div>Loading</div>
+        return <div></div>
     
 }

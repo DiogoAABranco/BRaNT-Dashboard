@@ -22,7 +22,11 @@ export default function CardsRow(props) {
                 value++;
         });
 
-        return value/nSessions*100;
+        let progress = value/nSessions*100;
+
+        if(progress < 100)
+            return progress;
+        else return 100; 
     }
 
     return (

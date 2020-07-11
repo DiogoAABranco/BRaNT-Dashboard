@@ -17,10 +17,11 @@ export default class ViewDetailedProgram extends Component {
     
         this.state = {
            patientID:this.props.match.params.id,
-            program:[]
+            program:[],
+            change:true
             
         }
-        this.onClickRemoveSession = this.onClickRemoveSession.bind(this);
+        this.updateSessions = this.updateSessions.bind(this);
         this.handleSimulateResults = this.handleSimulateResults.bind(this);
     }
     abortController = new AbortController();
@@ -35,7 +36,7 @@ export default class ViewDetailedProgram extends Component {
         fetch(`${baseUrl}training-program/${this.state.patientID}`,{headers:tokenHeader()},{signal: this.abortController.signal })
             .then(res => res.json())
             .then(data => {
-                this.setState({program:data});
+                this.setState({program:data,change:true});
                 console.log("json",data);
         
             })
@@ -45,12 +46,23 @@ export default class ViewDetailedProgram extends Component {
             });      
             return () => this.abortController.abort(); 
     }
+
+    
  
-    onClickRemoveSession (e,session){
-        let copyProgram = this.state.program;
-        let newPlannedSessions = this.state.program.plannedSessions.filter(item => item !== session);
-        copyProgram.plannedSessions = newPlannedSessions;
-        this.setState({program:copyProgram});
+    updateSessions (sessions){
+ 
+        this.setState(prevState => ({
+            ...prevState,
+            program: {
+                ...prevState.program,
+                plannedSessions: sessions,
+                n_sessions:sessions.length
+            }
+             
+        }))
+        
+        
+        
     }
 
     handleSimulateResults(){
@@ -64,6 +76,7 @@ export default class ViewDetailedProgram extends Component {
             console.log(data);
             this.handleApiCall();
             
+            
         })
         .catch(console.log);
         
@@ -73,7 +86,7 @@ export default class ViewDetailedProgram extends Component {
 
     render() {
        
-        if(this.state.program.length !== 0)
+        if(this.state.program.length !== 0 && this.state.change === true)
         return (
             <div className="container-fluid">
                 
@@ -95,7 +108,7 @@ export default class ViewDetailedProgram extends Component {
 
                 <div className="row p-2 ">
                     <div className="col-md-12 mt-5">
-                        <ListSessions history={this.props.history} sessions={this.state.program.sessions} onClickRemoveSession={this.onClickRemoveSession} goTo={(id) => {this.props.history.push(`/programs/view-detailed-program/${id}`)}}/>
+                        <ListSessions history={this.props.history} sessions={this.state.program.sessions} updateSessions={this.updateSessions} goTo={(id) => {this.props.history.push(`/programs/view-detailed-program/${id}`)}}/>
                     </div>
                 </div>
  

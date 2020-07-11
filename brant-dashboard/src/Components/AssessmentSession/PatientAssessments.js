@@ -122,7 +122,7 @@ export default function PatientAssessments(props) {
         )
     }
     else
-        return <div>Loading..</div>
+        return <div></div>
     
 
 }

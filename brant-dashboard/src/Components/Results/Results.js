@@ -32,7 +32,7 @@ export default function Results(props) {
 
     const [sessionScoreType, setSessionScoreType] = useState([]);
 
-    const [radioSelectedGames, setRadioSelectedGames] = useState(100);
+    const [radioSelectedGames, setRadioSelectedGames] = useState('1');
 
     const [dataCharts, setDataCharts] = useState([]);
 
@@ -59,7 +59,7 @@ export default function Results(props) {
 
             setGames(data.games);
 
-            setRadioSelectedGames(data.games[0].id);
+            
 
             setScores(data.scores);
 
@@ -131,7 +131,7 @@ export default function Results(props) {
 
                 if(element.score_type_id == radioSelected){
 
-                    let temp = {x:index, y:parseInt(element.value), z:element.session.date };
+                    let temp = {x:index+1, y:parseInt(element.value), z:element.session.date };
 
                     data.push(temp);
                 }
@@ -155,7 +155,7 @@ export default function Results(props) {
 
                         if(element2.score_type_id == radioSelected && element2.game_id == radioSelectedGames ){
 
-                            let temp = {x:(element2.session_id - element[0].session_id), y:parseInt(element2.value), z:element2.session.date };
+                            let temp = {x:(element2.session_id - element[0].session_id+1), y:parseInt(element2.value), z:element2.session.date };
         
                             data.push(temp);
                         }
@@ -222,6 +222,7 @@ export default function Results(props) {
                                         {games.map(element =>
                                             <FormControlLabel 
                                                 key={element.id}
+                                                disabled={sessions} 
                                                 value={element.id+""}
                                                 control={<Radio color="primary"/>} 
                                                 label={element.name} 

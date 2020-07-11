@@ -32,6 +32,7 @@ class TrainingSession extends Component {
       ],
       programComplete: false,
       errorCreatingProgram: false,
+      games:[]
     };
     //necessary bind to get context of "this.setState"
     this.onClickRemoveActivity = this.onClickRemoveActivity.bind(this);
@@ -58,6 +59,7 @@ class TrainingSession extends Component {
 
   componentDidMount() {
     this.handleApiCall();
+    this.getAllActivities();
   }
 
   componentWillUnmount() {
@@ -108,6 +110,21 @@ class TrainingSession extends Component {
     this.setState({ nSessions: value });
   };
 
+  getAllActivities = () => {
+    fetch(`${baseUrl}games`,{headers:tokenHeader()},{signal: this.abortController.signal })
+    .then(res => res.json())
+    .then(data => {
+        this.setState({games:data});
+        console.log("json",data);
+
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        
+    });      
+    return () => this.abortController.abort(); 
+  }
+
   //remove activity from the recommended list
   onClickRemoveActivity(e, activity) {
     let temp = this.state.activities.filter((item) => item !== activity);
@@ -157,6 +174,7 @@ class TrainingSession extends Component {
             </div>
               
               <ActivitiesView
+              games={this.state.games}
                 state={this.state}
                 onClickRemoveActivity={this.onClickRemoveActivity}
               />

@@ -5,6 +5,7 @@ import DialogEditByStep from './DialogEditByStep'
 import ActivityBoxShape from './ActivityBoxShape'
 import ClearIcon from '@material-ui/icons/Clear';
 import Subtitle from '../Others/Subtitle';
+import DialogAddActivity from './DialogAddActivity';
 
 
 
@@ -18,9 +19,7 @@ const ActivitiesView =(props)=>{
 
           <div className="row p-0 m-0">
 
-            <button className="btn btn-brant-color mr-2">
-              <AddIcon />
-            </button>
+            <DialogAddActivity games={props.games}/>
 
             {/* <DialogEditByStep data={props.state.activities}/> */}
           </div>

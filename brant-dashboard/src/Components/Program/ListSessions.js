@@ -42,14 +42,13 @@ export default function ListSessions(props) {
           fetch(`${baseUrl}session/${rowData.id}`, {
               method: 'DELETE',
               headers:tokenHeader(),
-          }).then(res => {
-              return res;
           })
           .then(res => res.json())
           .then((data) => {
               console.log('API success: ',data);
               const newSessions = sessions.filter((item) => item.id !== rowData.id);
               setSession(newSessions);
+              props.updateSessions(newSessions);
               if(newSessions.length === 0){
                 props.history.push('/programs');
               }
@@ -81,7 +80,6 @@ export default function ListSessions(props) {
               { title: 'ID', field: 'id', render: rowData =>{if(rowData.id !== null)return idSession(props.sessions, rowData.id)} },
               { title: 'Data', field: 'date'},
               { title: 'Estado', field: 'isDone', render: rowData =>{if(rowData.isDone !== null)return convertState(rowData.isDone)}},
-              { title: 'Resultados', field: ''},
         ]}
         data={sessions}
         

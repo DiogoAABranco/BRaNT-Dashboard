@@ -9,7 +9,7 @@ export default function ProgressSessions({value}) {
                 </div>
             </div>
             <div className="progress"> 
-                <div className="progress-bar" role="progressbar" style={{width: value+"%",background:"#907d83" }} aria-valuenow={value} aria-valuemin="0" aria-valuemax="100"></div>
+                <div className="progress-bar" role="progressbar" style={{width: value+"%",background:"#73374a", border: '3px solid white'}} aria-valuenow={value} aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
     )
