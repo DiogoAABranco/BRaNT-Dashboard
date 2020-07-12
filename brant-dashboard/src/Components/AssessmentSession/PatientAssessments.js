@@ -21,6 +21,10 @@ export default function PatientAssessments(props) {
 
     const [goToNewAssessmentSession, setGoToNewAssessmentSession] = useState(false);
 
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const [anexos, setAnexos] = useState([]);
+
 
     useEffect(() => {
 
@@ -84,8 +88,16 @@ export default function PatientAssessments(props) {
         ]}
         data={assessments}
             onRowClick={((evt, selectedRow) => {setOpen(true); setAssessmentSelected(selectedRow);})}
+        actions={[
+            {
+                icon: 'save',
+                tooltip: 'Ver Anexos',
+                onClick: (event, rowData) =>  (setOpenDialog(true), setAnexos(rowData.images))
+            }
+            ]}
         options={{
             search: false,
+            actionsColumnIndex: -1,
             sorting:true,
             paging: true,
             showTitle:false,
@@ -107,8 +119,11 @@ export default function PatientAssessments(props) {
             firstTooltip: 'Primeira página',
             previousTooltip: 'Página anterior',
             nextTooltip: 'Próxima página',
-            lastTooltip: 'Última página'
-            }
+            lastTooltip: 'Última página',
+            },
+            header: {
+                actions: 'Anexos'
+            },
             
         }}
         
@@ -116,6 +131,7 @@ export default function PatientAssessments(props) {
        
                 </div>
                  {assessmentSelected != null ? <DialogBrant open={open} handleClose={handleClose} date={assessmentSelected.date} assessment={assessmentSelected} />:null}
+                 {openDialog ? <AssessmentImages open={openDialog} setOpen={setOpenDialog} images={anexos}/>:null }
             </div>
 
             

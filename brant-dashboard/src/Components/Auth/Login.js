@@ -30,7 +30,7 @@ export default function Login(props) {
         login(user1).then(res=>{
             console.log(res);
             if(res){
-                props.history.push('/'); 
+                props.history.push('/home'); 
             }
             else{
                 console.log("Credenciais incorretas");
@@ -76,10 +76,10 @@ export default function Login(props) {
                                             }} />
 
                                 </div>
-                                <div className="d-flex justify-content-end pb-4">
+                                {/* <div className="d-flex justify-content-end pb-4">
                                     <Link to="register"><span className="text-brant-color">Registar-se</span></Link>
-                                </div>
-                                <div className="container mx-auto">
+                                </div> */}
+                                <div className="container mx-auto py-4">
                                     <button type="submit" className="btn btn-brant-color w-50 p-2">Login</button>
 
                                 </div>

@@ -1,26 +1,24 @@
 import React, {Component} from 'react'
 import {logout, getUser} from '../Config/configToken'
+import { withRouter } from 'react-router-dom';
 
 
-class Navbar extends Component {
-    constructor(props) {
-        super(props)
-        this.handleLogout = this.handleLogout.bind(this);
-    }
+function Navbar (props) {
+  
     
 
 
-    handleLogout = () => {
+    const handleLogout = () => {
 
         if(logout()){
             console.log("logout");
-            this.props.history.push('/auth/login');
+            props.history.push('/auth/login');
         }
         else
             console.log("erro logout");
         
     }
-    render(){
+   
         if( getUser()!==null){
 
         
@@ -41,7 +39,7 @@ class Navbar extends Component {
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a className="dropdown-item" href="">Definições</a>
                             <div className="dropdown-divider"></div>
-                            <span className="dropdown-item hoverable" onClick={this.handleLogout}>Logout</span>
+                            <span className="dropdown-item hoverable" onClick={handleLogout}>Logout</span>
                         </div>
                         </li>
                     </ul>
@@ -52,6 +50,5 @@ class Navbar extends Component {
         )}
         else return <div></div>
     }
-}
 
-export default Navbar
+export default withRouter(Navbar);

@@ -104,6 +104,10 @@ class PatientsList extends Component{
                                         <label className="text-brant-color">Nome</label>
                                         <input type="name" onChange={(e)=>this.searchSpace(e)} className="form-control" id="inputName" placeholder="Enter name"/>
                                     </div>
+                                    
+                                </div>
+                                <div className="col-sm-6">
+                                   
                                     <div className="pl-4 pr-4 pt-4">
                                         <label className="text-brant-color">Idade</label>
                                         <div className="w-50">
@@ -118,21 +122,7 @@ class PatientsList extends Component{
                                         </div>
                                                                  
                                     </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <div className="pl-4 pr-4 pt-2">
-                                                <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Sessões em atraso" labelPlacement="end"/>
-                                            </div>
-                                            <div className="pl-4 pr-4 pt-2">
-                                                <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Sessões concluídas" labelPlacement="end"/>
-                                            </div>
-                                            <div className="pl-4 pr-4 pt-2">
-                                                <FormControlLabel value="1" control={<Checkbox color="primary" />} label="Avaliação pendente" labelPlacement="end"/>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             

@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 import PatientsList from './PatientsList'
 import NewAssessmentTool from "./Assessment/NewAssessmentTool"
 
-import {BrowserRouter as Router, Route,Switch, Redirect } from 'react-router-dom'
+import {BrowserRouter as Router, Route,Switch, Redirect, BrowserRouter } from 'react-router-dom'
 import TrainingSession from './TrainingSession/TrainingSession'
 import Programs from './Program/Programs'
 import ViewDetailedProgram from './Program/ViewDetailedProgram'
@@ -18,6 +18,8 @@ import NewAssessmentSession from './AssessmentSession/NewAssessmentSession'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
 import { checkAuth } from '../Config/configToken'
+import HomePage from './HomePage'
+import NoMatchPage from './NoMatchPage'
 
 
 const PrivateRoute = ({component: Component, ...rest}) =>{
@@ -35,7 +37,9 @@ const PrivateRoute = ({component: Component, ...rest}) =>{
 
 function Dashboard(props){
    
-        return <Switch>
+        return <BrowserRouter>
+        
+         <Switch>
     
 
             
@@ -49,9 +53,12 @@ function Dashboard(props){
                         <Sidebar/>
 
                         <div id="page-content-wrapper">
-                            <PrivateRoute path="/" component={ Navbar }/> 
+                             <Navbar/>
                             <div className="pt-2">
-                                <PrivateRoute exact path="/home" />
+                                <Switch>
+
+                                
+                                <PrivateRoute exact path="/home" component={HomePage} />
                                 <PrivateRoute exact path="/create-patient" component={ NewPatientForm }/>  
                                 <PrivateRoute exact path="/patients" component={ PatientsList } />      
                                 <PrivateRoute exact path="/patients/patient-information/:id" component={ PatientInformation }/>                 
@@ -64,6 +71,8 @@ function Dashboard(props){
                                 <PrivateRoute exact path="/assessment-tools" component={ AssessmentToolList }/> 
                                 <PrivateRoute exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
                                 <PrivateRoute exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
+                                <Route component={ NoMatchPage }/>
+                                </Switch>
                             </div>
 
                         </div>
@@ -73,6 +82,7 @@ function Dashboard(props){
                 </div>
             </Fragment>
         </Switch>
+        </BrowserRouter>
     
 }
 export default Dashboard
