@@ -53,7 +53,7 @@ function Dashboard(props){
                         <Sidebar/>
 
                         <div id="page-content-wrapper">
-                             <Navbar/>
+                            <PrivateRoute path="/" component={Navbar} />
                             <div className="pt-2">
                                 <Switch>
 
