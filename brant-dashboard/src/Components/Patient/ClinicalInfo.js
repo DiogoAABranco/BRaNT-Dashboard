@@ -46,7 +46,7 @@ function ClinicalInfo({clinicalTypes,clinicalInfo,handleSubmit, description, set
                     </FormControl>
                     </div>
                     <div className="col-md-12 d-flex justify-content-center mb-2">
-                        <button type="submite" className="btn btn-brant-color mt-2 w-40">Adicionar</button>
+                        <button type="submit" className="btn btn-brant-color mt-2 w-40">Adicionar</button>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export default function ActivitiesNextSession({ session }) {
 
         <div key={game.id} className="col-md-3">
 
-            <div className="card ">
+            <div className="card mt-2">
 
                 <div className="card-header text-brant-color">
                     <b>{game.name}</b>

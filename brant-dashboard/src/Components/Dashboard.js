@@ -20,6 +20,7 @@ import Register from './Auth/Register'
 import { checkAuth } from '../Config/configToken'
 import HomePage from './HomePage'
 import NoMatchPage from './NoMatchPage'
+import { FinishedPrograms } from './Program/FinishedPrograms'
 
 
 const PrivateRoute = ({component: Component, ...rest}) =>{
@@ -56,22 +57,21 @@ function Dashboard(props){
                             <PrivateRoute path="/" component={Navbar} />
                             <div className="pt-2">
                                 <Switch>
-
-                                
-                                <PrivateRoute exact path="/home" component={HomePage} />
-                                <PrivateRoute exact path="/create-patient" component={ NewPatientForm }/>  
-                                <PrivateRoute exact path="/patients" component={ PatientsList } />      
-                                <PrivateRoute exact path="/patients/patient-information/:id" component={ PatientInformation }/>                 
-                                <PrivateRoute exact path="/patients/new-program/:id/:name" component={ TrainingSession }/>  
-                                <PrivateRoute exact path="/programs" component={ Programs }/>  
-                                <PrivateRoute exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>              
-                                <PrivateRoute exact path="/programs/results/training-program/:id" component={ Results }/> 
-                                <PrivateRoute exact path="/games" component={ GameView }/> 
-                                <PrivateRoute exact path="/new-assessment" component={ NewAssessmentTool }/> 
-                                <PrivateRoute exact path="/assessment-tools" component={ AssessmentToolList }/> 
-                                <PrivateRoute exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
-                                <PrivateRoute exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
-                                <Route component={ NoMatchPage }/>
+                                    <PrivateRoute exact path="/home" component={HomePage} />
+                                    <PrivateRoute exact path="/create-patient" component={ NewPatientForm }/>  
+                                    <PrivateRoute exact path="/patients" component={ PatientsList } />      
+                                    <PrivateRoute exact path="/patients/patient-information/:id/:idTab" component={ PatientInformation }/>                 
+                                    <PrivateRoute exact path="/patients/new-program/:id/:name" component={ TrainingSession }/>  
+                                    <PrivateRoute exact path="/programs" component={ Programs }/>  
+                                    <PrivateRoute exact path="/programs-complete" component={ FinishedPrograms }/> 
+                                    <PrivateRoute exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>              
+                                    <PrivateRoute exact path="/programs/results/training-program/:id" component={ Results }/> 
+                                    <PrivateRoute exact path="/games" component={ GameView }/> 
+                                    <PrivateRoute exact path="/new-assessment" component={ NewAssessmentTool }/> 
+                                    <PrivateRoute exact path="/assessment-tools" component={ AssessmentToolList }/> 
+                                    <PrivateRoute exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
+                                    <PrivateRoute exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
+                                    <Route component={ NoMatchPage }/>
                                 </Switch>
                             </div>
 

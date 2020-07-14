@@ -96,7 +96,18 @@
   }
   .active li{
     color: #40161e !important;
-    background-color: rgb(195, 169, 186) !important;;
+    background-color: rgb(195, 169, 186) !important;
+  }
+
+  .sb-item-border{
+   
+    
+ 
+    
+  }
+  .sb-item-border:hover{
+    background-color: rgb(195, 169, 186) !important;
+    color:#FFF;
   }
 
   

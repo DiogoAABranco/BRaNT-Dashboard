@@ -14,16 +14,10 @@ export default function ListSessions(props) {
 
   function convertState(inState){
 
-    if (inState == true) return <div className="alert alert-success m-0"></div>;
-    else return <div className="alert alert-danger m-0"></div>;
+    if (inState == true) return <p className="text-success">Feito</p>;
+    else return <p className="text-danger">Pendente</p>;
 
   }
-
-
-  function handleDeleteSession(e){
-    console.log(e);
-  }
-
 
   function idSession(sessions,id){
 
@@ -32,7 +26,6 @@ export default function ListSessions(props) {
     return "Sessão " + finalId;
 
   }
-
   
   function deleteSession(rowData){
 

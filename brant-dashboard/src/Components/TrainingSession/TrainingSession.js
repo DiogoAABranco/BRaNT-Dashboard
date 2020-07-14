@@ -214,7 +214,7 @@ class TrainingSession extends Component {
             <SimpleDialog
               title="Informação"
               information={
-                "Programa de treino criado para o paciente: " +
+                "Programa de treino criado para o utente: " +
                 this.state.patientName
               }
               link="/programs"

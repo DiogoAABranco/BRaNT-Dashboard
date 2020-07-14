@@ -117,15 +117,15 @@ export default function NewPatientForm(props) {
     }
     return (
         <div>
-            {success?<div className="alert alert-success" role="alert">Paciente adicionado!</div>:null }
-            {warning?<div className="alert alert-danger" role="alert">Não foi possível adicionar paciente</div>:null }
+            {success?<div className="alert alert-success" role="alert">Utente adicionado!</div>:null }
+            {warning?<div className="alert alert-danger" role="alert">Não foi possível adicionar utente</div>:null }
             
             <div className="container w-50">
                 
                 <div className="d-flex  m-0 p-4">
                     <form className="row w-100" onSubmit={handleSubmit} >
                         <div className="p-5 d-flex justify-content-center w-100">
-                            <Title sectionTitle="Novo Paciente"/>
+                            <Title sectionTitle="Novo Utente"/>
 
                         </div>
                         <div className="col-md-12 form-group ">
@@ -180,8 +180,8 @@ export default function NewPatientForm(props) {
                                     value={gender}
                                     onChange={e => setGender(e.target.value)}
                                 >
-                                <MenuItem value="0">Feminino</MenuItem>
-                                <MenuItem value="1">Masculino</MenuItem>
+                                <MenuItem value="1">Feminino</MenuItem>
+                                <MenuItem value="2">Masculino</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

@@ -17,7 +17,7 @@ export default class ViewDetailedProgram extends Component {
     
         this.state = {
            patientID:this.props.match.params.id,
-            program:[],
+            program:0,
             change:true
             
         }
@@ -86,7 +86,7 @@ export default class ViewDetailedProgram extends Component {
 
     render() {
        
-        if(this.state.program.length !== 0 && this.state.change === true)
+        if(this.state.program !== 0 && this.state.change === true)
         return (
             <div className="container-fluid">
                 
@@ -97,7 +97,8 @@ export default class ViewDetailedProgram extends Component {
                 <div className="row p-0 ml-2 d-flex justify-content-between">
                     <DialogEditByStep gameVariables={this.state.program.game_variables}/>
                     <div className="pt-2 pr-4">
-                        <button className="btn btn-brant-color" onClick={ this.handleSimulateResults}>Simular Resultados</button>
+                        {this.state.program.isActive === 1 ? <button className="btn btn-brant-color" onClick={ this.handleSimulateResults}>Simular Resultados</button>:null
+                        }
 
                     </div>
                     <div className="pt-2 pr-4">

@@ -1,35 +1,125 @@
-import React, {useState} from 'react'
-import ItemSidebar from './ItemSidebar'
-import {Link,NavLink} from 'react-router-dom'
+import React, { useState } from "react";
+import ItemSidebar from "./ItemSidebar";
+import { Link, NavLink } from "react-router-dom";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
+const itemsSideBar = [
+  {
+    name: "Início",
+    url: "/home",
+  },
+  {
+    name: "Utentes",
+    children: [
+      {
+        name: "Novo Utente",
+        url: "/create-patient",
+      },
+      {
+        name: "Lista de Utentes",
+        url: "/patients",
+      },
+    ],
+  },
+  {
+    name: "Programas de treino",
+    children: [
+      {
+        name: "Programas ativos",
+        url: "/programs",
+      },
+      {
+        name: "Programas finalizados",
+        url: "/programs-complete",
+      },
+    ],
+  },
+  {
+    name: "Atividades",
+    children: [
+      {
+        name: "Lista de atividades",
+        url: "/games",
+      },
+    ],
+  },
+  {
+    name: "Ferramentas de avaliação",
+    children: [
+      {
+        name: "Nova Ferramenta",
+        url: "/new-assessment",
+      },
+      {
+        name: "Lista das Ferramentas",
+        url: "/assessment-tools",
+      },
+    ],
+  },
+];
 
-function Sidebar(props){
-    
-        return (
-            <div className="bg-light border-right" id="sidebar-wrapper">
+function Sidebar(props) {
 
-                <div className="sidebar-heading"><img src="../Images/BRaNT_LOGO.PNG" alt="" className="logo" className="navbar-brand"/></div>
+  return (
 
-                <ul className="list-group list-group-flush">
+    <div className="bg-light border-right" id="sidebar-wrapper">
 
-                    <NavLink activeClassName="active" to='/home'><li className="list-group-item list-group-item-action bg-light">Início</li></NavLink>
+      <div className="sidebar-heading">
 
-                    <NavLink activeClassName="active"  to='/create-patient'><li className="list-group-item list-group-item-action bg-light">Novo Paciente</li></NavLink>
+        <img
+          src="../Images/BRaNT_LOGO.PNG"
+          alt=""
+          className="logo"
+          className="navbar-brand"
+        />
 
-                    <NavLink activeClassName="active" to='/patients'><li className="list-group-item list-group-item-action bg-light">Utentes</li></NavLink>   
+      </div>
 
-                    <NavLink activeClassName="active" to='/programs'><li className="list-group-item list-group-item-action bg-light">Programas de Treino</li></NavLink>
+      <ul className="list-group list-group-flush">
 
-                    <NavLink activeClassName="active" to='/games'><li className="list-group-item list-group-item-action bg-light">Atividades</li></NavLink>
+          {itemsSideBar.map(item => 
+            
+            <div key={item.name}>
 
-                    <NavLink activeClassName="active" to='/new-assessment'><li className="list-group-item list-group-item-action bg-light">NovaFerramenta</li></NavLink>
+                {item.children ? <div>
 
-                    <NavLink activeClassName="active" to='/assessment-tools'><li className="list-group-item list-group-item-action bg-light">Ferramentas de avaliação</li></NavLink>
-                  
-                </ul>
+                    <li className="list-group-item list-group-item-actions sb-item-border bg-light pl-2 pt-3">
+                        <b>{item.name}</b>
+                    </li>
+            
+                
+                    {item.children.map(subitem =>
 
-            </div>
-        )
-    
+                        <NavLink key={subitem.name} activeClassName="active" to={subitem.url}>
+
+                            <li className="list-group-item list-group-item-action bg-light pl-5">
+                                {subitem.name}
+                            </li>
+                
+                        </NavLink>
+                    )} </div>:
+                
+
+                    <NavLink activeClassName="active" to={item.url}>
+
+                        <li className="list-group-item list-group-item-action bg-light">
+                            {item.name}
+                        </li>
+
+                    </NavLink>
+                
+              }</div>
+           
+            )}
+        
+
+        
+      </ul>
+    </div>
+  );
 }
-export default Sidebar
+export default Sidebar;

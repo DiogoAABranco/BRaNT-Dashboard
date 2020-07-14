@@ -160,7 +160,7 @@ export default function NewAssessmentSession(props) {
         .then((data) => {
             console.log('API success: ',data);
             if(data.msg === 'success'){
-                props.history.push(`/patients/patient-assessments/${patient.id}/${patient.name}`);
+                props.history.push(`/patients/patient-information/${patient.id}/3`);
             }
         })
         .catch(err => {

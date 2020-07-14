@@ -182,7 +182,7 @@ export default function Results(props) {
                     <div className="col-md-12">
 
                         <Title 
-                            sectionTitle={"Paciente: " + patient.name }
+                            sectionTitle={"Utente: " + patient.name }
                         />
 
                     </div>

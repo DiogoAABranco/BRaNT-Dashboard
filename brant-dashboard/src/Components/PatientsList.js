@@ -94,7 +94,7 @@ class PatientsList extends Component{
                 <div className="card">
                     <div className="card-header d-flex justify-content-between" id="headingOne">
                         <Subtitle sectionTitle="Lista de utentes"/>
-                        <Link to="/create-patient"><button className="btn btn-brant-color">Novo Paciente</button></Link>
+                        <Link to="/create-patient"><button className="btn btn-brant-color">Novo Utente</button></Link>
                     </div>
 
                     <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -110,13 +110,14 @@ class PatientsList extends Component{
                                    
                                     <div className="pl-4 pr-4 pt-4">
                                         <label className="text-brant-color">Idade</label>
-                                        <div className="w-50">
+                                        <div className="w-50 mt-4">
                                         <Slider
                                             value={this.state.valueRangeSlider}
                                             onChange={this.handleChangeSlider}
                                             valueLabelDisplay="auto"
                                             aria-labelledby="range-slider"
                                             getAriaValueText={this.valuetext}
+                                            valueLabelDisplay="on"
                                             
                                             /> 
                                         </div>
@@ -146,7 +147,7 @@ class PatientsList extends Component{
                                 { title: 'Idade', field: 'age'}
                         ]}
                         data={users}
-                            onRowClick={((evt, selectedRow) => this.props.history.push(`patients/patient-information/${selectedRow.id}`))}
+                            onRowClick={((evt, selectedRow) => this.props.history.push(`patients/patient-information/${selectedRow.id}/0`))}
                         localization={{
                             pagination: {
                                 labelRowsSelect: 'linhas',

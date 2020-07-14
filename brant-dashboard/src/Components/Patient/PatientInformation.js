@@ -10,6 +10,7 @@ import {Link} from 'react-router-dom';
 import BarChart from '../Others/BarChart';
 import Title from '../Others/Title';
 import { tokenHeader } from '../../Config/configToken'
+import PatientAssessments from './PatientAssessments'
 
 
 
@@ -33,6 +34,8 @@ export default function PatientInformation(props) {
     const [goToNewProgram, setGoToNewProgram] = useState(false);
     const [goToAssessments, setGoToAssessments] = useState(false);
     const [goToNewAssessmentSession, setGoToNewAssessmentSession] = useState(false);
+
+    const [active,setActive] = useState(parseInt(props.match.params.idTab));
    
 
     const apiCallFields = () => {
@@ -137,7 +140,7 @@ export default function PatientInformation(props) {
                 <NavLink className="text-brant-color" to="/patients">
                     Utentes
                 </NavLink>
-                <Typography color="textPrimary">Informação do paciente</Typography>
+                <Typography color="textPrimary">Informação do utente</Typography>
             </Breadcrumbs>
             <div className="d-flex flex-row-reverse">
 
@@ -149,19 +152,6 @@ export default function PatientInformation(props) {
 
                         </div>
 
-                        <div className="col-md-3">
-
-                            {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Criar Nova avaliação</button></Link>:null}
-
-                        </div>
-
-                        <div className="col-md-3">
-
-                            {goToAssessments !== false?<Link to={goToAssessments}><button className="btn btn-brant-color">Lista de Avaliações</button></Link>:null}
-
-                        </div>
-                        
-
                     </div>
                     
                 </div>
@@ -169,18 +159,20 @@ export default function PatientInformation(props) {
                 <div className="col-md-12">
                     <nav>
                         <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a className="nav-item nav-link active text-brant-color" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><Subtitle sectionTitle="Dados do Paciente"/></a>
-                            <a className="nav-item nav-link text-brant-color" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><Subtitle sectionTitle="Informação Clínica"/></a>
-                            <a className="nav-item nav-link text-brant-color" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><Subtitle sectionTitle="Perfil Cognitivo"/></a>
+                            <a className={active === 0 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" ><Subtitle sectionTitle="Dados do utente"/></a>
+                            <a className={active === 1 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" ><Subtitle sectionTitle="Informação Clínica"/></a>
+                            <a className={active === 2 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><Subtitle sectionTitle="Perfil"/></a>
+                            <a className={active === 3 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-contact-tab" data-toggle="tab" href="#nav-assessments" role="tab" aria-controls="nav-assessments" aria-selected="false"><Subtitle sectionTitle="Avaliações"/></a>
+
                         </div>
                     </nav>
                     <div className="tab-content" id="nav-tabContent">
-                        <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div className={active === 0 ? "tab-pane fade show active" : "tab-pane fade show"} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             {patient !== null?
                             <SocioDemoInfo patient={patient} education_level={fieldsEducationLevel}/>:null}
 
                         </div>
-                        <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div className={active === 1 ? "tab-pane fade show active" : "tab-pane fade show"} id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             
                             <h1>
                             {patient !== null && clinicalTypes !== null?
@@ -188,15 +180,32 @@ export default function PatientInformation(props) {
                             
                             </h1>
                         </div>
-                        <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div className={active === 2 ? "tab-pane fade show active" : "tab-pane fade show"} id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <h1>
                                 
                                 {patient !== null?
                                 <div>
                                     <div className="col-md-12 d-flex justify-content-center">
-                                        <Title sectionTitle="Perfil cognitivo"/>
+                                        <Title sectionTitle="Perfil"/>
                                         <div className="container">
                                             <BarChart data={patient.cognitiveProfile}/>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                :null}
+                                
+                            </h1>
+                        </div>
+                        <div className={active === 3 ? "tab-pane fade show active" : "tab-pane fade show"} id="nav-assessments" role="tabpanel" aria-labelledby="nav-assessments-tab">
+                            <h1>
+                                {patient !== null?
+                                <div>
+                                    <div className="col-md-12 d-flex justify-content-center">
+                                       
+                                        <div className="container">
+                                            <PatientAssessments id={patientID} name={patient.name}/>
                                         </div>
                                         
                                     </div>

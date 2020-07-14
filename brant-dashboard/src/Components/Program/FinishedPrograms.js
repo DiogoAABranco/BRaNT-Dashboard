@@ -11,7 +11,7 @@ and health professional can manage and edit the active programs
 ------------------------------------------------------------------ */
 
 
-export class Programs extends Component {
+export class FinishedPrograms extends Component {
     constructor(props) {
         super(props)
     
@@ -32,16 +32,12 @@ export class Programs extends Component {
             
                 let activePrograms = [];
                 data.forEach(program => {
-                    if(program.isActive === 1){
+                    if(program.isActive === 0){
                         activePrograms.push(program);
                     }
                 });
                 this.setState({programs:activePrograms});
             })
-    }
-    componentDidUpdate(){
-        this.handleApiCall();
-
     }
 
     componentDidMount() {
@@ -56,7 +52,7 @@ export class Programs extends Component {
         return (
             <div>
                 <div className="p-2 d-flex justify-content-between">
-                        <Title sectionTitle="Programas de treino ativos"/>
+                        <Title sectionTitle="Programas de treino finalizados"/>
                     </div>
                 <div className="row p-0 m-0">
                     <div className="col-sm-12 p-2">
@@ -68,4 +64,4 @@ export class Programs extends Component {
     }
 }
 
-export default Programs
+export default FinishedPrograms
