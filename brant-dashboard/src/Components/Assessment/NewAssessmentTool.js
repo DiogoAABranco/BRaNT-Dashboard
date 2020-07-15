@@ -3,6 +3,9 @@ import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import Subtitle from '../Others/Subtitle'
 import { tokenHeader } from '../../Config/configToken'
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 
@@ -12,7 +15,7 @@ function NewAssessmentTool(props){
 
     const [toolDescription, setToolDescription] = useState("");
 
-    const [errors, setErrors] = useState({name:'',description:'',domains:''});
+    const [errors, setErrors] = useState({name:'',description:'',domains:'',subdomains:''});
 
     const [domains,setDomains] = useState([]);
 
@@ -20,7 +23,7 @@ function NewAssessmentTool(props){
     const [newDomain,setNewDomain] = useState("");
 
     //input right side
-    const [newSubDomain,setNewSubDomain] = useState("");
+    const [newSubDomain,setNewSubDomain] = useState({name:"",minValue:0, maxValue:0, stateValues:false});
 
     let domain = {id:0, name:newDomain,val:0,submodules:[]}
     
@@ -32,18 +35,27 @@ function NewAssessmentTool(props){
 
     const [subDomainEditing,setSubDomainEditing] = useState("");
     
-    let subDomain = {id:0, name:newSubDomain,val:0}
+    let subDomain = {id:0, name:newSubDomain.name,maxValue:newSubDomain.maxValue, minValue:newSubDomain.minValue, stateValues:newSubDomain.stateValues}
 
-    if(domainEditing.submodules !== undefined && domainEditing.submodules.length > 0)
-        subDomain = {id:domainEditing.submodules[domainEditing.submodules.length - 1].id+1,name:newSubDomain,val:0}
-    
+    if(domainEditing.submodules !== undefined && domainEditing.submodules.length > 0){
+        subDomain = {id:domainEditing.submodules[domainEditing.submodules.length - 1].id+1,name:newSubDomain.name,minValue:newSubDomain.minValue, maxValue:newSubDomain.maxValue,stateValues: newSubDomain.stateValues}
+        console.log(subDomain);
+    }
     const onChangeNewDomain = (e)=>{
 
         setNewDomain(e.target.value);
     }
     const onChangeNewSubDomain = (e)=>{
+        if(e.target.name === 'name')
+            setNewSubDomain({...newSubDomain, name: e.target.value});
+        if(e.target.name === 'minValue')
+            setNewSubDomain({...newSubDomain,minValue: parseInt(e.target.value), stateValues:true});
+        if(e.target.name === 'maxValue')
+            setNewSubDomain({...newSubDomain,maxValue: parseInt(e.target.value), stateValues:true});
+        if(e.target.name === 'stateValues')
+            setNewSubDomain({...newSubDomain,stateValues:e.target.checked});
+            
 
-        setNewSubDomain(e.target.value);
     }
 
     const onclickAddDomain=() => {
@@ -57,13 +69,29 @@ function NewAssessmentTool(props){
     const onclickAddSubDomain=() => {
 
         let tempDomain = domainEditing;
+        let errors_subdomains;
+        console.log(subDomain);
 
-        if(subDomain.name !== "" &&tempDomain.submodules !== undefined)
+        if(subDomain.name === "" || subDomain.name === null || domainEditing === "" ){
+            errors_subdomains = 'Impossível adicionar submódulo!';
+            setErrors({...errors, subdomains:errors_subdomains });
+            
+
+        }
+        else{
+            errors_subdomains='';
+            setErrors({...errors, subdomains:errors_subdomains });
             tempDomain.submodules.push(subDomain);
 
-        setdomainEditing(tempDomain);      
+            setdomainEditing(tempDomain);      
+            console.log(domainEditing);
 
-        setNewSubDomain("");
+
+            
+
+        }
+        setNewSubDomain({...newSubDomain,name:"",minValue:0, maxValue:0, stateValues:false});  
+        
 
     }
 
@@ -202,9 +230,17 @@ function NewAssessmentTool(props){
                                 {errors.domains !== '' ?<div className="invalid-tooltip">
                                     {errors.domains}
                                 </div>:null}
+                                <div className="container ">
+
+                                    <div className="row">
+                                        <div className="mx-auto pt-4">
+                                        <button onClick={onclickAddDomain} className="btn btn-brant-color mt-2">Adicionar</button>
+                                        <button className="btn btn-outline-danger ml-4 mt-2" onClick={onclickDeleteDomain}>Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 
-                                <button onClick={onclickAddDomain} className="btn btn-brant-color mt-2">Adicionar</button>
-                                <button className="btn btn-outline-danger ml-4 mt-2" onClick={onclickDeleteDomain}>Eliminar</button>
+                                
 
                             </div>
                             <div className="card-body p-0">
@@ -226,9 +262,44 @@ function NewAssessmentTool(props){
                             <div className="card-header">
 
                                 {domainEditing.name !== undefined && domainEditing.name !== "" ? <Subtitle sectionTitle={"Submódulos: "+domainEditing.name}/> : <Subtitle sectionTitle="Submódulos - escolher módulo a editar"/>}
-                                <input type="name" className="form-control w-80" id="inputSubdomain" value={newSubDomain} onChange={onChangeNewSubDomain} placeholder="Inserir novo sub módulo"/>
-                                <button onClick={onclickAddSubDomain} className="btn btn-brant-color mt-2">Adicionar</button>
-                                <button className="btn btn-outline-danger ml-4 mt-2" onClick={onclickDeleteSubDomain}>Eliminar</button>
+                                
+                                <div className="container">
+
+                                    <div className="row">
+
+                                        <div className="col-md-8">
+                                        
+                                            <input type="name" name="name" className={errors.subdomains !=='' ? "form-control w-80 is-invalid":'form-control w-80'} id="inputSubdomain" value={newSubDomain.name} onChange={onChangeNewSubDomain} placeholder="Inserir novo sub módulo" required/>
+                                            {errors.subdomains !== '' ?<div className="invalid-tooltip">
+                                                {errors.subdomains}
+                                            </div>:null}
+                                        </div>
+                                        <div className="col-md-4">
+                                        
+                                            <FormControlLabel control={<Checkbox checked={newSubDomain.stateValues} name="stateValues" onChange={onChangeNewSubDomain} value={true} color="primary"/>}label="Incluir valor mínimo e máximo"/>
+
+                                        </div>
+                                    </div>
+                                    {newSubDomain.stateValues ? <div className="row">
+                                        <div className="col-md-6">
+                                            <TextField id="standard-basic" className="mx-auto" name="minValue" type="number" label="Valor mínimo" value={newSubDomain.minValue} onChange={onChangeNewSubDomain} />
+
+                                        </div>
+                                        <div className="col-md-6">
+                                            <TextField id="standard-basic" className="mx-auto" name="maxValue" type="number" label="Valor máximo" value={newSubDomain.maxValue} onChange={onChangeNewSubDomain} />
+
+                                        </div>
+                                    </div>:null}
+
+                                </div>
+                                <div className="row">
+                                    <div className="mx-auto pt-2">
+                                        <button onClick={onclickAddSubDomain} className="btn btn-brant-color mt-2">Adicionar</button>
+                                        <button className="btn btn-outline-danger ml-4 mt-2" onClick={onclickDeleteSubDomain}>Eliminar</button>
+                                    </div>
+                                </div>
+
+                                
                             
                             </div>
 

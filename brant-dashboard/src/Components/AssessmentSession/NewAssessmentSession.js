@@ -10,7 +10,8 @@ import Subtitle from '../Others/Subtitle';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import { tokenHeader,getToken } from '../../Config/configToken'
+import { tokenHeader,getToken,getUser } from '../../Config/configToken'
+
 
 
 
@@ -19,7 +20,7 @@ export default function NewAssessmentSession(props) {
 
     const [patient, setPatient] = useState({id:props.match.params.id, name:props.match.params.name});
 
-    const [user, setUser] = useState({id:1, name:"profissional 1"});
+    const [user, setUser] = useState({id:null, name:null});
 
     const [tools, setTools] = useState(null);
     
@@ -37,6 +38,8 @@ export default function NewAssessmentSession(props) {
         const abortController = new AbortController();
 
         const signal = abortController.signal;
+
+        setUser({id:getUser().id, name: getUser().name});
 
         fetch(`${baseUrl}assessment-tools`,{headers:tokenHeader()},{ signal: signal })
 

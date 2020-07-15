@@ -11,11 +11,11 @@ function BarChart(props){
           domainPadding={15}
           horizontal={true}
           animate={{
-              duration: 2000,
-              onLoad: { duration: 500 }
+              duration: 500,
+              onLoad: { duration: 100 }
             }}
-          height ={250}  
-          width = {600}
+          height ={350}  
+          width = {500}
           padding={{ left: 150, top: 20, right: 20, bottom: 20 }}
         >
           <VictoryAxis
@@ -23,23 +23,20 @@ function BarChart(props){
           />
       
           <VictoryBar
-          
-          
-         
+
           data={data} 
           labels={({ datum }) => datum.value}
           style={{
               data: {
               fill: "#802d3d",
-            
               },
-              labels: { fill: "white" }
+              labels: { fill: "#802d3d", fontSize: 16 }
           
           }}
          
             x="domain"
             y="value"
-            labelComponent={<VictoryLabel dy={0} dx={-30}/>}
+            labelComponent={<VictoryLabel dy={0} dx={10}/>}
           
           />
         </VictoryChart>

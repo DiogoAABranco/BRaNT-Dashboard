@@ -187,7 +187,7 @@ export default function PatientInformation(props) {
                                 <div>
                                     <div className="col-md-12 d-flex justify-content-center">
                                         <Title sectionTitle="Perfil"/>
-                                        <div className="container">
+                                        <div className="container mh-50">
                                             <BarChart data={patient.cognitiveProfile}/>
                                         </div>
                                         

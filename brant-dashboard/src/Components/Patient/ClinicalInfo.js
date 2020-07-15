@@ -57,6 +57,7 @@ function ClinicalInfo({clinicalTypes,clinicalInfo,handleSubmit, description, set
                 search: true,
                 paging: true,
                 showTitle:false,
+                sorting:true,
                 header:true,
                 headerStyle:{
                     "fontWeight": 900,
@@ -65,9 +66,10 @@ function ClinicalInfo({clinicalTypes,clinicalInfo,handleSubmit, description, set
                 }
             }}
             columns={[
+                { title: 'Data', field: 'date', defaultSort:'desc'},
                 { title: 'Tipo', field: 'clinical_info_type_id', render: rowData => {if(rowData.clinical_info_type_id != null)return setClinicalType(rowData.clinical_info_type_id)},},
                 { title: 'Descrição', field: 'description'},
-                // { title: 'Data', field: 'date'}
+                
         ]}
         data={clinicalInfo}
         localization={{
