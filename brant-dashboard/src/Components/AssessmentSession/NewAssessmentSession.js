@@ -142,17 +142,14 @@ export default function NewAssessmentSession(props) {
             console.log(mod);
             
             mod.submodules.forEach(submod => {
-                console.log(submod);
-                console.log(submod.min_value,submod.max_value, !invalid);
 
                 if(submod.min_value !== null && submod.max_value !== null && !invalid){
-                    console.log("if min max");
 
                     if(parseInt(submod.value) < submod.min_value ||  parseInt(submod.value) > submod.max_value  ){
                         setErrors(submod.name + ": valor inválido!");
                         setOpen(true);
                         invalid = true;
-                        console.log(submod.name,submod.value,submod.min_value,submod.max_value);
+                        return false;
                     }
                     
                 }
