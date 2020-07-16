@@ -5,11 +5,14 @@ import DialogEditByStep from './DialogEditByStep'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from 'react-router-dom'
 import { tokenHeader } from '../../Config/configToken'
+import DialogSessionInfo from './DialogSessionInfo'
 
 
 export default function ListSessions(props) {
 
   const [sessions,setSession] = useState(props.sessions);
+  const [selectedRow,setSelectedRow] = useState(null);
+  
 
 
   function convertState(inState){
@@ -73,10 +76,10 @@ export default function ListSessions(props) {
               { title: 'ID', field: 'id', render: rowData =>{if(rowData.id !== null)return idSession(props.sessions, rowData.id)} },
               { title: 'Data', field: 'date'},
               { title: 'Estado', field: 'isDone', render: rowData =>{if(rowData.isDone !== null)return convertState(rowData.isDone)}},
+              { title: 'Detalhes', field: 'id', render: rowData =>{if(rowData.id != null)return <DialogSessionInfo session={rowData}/> }},
         ]}
         data={sessions}
-        
-
+        onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
         localization={{
           toolbar: {
             searchTooltip: 'Procurar',
@@ -103,7 +106,10 @@ export default function ListSessions(props) {
           })
         ]}
         options={{
-          actionsColumnIndex: -1
+          actionsColumnIndex: -1,
+          rowStyle: rowData => ({
+            backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
+          })
         }}
       /> 
     );

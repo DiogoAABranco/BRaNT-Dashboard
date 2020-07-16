@@ -64,6 +64,7 @@ function NewAssessmentTool(props){
             setDomains([...domains, domain]);
 
         setNewDomain("");
+        setdomainEditing(domain);
 
     }
     const onclickAddSubDomain=() => {
@@ -255,7 +256,7 @@ function NewAssessmentTool(props){
                         
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className={domains.length > 0 ? "col-sm-6" : "col-sm-6 invisible"}>
 
                         <div className="card">
 

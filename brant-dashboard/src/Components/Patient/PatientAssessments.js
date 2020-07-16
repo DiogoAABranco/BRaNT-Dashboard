@@ -58,7 +58,7 @@ export default function PatientAssessments(props) {
     if(assessments != null ){
 
         return (
-            <div className="p-2">
+            <div className="p-2 ">
                 <div className="d-flex justify-content-end pb-4">
                     {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Nova avaliação</button></Link>:null}
 

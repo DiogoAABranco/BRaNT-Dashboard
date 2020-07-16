@@ -185,9 +185,9 @@ export default function PatientInformation(props) {
                                 
                                 {patient !== null?
                                 <div>
-                                    <div className="col-md-12 d-flex justify-content-center">
+                                    <div className="col-md-8 d-flex justify-content-center">
                                         <Title sectionTitle="Perfil"/>
-                                        <div className="container mh-50">
+                                        <div className="container h-50">
                                             <BarChart data={patient.cognitiveProfile}/>
                                         </div>
                                         
@@ -202,9 +202,9 @@ export default function PatientInformation(props) {
                             <h1>
                                 {patient !== null?
                                 <div>
-                                    <div className="col-md-12 d-flex justify-content-center">
+                                    <div>
                                        
-                                        <div className="container">
+                                        <div className="">
                                             <PatientAssessments id={patientID} name={patient.name}/>
                                         </div>
                                         
