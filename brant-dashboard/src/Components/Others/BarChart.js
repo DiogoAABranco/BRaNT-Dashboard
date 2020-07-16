@@ -25,7 +25,7 @@ function BarChart(props){
           <VictoryBar
 
           data={data} 
-          labels={({ datum }) => datum.value}
+          labels={({ datum }) => datum.maxValue ? datum.value+"/"+datum.maxValue:datum.value}
           style={{
               data: {
               fill: "#802d3d",

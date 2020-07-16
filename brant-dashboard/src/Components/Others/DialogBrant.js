@@ -16,6 +16,7 @@ function DialogBrant(props){
         props.assessment.results.forEach(( element,index ) => {
 
             let domainName = "";
+            let maxValue = "";
 
             props.assessment.assessment_tool.modules.forEach(module => {
 
@@ -23,11 +24,12 @@ function DialogBrant(props){
                     
                     if(submodule.id === element.submodule_id){
                         domainName = submodule.name;
+                        maxValue = submodule.max_value; 
                     }
                 })
             });
 
-            let temp = { domain:domainName,value: parseInt(element.value) }
+            let temp = { domain:domainName,value: parseInt(element.value),maxValue:maxValue}
             data.push(temp);
         });
 
