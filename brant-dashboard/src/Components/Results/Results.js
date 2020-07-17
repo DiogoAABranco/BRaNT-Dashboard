@@ -208,7 +208,7 @@ export default function Results(props) {
 
                     <div className="col-md-9">
 
-                        <div className="row text-brant-color font-weight-bold text-uppercase d-flex justify-content-center align-items-center shadow-sm p-3 bg-white rounded mx-2">
+                        <div className={sessions ? "invisible" :"row text-brant-color font-weight-bold text-uppercase d-flex justify-content-center align-items-center shadow-sm p-3 bg-white rounded mx-2" }>
 
                         <FormControl component="fieldset">
 

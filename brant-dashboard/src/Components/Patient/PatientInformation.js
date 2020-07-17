@@ -11,6 +11,7 @@ import BarChart from '../Others/BarChart';
 import Title from '../Others/Title';
 import { tokenHeader } from '../../Config/configToken'
 import PatientAssessments from './PatientAssessments'
+import Programs from "./Programs";
 
 
 
@@ -142,19 +143,7 @@ export default function PatientInformation(props) {
                 </NavLink>
                 <Typography color="textPrimary">Informação do utente</Typography>
             </Breadcrumbs>
-            <div className="d-flex flex-row-reverse">
-
-                    <div className="row p-0 m-0">
-
-                        <div className="col-md-3">
-
-                            {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Criar Novo Programa</button></Link>:null}
-
-                        </div>
-
-                    </div>
-                    
-                </div>
+           
             <div className="row p-4 m-0">
                 <div className="col-md-12">
                     <nav>
@@ -163,6 +152,7 @@ export default function PatientInformation(props) {
                             <a className={active === 1 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" ><Subtitle sectionTitle="Informação Clínica"/></a>
                             <a className={active === 2 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><Subtitle sectionTitle="Perfil"/></a>
                             <a className={active === 3 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-contact-tab" data-toggle="tab" href="#nav-assessments" role="tab" aria-controls="nav-assessments" aria-selected="false"><Subtitle sectionTitle="Avaliações"/></a>
+                            <a className={active === 4 ? "nav-item nav-link text-brant-color active" :"nav-item nav-link text-brant-color"} id="nav-contact-tab" data-toggle="tab" href="#nav-programs" role="tab" aria-controls="nav-programs" aria-selected="false"><Subtitle sectionTitle="Programas de treino"/></a>
 
                         </div>
                     </nav>
@@ -209,6 +199,28 @@ export default function PatientInformation(props) {
                                         </div>
                                         
                                     </div>
+                                </div>
+
+                                :null}
+                                
+                            </h1>
+                        </div>
+                        <div className={active === 4 ? "tab-pane fade show active" : "tab-pane fade show"} id="nav-programs" role="tabpanel" aria-labelledby="nav-programs-tab">
+                            <h1>
+                                
+                                {patient !== null?
+                                <div>
+                                    <div className="d-flex justify-content-end pb-4">
+
+                                        {goToNewProgram !== false?<Link to={goToNewProgram}><button className="btn btn-brant-color">Criar Novo Programa</button></Link>:null}
+
+                                    </div>
+                             
+                                    <div className="">
+                                        <Programs patient={patient} history={props.history}/>
+                                    </div>
+                                        
+                                 
                                 </div>
 
                                 :null}

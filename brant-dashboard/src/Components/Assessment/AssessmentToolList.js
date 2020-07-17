@@ -4,11 +4,14 @@ import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import { set } from 'date-fns';
 import {tokenHeader} from '../../Config/configToken'
+import SimpleSnackbar from '../Others/SimpleSnackBar'
 
 export default function AssessmentToolList() {
 
     const [tools, setTools] = useState(null);
     const [selected, setSelected] = useState(null);
+    const [snackbar, setSnackbar] = useState(false);
+    const [text, setText] = useState("");
 
     useEffect(() => {
 
@@ -34,8 +37,47 @@ export default function AssessmentToolList() {
 
     function handleClickTool (tool){
 
-        console.log(tool);
         setSelected(tool);
+        
+    }
+
+    const handleRemove = () =>{
+        var result = window.confirm("Deseja eliminar esta ferramenta de avaliação?");
+        if (result) {
+            fetch(`${baseUrl}assessment-tools/${selected.id}`, {
+                method: 'DELETE',
+                headers:tokenHeader(),
+            }).then(res => {
+                
+                return res;
+            })
+            .then(res => res.json())
+            .then((data) => {
+    
+                console.log('API success: ',data);
+                if(data.msg =="success"){
+                    let tempTools = tools;
+                    
+                    setTools(tempTools.filter(item => item.id != selected.id));
+                    setSelected(tools[0]);
+                    setText("Ferramenta de avaliação eliminada");
+                    setSnackbar(true);
+    
+                }
+                else{
+                    setText("Impossível eliminar esta ferramenta de avaliação");
+                    setSnackbar(true);
+                }
+               
+    
+            })
+            .catch(err => {
+                console.log('API err: ',err);
+                
+                return err;
+            });
+        }
+
         
     }
 
@@ -43,6 +85,7 @@ export default function AssessmentToolList() {
     if(tools !== null && selected !== null){
         return (
             <div>
+                {snackbar ? <SimpleSnackbar data={text} open={snackbar} setOpen={setSnackbar}/>:null}
 
                 <Title sectionTitle="Ferramentas de Avaliação"/>
 
@@ -54,7 +97,7 @@ export default function AssessmentToolList() {
 
                             <ul className="list-group list-group-flush text-brant-color p-4">
 
-                                {tools.map(tool => selected !== null && selected.id == tool.id ?<li key={tool.id} onClick={() => handleClickTool(tool)} className=" list-group-item list-group-item-brant-color list-group-item-action active">{tool.name}</li>:<li key={tool.id} onClick={() => handleClickTool(tool)} className=" list-group-item list-group-item-brant-color list-group-item-action">{tool.name}</li> )}
+                                <h5>{tools.map(tool => selected !== null && selected.id == tool.id ?<li key={tool.id} onClick={() => handleClickTool(tool)} className=" list-group-item list-group-item-brant-color list-group-item-action active">{tool.name}</li>:<li key={tool.id} onClick={() => handleClickTool(tool)} className=" list-group-item list-group-item-brant-color list-group-item-action">{tool.name}</li> )}</h5>
                             
                             </ul>
 
@@ -64,7 +107,10 @@ export default function AssessmentToolList() {
 
                             <div className="card border-brant-color mb-3 m-4">
 
-                                <div className="card-header text-brant-color"><h5>{selected.name}</h5></div>
+                                <div className="card-header text-brant-color d-flex justify-content-between">
+                                    <h5>{selected.name}</h5>
+                                    <button className="btn btn-outline-danger" onClick={handleRemove}> Eliminar Ferramenta</button>
+                                </div>
 
                                 <div className="card-body text-brant-color">
 

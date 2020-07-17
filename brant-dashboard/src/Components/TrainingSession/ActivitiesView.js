@@ -33,7 +33,7 @@ const ActivitiesView =(props)=>{
             {props.state.activities.map((temp) => (
               <div key={temp.id} className="col-sm-2">
 
-                <ActivityBoxShape data={temp} />
+                <ActivityBoxShape data={temp} games={props.games} />
 
                 <div className="row justify-content-md-center">
 

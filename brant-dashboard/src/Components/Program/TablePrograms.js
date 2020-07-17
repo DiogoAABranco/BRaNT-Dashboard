@@ -6,14 +6,22 @@ import MaterialTable from 'material-table'
 export default function TablePrograms(props) {
     
     const programs = props.data;
+
+    const manageState = (type) =>{
+      if(type === 0 ){
+        return 'Inativo';
+      }
+      else
+        return 'Ativo';
+    }
     
     return (
       <MaterialTable
         columns={[
-            { title: 'ID', field: 'id'},
-            { title: 'Nome', field: 'patient.name'},
             { title: 'Data de início', field: 'start_date', defaultSort: 'desc'},
-            { title: 'Número de sessões', field: 'n_sessions'}
+            { title: 'Nome', field: 'patient.name'},
+            { title: 'Número de sessões', field: 'n_sessions'},
+            { title: 'Estado', field: 'isActive', render: rowData=>manageState(rowData.isActive)}
       ]}
       data={programs}
         onRowClick={((evt, selectedRow) => props.goTo(selectedRow.id))}

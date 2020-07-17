@@ -9,6 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Chip from '@material-ui/core/Chip';
+
 
 
 
@@ -61,16 +63,32 @@ export default function DialogAddActivity({ games, addNewActivities }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Actividades</DialogTitle>
+        <DialogTitle id="alert-dialog-title" className="text-brant-color">Actividades</DialogTitle>
         <DialogContent>
           
           <div className="container">
                 {games.map(game => 
-                    <div key={game.id} className="row">
+                    <div key={game.id} className="row bg-light-games mb-4">
+                      <div className="col-md-12">
                         <FormControlLabel
                             control={<Checkbox color="primary" name={game.id+""} onChange={handleChange} />}
-                            label={game.name}
+                            label={game.name + " - " + game.description}
                         />
+                      </div>
+                        
+                        <div className="row pb-4 pl-5">
+                          { game.profileByDomain.map( domain =>
+
+                          <span key={ domain.id} className="mr-2">
+
+                              <Chip  size="small" color="primary" label={domain.name} />
+
+                          </span>
+
+
+                          )}
+                        </div>
+                        
                     </div>
                 )}
           </div>
