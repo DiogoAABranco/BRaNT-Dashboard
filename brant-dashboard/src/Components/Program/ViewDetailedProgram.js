@@ -18,11 +18,17 @@ export default class ViewDetailedProgram extends Component {
         this.state = {
            patientID:this.props.match.params.id,
             program:0,
-            change:true
+            change:true,
+            snackbar:false,
+            text:""
             
         }
         this.updateSessions = this.updateSessions.bind(this);
         this.handleSimulateResults = this.handleSimulateResults.bind(this);
+        this.handleEndProgram = this.handleEndProgram.bind(this);
+        this.setSnackbar = this.setSnackbar.bind(this);
+
+        
     }
     abortController = new AbortController();
 
@@ -64,6 +70,39 @@ export default class ViewDetailedProgram extends Component {
         
         
     }
+    handleEndProgram (){
+        let programT = this.state.program;
+        programT.isActive = 0;
+
+        this.setState({program:programT });
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        fetch(`${baseUrl}training-program`,{           
+            method:"PUT",
+            headers:tokenHeader(),
+            body:JSON.stringify(this.state.program)},
+            { signal: signal })
+        .then(res => res.json())
+        .then((data) => {
+
+            if(data.msg =="success"){
+                this.setState({text: "Programa de treino finalizado",snackbar:true});
+            }
+            else{
+                this.setState({text: "Impossível finalizar programa de treino",snackbar:true});
+            }
+            console.log(data);
+          
+            
+        })
+        .catch(console.log);
+        
+        return () => abortController.abort(); 
+    }
+    setSnackbar(val){
+        this.setState({snackbar:val});
+    }
 
     handleSimulateResults(){
         const abortController = new AbortController();
@@ -89,15 +128,23 @@ export default class ViewDetailedProgram extends Component {
         if(this.state.program !== 0 && this.state.change === true)
         return (
             <div className="container-fluid">
-                
-                <Title sectionTitle={"Programa de treino: " + this.state.program.patient.name} />
+                {this.state.snackbar ? <SimpleSnackbar data={this.state.text} open={this.state.snackbar} setOpen={this.setSnackbar}/>:null}
+                <div className="card-header d-flex justify-content-between" id="headingOne">
+                    <Title sectionTitle={"Programa de treino: " + this.state.program.patient.name} />
+                    {this.state.program.isActive ? <p className="text-success">Programa de treino ativo</p> : <p className="text-danger">Programa de treino inativo</p> }
+                </div>
                 <CardsRow data={this.state.program}/>
-                <ActivitiesNextSession session={this.state.program.sessions[0]} />
+                <ActivitiesNextSession session={this.state.program.sessions[this.state.program.sessions.length - 1]} />
 
                 <div className="row p-0 ml-2 d-flex justify-content-between">
                     <DialogEditByStep gameVariables={this.state.program.game_variables}/>
                     <div className="pt-2 pr-4">
                         {this.state.program.isActive === 1 ? <button className="btn btn-brant-color" onClick={ this.handleSimulateResults}>Simular Resultados</button>:null
+                        }
+
+                    </div>
+                    <div className="pt-2 pr-4">
+                        {this.state.program.isActive === 1 ? <button className="btn btn-brant-color" onClick={ this.handleEndProgram}>Finalizar Programa</button>:null
                         }
 
                     </div>

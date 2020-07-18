@@ -64,7 +64,8 @@ function Dashboard(props){
                                     <PrivateRoute exact path="/patients/new-program/:id/:name" component={ TrainingSession }/>  
                                     <PrivateRoute exact path="/programs" component={ Programs }/>  
                                     <PrivateRoute exact path="/programs-complete" component={ FinishedPrograms }/> 
-                                    <PrivateRoute exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>              
+                                    <PrivateRoute exact path="/programs/view-detailed-program/:id" component={ ViewDetailedProgram }/>     
+                                    <PrivateRoute exact path="/programs-complete/view-detailed-program/:id" component={ ViewDetailedProgram }/>          
                                     <PrivateRoute exact path="/programs/results/training-program/:id" component={ Results }/> 
                                     <PrivateRoute exact path="/games" component={ GameView }/> 
                                     <PrivateRoute exact path="/new-assessment" component={ NewAssessmentTool }/> 

@@ -56,7 +56,7 @@ export class FinishedPrograms extends Component {
                     </div>
                 <div className="row p-0 m-0">
                     <div className="col-sm-12 p-2">
-                        <TablePrograms data={this.state.programs} goTo={(id) => {this.props.history.push(`/programs/view-detailed-program/${id}`)}}/>
+                        <TablePrograms data={this.state.programs} goTo={(id) => {this.props.history.push(`/programs-complete/view-detailed-program/${id}`)}}/>
                     </div>
                 </div>
             </div>
