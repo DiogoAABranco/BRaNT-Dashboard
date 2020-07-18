@@ -1,4 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useState, useEffect } from 'react'
+import baseUrl from '../Config/config'
+import { tokenHeader } from '../Config/configToken'
+
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import PatientsList from './PatientsList'
@@ -17,7 +20,7 @@ import PatientAssessments from './AssessmentSession/PatientAssessments'
 import NewAssessmentSession from './AssessmentSession/NewAssessmentSession'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
-import { checkAuth } from '../Config/configToken'
+import { checkAuth, getUser } from '../Config/configToken'
 import HomePage from './HomePage'
 import NoMatchPage from './NoMatchPage'
 import { FinishedPrograms } from './Program/FinishedPrograms'
@@ -37,13 +40,43 @@ const PrivateRoute = ({component: Component, ...rest}) =>{
 
 
 function Dashboard(props){
+
+    const [user,setUser] = useState(null);
+    const [userUpdated,setUserUpdated] = useState(false);
+
+    useEffect(() => {
+
+        setUserUpdated(false);
+
+        fetch(`${baseUrl}details`,{
+            method: "post",
+            headers: tokenHeader(),
+             })
+             .then(res => res.json())
+             .then(res =>{
+                 if(res.msg ==='success'){
+                    setUser(res.user);
+               
+                 }
+                 else{
+                    console.log("impossible to store user");
+                    return false;
+                 }
+                            
+             })
+             .catch(console.log);  
+       setUserUpdated(true);
+        return;
+
+    },[]);
    
+    if(userUpdated !== false){
+
+    
         return <BrowserRouter>
         
          <Switch>
     
-
-            
             <Route exact path="/auth/login" component={ Login }/>
             <Route exact path="/auth/register" component={ Register }/>
             <Fragment>
@@ -51,7 +84,7 @@ function Dashboard(props){
 
                     <div className="d-flex" id="wrapper">
 
-                        <Sidebar/>
+                        <Sidebar user={user}/>
 
                         <div id="page-content-wrapper">
                             <PrivateRoute path="/" component={Navbar} />
@@ -68,10 +101,15 @@ function Dashboard(props){
                                     <PrivateRoute exact path="/programs-complete/view-detailed-program/:id" component={ ViewDetailedProgram }/>          
                                     <PrivateRoute exact path="/programs/results/training-program/:id" component={ Results }/> 
                                     <PrivateRoute exact path="/games" component={ GameView }/> 
-                                    <PrivateRoute exact path="/new-assessment" component={ NewAssessmentTool }/> 
                                     <PrivateRoute exact path="/assessment-tools" component={ AssessmentToolList }/> 
                                     <PrivateRoute exact path="/patients/patient-assessments/:id/:name" component={ PatientAssessments }/>  
                                     <PrivateRoute exact path="/patients/patient-new-assessment/:id/:name" component={ NewAssessmentSession }/>
+
+                                    {/*routes only for admin*/}
+                                    {getUser() !== null && getUser().role.name === 'admin' ? 
+                                        <PrivateRoute exact path="/new-assessment" component={ NewAssessmentTool }/>:null
+                                        //lista de users e criar novo user
+                                    } 
                                     <Route component={ NoMatchPage }/>
                                 </Switch>
                             </div>
@@ -84,6 +122,9 @@ function Dashboard(props){
             </Fragment>
         </Switch>
         </BrowserRouter>
+        }
+        else
+        return <div></div>
     
 }
 export default Dashboard

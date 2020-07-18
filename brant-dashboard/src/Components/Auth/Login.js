@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { login } from './auth'
 import SimpleSnackbar from '../Others/SimpleSnackBar'
+import { getUser } from '../../Config/configToken';
 
 
 export default function Login(props) {
@@ -30,6 +31,7 @@ export default function Login(props) {
         login(user1).then(res=>{
             console.log(res);
             if(res){
+                
                 props.history.push('/home'); 
             }
             else{

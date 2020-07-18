@@ -3,8 +3,9 @@ import React, {useState, useEffect} from 'react'
 import baseUrl from '../../Config/config'
 import Title from '../Others/Title'
 import { set } from 'date-fns';
-import {tokenHeader} from '../../Config/configToken'
+import {tokenHeader,getUser} from '../../Config/configToken'
 import SimpleSnackbar from '../Others/SimpleSnackBar'
+
 
 export default function AssessmentToolList() {
 
@@ -109,7 +110,7 @@ export default function AssessmentToolList() {
 
                                 <div className="card-header text-brant-color d-flex justify-content-between">
                                     <h5>{selected.name}</h5>
-                                    <button className="btn btn-outline-danger" onClick={handleRemove}> Eliminar Ferramenta</button>
+                                    {getUser().role.name === 'admin' ? <button className="btn btn-outline-danger" onClick={handleRemove}> Eliminar Ferramenta</button>:null}
                                 </div>
 
                                 <div className="card-body text-brant-color">
