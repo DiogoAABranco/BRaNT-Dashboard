@@ -116,7 +116,13 @@ const itemsSideBarAdmin = [
 ];
 
 function Sidebar(props) {
+  const [user,setUser] = useState(getUser());
 
+  useEffect(() => {
+    
+setUser(getUser());
+    return () => { setUser(null); console.log("componentWillUnmount"); }
+  }, [] );
 
   return (
 
@@ -135,7 +141,7 @@ function Sidebar(props) {
 
       <ul className="list-group list-group-flush">
 
-          {props.user.role.name === 'admin' ? itemsSideBarAdmin.map(item => 
+          {user!== null && user.role.name === 'admin' ? itemsSideBarAdmin.map(item => 
             
             <div key={item.name}>
 

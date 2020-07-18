@@ -41,38 +41,15 @@ const PrivateRoute = ({component: Component, ...rest}) =>{
 
 function Dashboard(props){
 
-    const [user,setUser] = useState(null);
-    const [userUpdated,setUserUpdated] = useState(false);
+    const [user,setUser] = useState(getUser());
 
     useEffect(() => {
-
-        setUserUpdated(false);
-
-        fetch(`${baseUrl}details`,{
-            method: "post",
-            headers: tokenHeader(),
-             })
-             .then(res => res.json())
-             .then(res =>{
-                 if(res.msg ==='success'){
-                    setUser(res.user);
-               
-                 }
-                 else{
-                    console.log("impossible to store user");
-                    return false;
-                 }
-                            
-             })
-             .catch(console.log);  
-       setUserUpdated(true);
-        return;
-
-    },[]);
-   
-    if(userUpdated !== false){
-
     
+
+        return () => { setUser(null);console.log("componentWillUnmount2"); }
+      }, [] );
+   
+   
         return <BrowserRouter>
         
          <Switch>
@@ -122,9 +99,8 @@ function Dashboard(props){
             </Fragment>
         </Switch>
         </BrowserRouter>
-        }
-        else
-        return <div></div>
+        
+        
     
 }
 export default Dashboard
