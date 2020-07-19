@@ -18,9 +18,9 @@ export const login = (user) => {
         .then(res =>{
             console.log(res);
             if(res.success){
-                setToken(res.success.token);
+                setToken(res.success);
+                return res.success.user;
 
-                return localStorage.getItem('currentUser');
             }
             else{
                 return false;

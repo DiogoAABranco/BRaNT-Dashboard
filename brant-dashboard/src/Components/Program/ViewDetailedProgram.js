@@ -149,7 +149,7 @@ export default class ViewDetailedProgram extends Component {
 
                     </div>
                     <div className="pt-2 pr-4">
-                        <button className="btn btn-brant-color" onClick={ () => {this.props.history.push(`/programs/results/training-program/${this.state.program.id}`)}}>Resultados</button>
+                        <button className="btn btn-brant-color" onClick={ () => {this.props.history.push(`/dashboard/programs/results/training-program/${this.state.program.id}`)}}>Resultados</button>
 
                     </div>
                 </div>

@@ -46,7 +46,7 @@ export default function ListSessions(props) {
               setSession(newSessions);
               props.updateSessions(newSessions);
               if(newSessions.length === 0){
-                props.history.push('/programs');
+                props.history.push('/dashboard/programs');
               }
           })
           .catch(err => {

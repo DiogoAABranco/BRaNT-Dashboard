@@ -37,7 +37,7 @@ export default function PatientAssessments(props) {
             
             setAssessments(data);
            // setAssessmentSelected(data[0]);
-            setGoToNewAssessmentSession({pathname: `/patients/patient-new-assessment/${patient.id}/${patient.name}`});
+            setGoToNewAssessmentSession({pathname: `/dashboard/patients/patient-new-assessment/${patient.id}/${patient.name}`});
   console.log(data);
         })
         .catch(console.log);
@@ -61,7 +61,7 @@ export default function PatientAssessments(props) {
             <div className="p-2">
                 <div className="pb-2">
                     <Breadcrumbs aria-label="breadcrumb">
-                        <NavLink className="text-brant-color" to="/patients">
+                        <NavLink className="text-brant-color" to="/dashboard/patients">
                             Utentes
                         </NavLink>
                         <Typography color="textPrimary">Lista de avaliações</Typography>

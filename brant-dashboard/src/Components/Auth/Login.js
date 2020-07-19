@@ -34,10 +34,10 @@ export default function Login(props) {
             password:user.password
         }
 
-        login(user1).then(res=>{
+        login(user1).then(user=>{
             
-            if(res !== false){
-                console.log("login: ",res);
+            if(user !== false){
+                console.log("login: ",user);
                 props.history.push('/dashboard/patients'); 
             }
             else{

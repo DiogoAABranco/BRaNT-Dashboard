@@ -24,34 +24,13 @@ export const getUser = () =>{
     return JSON.parse(localStorage.getItem('currentUser'));
 }
 
-export const setToken = (token) =>{
-    localStorage.setItem('token',token); 
+export const setToken = (success) =>{
+    localStorage.setItem('token',success.token); 
 
-    let user = null;
+    currentUserSubject.next(success.user);
+    localStorage.setItem('currentUser', JSON.stringify(success.user));
 
-    fetch(`${baseUrl}details`,{
-        method: "post",
-        headers:new Headers({
-            'Authorization': 'Bearer ' + token,
-        }),
-         })
-         .then(res => res.json())
-         .then(res =>{
-             if(res.msg ==='success'){
-                currentUserSubject.next(res.user);
-                localStorage.setItem('currentUser', JSON.stringify(res.user));
-                user = res.user;
-                return" res.user";
-             }
-             else{
-                console.log("impossible to store user");
-                return false;
-             }
-                        
-         })
-         .catch(console.log);  
-   
-    return;
+    return true;
 }
 
 export const tokenHeader = () =>{

@@ -37,7 +37,7 @@ export default function PatientAssessments(props) {
             
             setAssessments(data);
            // setAssessmentSelected(data[0]);
-            setGoToNewAssessmentSession({pathname: `/patients/patient-new-assessment/${patient.id}/${patient.name}`});
+            setGoToNewAssessmentSession({pathname: `/dashboard/patients/patient-new-assessment/${patient.id}/${patient.name}`});
   console.log(data);
         })
         .catch(console.log);

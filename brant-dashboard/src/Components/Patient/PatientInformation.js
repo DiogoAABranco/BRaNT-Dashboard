@@ -60,9 +60,9 @@ export default function PatientInformation(props) {
         .then(res => res.json())
         .then((data) => {
             setPatient(data);
-            setGoToNewProgram({pathname: `/patients/new-program/${patientID}/${data.name}`});
-            setGoToAssessments({pathname: `/patients/patient-assessments/${patientID}/${data.name}`});
-            setGoToNewAssessmentSession({pathname: `/patients/patient-new-assessment/${patientID}/${data.name}`});
+            setGoToNewProgram({pathname: `/dashboard/patients/new-program/${patientID}/${data.name}`});
+            setGoToAssessments({pathname: `/dashboard/patients/patient-assessments/${patientID}/${data.name}`});
+            setGoToNewAssessmentSession({pathname: `/dashboard/patients/patient-new-assessment/${patientID}/${data.name}`});
             
         })
         .catch(err =>{console.log(err)});
@@ -138,7 +138,7 @@ export default function PatientInformation(props) {
             {success?<div className="alert alert-success" role="alert">Informação adicionada!</div>:null }
             {warning?<div className="alert alert-danger" role="alert">Não foi possível adicionar informação</div>:null }
             <Breadcrumbs aria-label="breadcrumb">
-                <NavLink className="text-brant-color" to="/patients">
+                <NavLink className="text-brant-color" to="/dashboard/patients">
                     Utentes
                 </NavLink>
                 <Typography color="textPrimary">Informação do utente</Typography>

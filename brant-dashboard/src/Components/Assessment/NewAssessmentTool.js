@@ -161,7 +161,7 @@ function NewAssessmentTool(props){
         .then((data) => {
 
             console.log('API success: ',data);
-            props.history.push('/assessment-tools');
+            props.history.push('/dashboard/assessment-tools');
 
         })
         .catch(err => {

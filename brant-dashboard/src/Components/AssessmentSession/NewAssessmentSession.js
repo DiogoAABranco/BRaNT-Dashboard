@@ -191,7 +191,7 @@ export default function NewAssessmentSession(props) {
             .then((data) => {
                 console.log('API success: ',data);
                 if(data.msg === 'success'){
-                    props.history.push(`/patients/patient-information/${patient.id}/3`);
+                    props.history.push(`/dashboard/patients/patient-information/${patient.id}/3`);
                 }
             })
             .catch(err => {
@@ -213,7 +213,7 @@ export default function NewAssessmentSession(props) {
             <div> <SimpleSnackBar open={open} setOpen={setOpen} data={errors}/>
                 <div className="pb-2">
                     <Breadcrumbs aria-label="breadcrumb">
-                        <NavLink className="text-brant-color" to="/patients">
+                        <NavLink className="text-brant-color" to="/dashboard/patients">
                             Utentes
                         </NavLink>
                         <Typography color="textPrimary">Nova avaliação</Typography>

@@ -37,7 +37,7 @@ export class Programs extends Component {
             <div>
                 <div className="p-2">
                     
-                    <TablePrograms data={this.state.programs} goTo={(id) => {this.props.history.push(`/programs/view-detailed-program/${id}`)}}/>
+                    <TablePrograms data={this.state.programs} goTo={(id) => {this.props.history.push(`/dashboard/programs/view-detailed-program/${id}`)}}/>
                     
                 </div>
             </div>

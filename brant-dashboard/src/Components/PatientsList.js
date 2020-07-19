@@ -94,7 +94,7 @@ class PatientsList extends Component{
                 <div className="card">
                     <div className="card-header d-flex justify-content-between" id="headingOne">
                         <Subtitle sectionTitle="Lista de utentes"/>
-                        <Link to="/create-patient"><button className="btn btn-brant-color">Novo Utente</button></Link>
+                        <Link to="/dashboard/create-patient"><button className="btn btn-brant-color">Novo Utente</button></Link>
                     </div>
 
                     <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">

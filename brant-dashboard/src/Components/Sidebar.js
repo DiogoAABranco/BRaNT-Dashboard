@@ -148,7 +148,7 @@ function Sidebar(props) {
 
       <ul className="list-group list-group-flush">
 
-          {userContext ? itemsSideBarAdmin.map(item => 
+          {user.role.name === 'admin' ? itemsSideBarAdmin.map(item => 
             
             <div key={item.name}>
 

@@ -92,7 +92,7 @@ class TrainingSession extends Component {
         .then(res => res.json())
         .then((data) => {
             console.log('API success: ',data);
-            this.props.history.push('/programs');
+            this.props.history.push('/dashboard/programs');
         })
         .catch(err => {
           console.log(err);
@@ -217,12 +217,12 @@ class TrainingSession extends Component {
                 "Programa de treino criado para o utente: " +
                 this.state.patientName
               }
-              link="/programs"
+              link="/dashboard/programs"
             />
           ) : (
             <div>
               <Breadcrumbs aria-label="breadcrumb">
-                <NavLink className="text-brant-color" to="/patients">
+                <NavLink className="text-brant-color" to="/dashboard/patients">
                     Utentes
                 </NavLink>
                 <Typography color="textPrimary">Novo plano de treino</Typography>

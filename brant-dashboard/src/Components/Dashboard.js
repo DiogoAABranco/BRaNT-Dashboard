@@ -45,7 +45,7 @@ function Dashboard(props){
         return <BrowserRouter>
         
     
-    
+            <Route exact path="/" render={() => (<Redirect to="/auth/login" />)}/>
             <Route exact path="/auth/login" component={ Login }/>
             <Route exact path="/auth/register" component={ Register }/>
             <div>

@@ -9,7 +9,7 @@ export default function NoMatchPage() {
                 <Title sectionTitle="Página não encontrada!!!"/>
                 <div className="row mx-auto">
                     <div className="col-md-12 mx-auto">
-                    <button className="btn btn-brant-color"><Link to="/home">Página Inicial</Link></button>
+                    <button className="btn btn-brant-color"><Link to="/dashboard/home">Página Inicial</Link></button>
                     </div>
                 </div>
             </div>
