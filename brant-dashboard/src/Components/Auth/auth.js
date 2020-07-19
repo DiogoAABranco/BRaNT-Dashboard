@@ -4,7 +4,7 @@ import {setToken} from '../../Config/configToken'
 
 
 
-export const login = user => { 
+export const login = (user) => { 
 
     let formData = new FormData();
     formData.append('email', user.email);
@@ -19,8 +19,8 @@ export const login = user => {
             console.log(res);
             if(res.success){
                 setToken(res.success.token);
-                
-                return true;
+
+                return localStorage.getItem('currentUser');
             }
             else{
                 return false;

@@ -1,11 +1,13 @@
-import React, {Component} from 'react'
+import React, {useContext} from 'react'
 import {logout, getUser} from '../Config/configToken'
 import { withRouter } from 'react-router-dom';
+import { UserContext } from './UserContext'
+
 
 
 function Navbar (props) {
   
-    
+    const { userContext, setUserContext } = useContext(UserContext);
 
 
     const handleLogout = () => {
@@ -18,10 +20,7 @@ function Navbar (props) {
             console.log("erro logout");
         
     }
-   
-        if( getUser()!==null){
-
-        
+     
         return (
          
             <nav className="navbar navbar-expand-lg navbar-light bottom-shadow">
@@ -31,7 +30,7 @@ function Navbar (props) {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto mt-2 mt-lg-0 mr-2">
-                        <li className="nav-item nav-link">{"Seja bem-vindo, "+ getUser().name}</li>
+                        {userContext != null ? <li className="nav-item nav-link">{"Seja bem-vindo, "+ userContext.name}</li>:null}
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             
@@ -48,7 +47,6 @@ function Navbar (props) {
             
     
         )}
-        else return <div></div>
-    }
+    
 
 export default withRouter(Navbar);

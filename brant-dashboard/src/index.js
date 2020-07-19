@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import Dashboard from "./Components/Dashboard";
 //development server for teste - miragejs
@@ -18,26 +18,28 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import {BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { ptPT } from "@material-ui/core/locale";
+import { UserContext } from "./Components/UserContext";
+import { useMemo } from "react";
 
 
-class Main extends Component {
+function Main(props) {
 
-  constructor(props) {
+  const [userContext, setUserContext] =useState(null);
 
-    super(props);
-
-  }
-
-  render() {
+  const providerUser = useMemo(() => ({ userContext,setUserContext }), [ userContext,setUserContext ]);
 
     return (
 
         <ThemeProvider theme={ theme }>
+          <UserContext.Provider value={providerUser}>
+
+          
           <Router>
+            
              <Dashboard/>
           </Router>
            
-      
+          </UserContext.Provider>
         </ThemeProvider>    
 
     
@@ -46,7 +48,7 @@ class Main extends Component {
 
   }
 
-}
+
 
 
 

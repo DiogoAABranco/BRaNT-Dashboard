@@ -8,12 +8,18 @@ import { useState } from 'react';
 import { login } from './auth'
 import SimpleSnackbar from '../Others/SimpleSnackBar'
 import { getUser } from '../../Config/configToken';
+import { UserContext } from '../UserContext'
+import { useContext } from 'react'
+
+
+
 
 
 export default function Login(props) {
 
     const [user,setUser] = useState({email:"",password:""});
     const [error,setError] = useState(false);
+
 
     const onChange = (e) => {
         
@@ -29,10 +35,10 @@ export default function Login(props) {
         }
 
         login(user1).then(res=>{
-            console.log(res);
-            if(res){
-                
-                props.history.push('/home'); 
+            
+            if(res !== false){
+                console.log("login: ",res);
+                props.history.push('/dashboard/patients'); 
             }
             else{
                 console.log("Credenciais incorretas");

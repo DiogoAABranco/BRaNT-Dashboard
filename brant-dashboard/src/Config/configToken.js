@@ -1,9 +1,12 @@
 import { BehaviorSubject } from 'rxjs';
+import {useContext} from 'react'
 import baseUrl from './config'
+import { UserContext } from '../Components/UserContext'
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
-const currentUser = currentUserSubject.asObservable();
+export const currentUser = currentUserSubject.asObservable();
+
 
 export const checkAuth =  () => {
   
@@ -24,6 +27,8 @@ export const getUser = () =>{
 export const setToken = (token) =>{
     localStorage.setItem('token',token); 
 
+    let user = null;
+
     fetch(`${baseUrl}details`,{
         method: "post",
         headers:new Headers({
@@ -35,7 +40,8 @@ export const setToken = (token) =>{
              if(res.msg ==='success'){
                 currentUserSubject.next(res.user);
                 localStorage.setItem('currentUser', JSON.stringify(res.user));
-                return true;
+                user = res.user;
+                return" res.user";
              }
              else{
                 console.log("impossible to store user");
@@ -59,6 +65,6 @@ export const logout = () =>{
     localStorage.removeItem('token'); 
     localStorage.removeItem('currentUser'); 
     currentUserSubject.next(null);
-   
+     
     return true;
 }

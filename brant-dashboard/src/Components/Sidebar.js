@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ItemSidebar from "./ItemSidebar";
 import { Link, NavLink } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
@@ -6,24 +6,26 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {getUser} from '../Config/configToken'
+import {getUser, currentUser} from '../Config/configToken'
 import { useEffect } from "react";
+import { UserContext } from './UserContext'
+
 
 const itemsSideBar = [
   {
     name: "Início",
-    url: "/home",
+    url: "/dashboard/home",
   },
   {
     name: "Utentes",
     children: [
       {
         name: "Novo Utente",
-        url: "/create-patient",
+        url: "/dashboard/create-patient",
       },
       {
         name: "Lista de Utentes",
-        url: "/patients",
+        url: "/dashboard/patients",
       },
     ],
   },
@@ -32,11 +34,11 @@ const itemsSideBar = [
     children: [
       {
         name: "Programas ativos",
-        url: "/programs",
+        url: "/dashboard/programs",
       },
       {
         name: "Programas finalizados",
-        url: "/programs-complete",
+        url: "/dashboard/programs-complete",
       },
     ],
   },
@@ -45,7 +47,7 @@ const itemsSideBar = [
     children: [
       {
         name: "Lista de atividades",
-        url: "/games",
+        url: "/dashboard/games",
       },
     ],
   },
@@ -54,7 +56,7 @@ const itemsSideBar = [
     children: [
       {
         name: "Lista das Ferramentas",
-        url: "/assessment-tools",
+        url: "/dashboard/assessment-tools",
       },
     ],
   },
@@ -63,18 +65,18 @@ const itemsSideBar = [
 const itemsSideBarAdmin = [
   {
     name: "Início",
-    url: "/home",
+    url: "/dashboard/home",
   },
   {
     name: "Utentes",
     children: [
       {
         name: "Novo Utente",
-        url: "/create-patient",
+        url: "/dashboard/create-patient",
       },
       {
         name: "Lista de Utentes",
-        url: "/patients",
+        url: "/dashboard/patients",
       },
     ],
   },
@@ -83,11 +85,11 @@ const itemsSideBarAdmin = [
     children: [
       {
         name: "Programas ativos",
-        url: "/programs",
+        url: "/dashboard/programs",
       },
       {
         name: "Programas finalizados",
-        url: "/programs-complete",
+        url: "/dashboard/programs-complete",
       },
     ],
   },
@@ -96,7 +98,7 @@ const itemsSideBarAdmin = [
     children: [
       {
         name: "Lista de atividades",
-        url: "/games",
+        url: "/dashboard/games",
       },
     ],
   },
@@ -105,25 +107,30 @@ const itemsSideBarAdmin = [
     children: [
       {
         name: "Nova Ferramenta",
-        url: "/new-assessment",
+        url: "/dashboard/new-assessment",
       },
       {
         name: "Lista das Ferramentas",
-        url: "/assessment-tools",
+        url: "/dashboard/assessment-tools",
       },
     ],
   },
 ];
 
 function Sidebar(props) {
-  const [user,setUser] = useState(getUser());
+  const [user,setUser] = useState(currentUser.source.value);
+  const [loading,setLoading] = useState(true);
+
+  const { userContext, setUserContext } = useContext(UserContext);
 
   useEffect(() => {
-    
-setUser(getUser());
-    return () => { setUser(null); console.log("componentWillUnmount"); }
-  }, [] );
 
+    setUserContext(currentUser.source.value);
+    
+    return () => setUserContext(null); 
+},[]);
+
+     
   return (
 
     <div className="bg-light border-right" id="sidebar-wrapper">
@@ -141,7 +148,7 @@ setUser(getUser());
 
       <ul className="list-group list-group-flush">
 
-          {user!== null && user.role.name === 'admin' ? itemsSideBarAdmin.map(item => 
+          {userContext ? itemsSideBarAdmin.map(item => 
             
             <div key={item.name}>
 
@@ -214,5 +221,7 @@ setUser(getUser());
         
       </ul>
     </div>
-  );}
+  );
+         
+}
 export default Sidebar;
