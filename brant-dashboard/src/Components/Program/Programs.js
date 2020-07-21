@@ -40,7 +40,7 @@ export class Programs extends Component {
             })
     }
     componentDidUpdate(){
-        this.handleApiCall();
+        //this.handleApiCall();
 
     }
 

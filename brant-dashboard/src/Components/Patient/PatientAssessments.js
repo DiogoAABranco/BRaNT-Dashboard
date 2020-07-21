@@ -68,7 +68,7 @@ export default function PatientAssessments(props) {
                 <MaterialTable
             columns={[
                 { title: 'Data', field: 'date', defaultSort:'desc' },
-                { title: 'Profisional de saúde', field: 'user.name'},
+                { title: 'Profissional de saúde', field: 'user.name'},
                 { title: 'Ferramenta de avaliação', field: 'assessment_tool.name'},
                 //{ title: 'Anexos', field: 'files'}, //render: rowData => <AssessmentImages images={rowData.images}/>},
                 //{ title: 'Resultados', field: 'files', render: rowData =>  {setOpen(false); setAssessmentSelected(rowData);}}

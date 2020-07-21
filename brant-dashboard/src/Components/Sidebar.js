@@ -12,10 +12,10 @@ import { UserContext } from './UserContext'
 
 
 const itemsSideBar = [
-  {
-    name: "Início",
-    url: "/dashboard/home",
-  },
+  // {
+  //   name: "Início",
+  //   url: "/dashboard/home",
+  // },
   {
     name: "Utentes",
     children: [
@@ -63,10 +63,10 @@ const itemsSideBar = [
 ];
 
 const itemsSideBarAdmin = [
-  {
-    name: "Início",
-    url: "/dashboard/home",
-  },
+  // {
+  //   name: "Início",
+  //   url: "/dashboard/home",
+  // },
   {
     name: "Utentes",
     children: [
@@ -112,6 +112,19 @@ const itemsSideBarAdmin = [
       {
         name: "Lista das Ferramentas",
         url: "/dashboard/assessment-tools",
+      },
+    ],
+  },
+  {
+    name: "Utilizadores",
+    children: [
+      {
+        name: "Novo Utilizador",
+        url: "/dashboard/register",
+      },
+      {
+        name: "Lista de Utilizadores",
+        url: "/dashboard/users",
       },
     ],
   },

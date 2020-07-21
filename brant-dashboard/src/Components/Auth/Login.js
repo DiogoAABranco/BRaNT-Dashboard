@@ -7,18 +7,13 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { login } from './auth'
 import SimpleSnackbar from '../Others/SimpleSnackBar'
-import { getUser } from '../../Config/configToken';
-import { UserContext } from '../UserContext'
-import { useContext } from 'react'
-
-
-
 
 
 export default function Login(props) {
 
     const [user,setUser] = useState({email:"",password:""});
     const [error,setError] = useState(false);
+    const [disable,setDisable] = useState(false);
 
 
     const onChange = (e) => {
@@ -29,6 +24,7 @@ export default function Login(props) {
     onsubmit = (e) =>{
         e.preventDefault();
 
+        setDisable(true);
         const user1 = {
             email:user.email,
             password:user.password
@@ -43,6 +39,7 @@ export default function Login(props) {
             else{
                 console.log("Credenciais incorretas");
                 setError(true);
+                setDisable(false);
             }
         })
     }
@@ -88,7 +85,7 @@ export default function Login(props) {
                                     <Link to="register"><span className="text-brant-color">Registar-se</span></Link>
                                 </div> */}
                                 <div className="container mx-auto py-4">
-                                    <button type="submit" className="btn btn-brant-color w-50 p-2">Login</button>
+                                    <button type="submit" className="btn btn-brant-color w-50 p-2" disabled={disable}>Login</button>
 
                                 </div>
 

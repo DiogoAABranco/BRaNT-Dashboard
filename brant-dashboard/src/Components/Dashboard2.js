@@ -21,6 +21,8 @@ import NoMatchPage from './NoMatchPage'
 import { FinishedPrograms } from './Program/FinishedPrograms'
 import { UserContext } from './UserContext'
 import { useContext } from 'react'
+import UserList from './User/UserList'
+import Register from './Auth/Register'
 
 
 const PrivateRoute = ({component: Component, ...rest}) =>{
@@ -56,8 +58,12 @@ export default function Dashboard2() {
 
                             {/*routes only for admin*/}
                             {getUser() !== null && getUser().role.name === 'admin' ? 
-                                <PrivateRoute exact path="/dashboard/new-assessment" component={ NewAssessmentTool }/>:null
-                                //lista de users e criar novo user
+                                <Switch>
+                                    <PrivateRoute exact path="/dashboard/new-assessment" component={ NewAssessmentTool }/>
+                                    <PrivateRoute exact path="/dashboard/users" component={ UserList }/>
+                                    <PrivateRoute exact path="/dashboard/register" component={ Register }/>
+                                </Switch>:null
+                                
                             } 
                             <Route component={ NoMatchPage }/>
                         </Switch>
