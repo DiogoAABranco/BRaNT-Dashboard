@@ -87,7 +87,7 @@ export default function NewPatientForm(props) {
         .then(res => res.json())
         .then((data) => {
             if(data.message === 'patient record created'){
-                props.history.push('/patients'); 
+                props.history.push('/dashboard/patients'); 
             }
             console.log('API success: ',data);
         })

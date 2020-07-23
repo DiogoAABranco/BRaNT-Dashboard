@@ -32,8 +32,9 @@ export class Programs extends Component {
             
                 let activePrograms = [];
                 data.forEach(program => {
-                    if(program.isActive === 1){
+                    if(program.isActive === true || program.isActive === 1 ){
                         activePrograms.push(program);
+                        
                     }
                 });
                 this.setState({programs:activePrograms});

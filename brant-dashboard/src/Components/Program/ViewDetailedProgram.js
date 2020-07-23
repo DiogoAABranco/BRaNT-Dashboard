@@ -139,12 +139,12 @@ export default class ViewDetailedProgram extends Component {
                 <div className="row p-0 ml-2 d-flex justify-content-between">
                     <DialogEditByStep gameVariables={this.state.program.game_variables}/>
                     <div className="pt-2 pr-4">
-                        {this.state.program.isActive === 1 ? <button className="btn btn-brant-color" onClick={ this.handleSimulateResults}>Simular Resultados</button>:null
+                        {this.state.program.isActive ? <button className="btn btn-brant-color" onClick={ this.handleSimulateResults}>Simular Resultados</button>:null
                         }
 
                     </div>
                     <div className="pt-2 pr-4">
-                        {this.state.program.isActive === 1 ? <button className="btn btn-brant-color" onClick={ this.handleEndProgram}>Finalizar Programa</button>:null
+                        {this.state.program.isActive ? <button className="btn btn-brant-color" onClick={ this.handleEndProgram}>Finalizar Programa</button>:null
                         }
 
                     </div>
