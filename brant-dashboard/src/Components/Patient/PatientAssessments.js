@@ -60,7 +60,7 @@ export default function PatientAssessments(props) {
         return (
             <div className="p-2 ">
                 <div className="d-flex justify-content-end pb-4">
-                    {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Nova avaliação</button></Link>:null}
+                    {goToNewAssessmentSession !== false?<Link to={goToNewAssessmentSession}><button className="btn btn-brant-color">Nova avaliação cognitiva</button></Link>:null}
 
                 </div>
                 
