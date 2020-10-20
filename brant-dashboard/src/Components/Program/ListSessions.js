@@ -76,7 +76,7 @@ export default function ListSessions(props) {
               { title: 'ID', field: 'id', render: rowData =>{if(rowData.id !== null)return idSession(props.sessions, rowData.id)} },
               { title: 'Data', field: 'date'},
               { title: 'Estado', field: 'isDone', render: rowData =>{if(rowData.isDone !== null)return convertState(rowData.isDone)}},
-              { title: 'Detalhes', field: 'id', render: rowData =>{if(rowData.id != null)return <DialogSessionInfo session={rowData}/> }},
+              { title: 'Notas', field: 'id', render: rowData =>{if(rowData.id != null)return <DialogSessionInfo session={rowData}/> }},
         ]}
         data={sessions}
         onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
